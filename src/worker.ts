@@ -6,7 +6,7 @@ export default {
     const headers = new Headers(response.headers);
     const { pathname } = new URL(request.url);
 
-    headers.set("X-Frame-Options", "DENY");
+    headers.set("X-Frame-Options", pathname === "/resume.pdf" ? "SAMEORIGIN" : "DENY");
     headers.set("X-Content-Type-Options", "nosniff");
     headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
     headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
