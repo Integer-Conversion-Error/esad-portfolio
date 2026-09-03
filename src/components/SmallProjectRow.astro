@@ -1,0 +1,146 @@
+---
+import { smallProjects } from "../lib/data";
+---
+
+<section class="small-projects section" aria-label="Other projects">
+  <div class="container">
+    <header class="head">
+      <span class="micro label">Also built</span>
+      <h2 class="text-h2">Other projects.</h2>
+    </header>
+
+    <ul class="grid">
+      {
+        smallProjects.map((project) => (
+          <li class="card">
+            <a href={project.github || "#"} class="card-link" rel="noopener" target={project.github ? "_blank" : undefined}>
+              <span class="micro index tabular">{project.index}</span>
+              <h4 class="card-title">{project.title}</h4>
+              <p class="card-desc">{project.description}</p>
+              <dl class="card-meta">
+                <div>
+                  <dt class="micro">Role</dt>
+                  <dd class="caption">{project.role}</dd>
+                </div>
+                <div>
+                  <dt class="micro">When</dt>
+                  <dd class="caption tabular">{project.duration}</dd>
+                </div>
+                <div>
+                  <dt class="micro">Stack</dt>
+                  <dd class="caption mono">{project.stack.join(" · ")}</dd>
+                </div>
+              </dl>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .small-projects {
+    border-top: 1px solid var(--rule);
+  }
+
+  .head {
+    margin-bottom: 64px;
+  }
+
+  .label {
+    color: var(--ink-subtle);
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--rule);
+  }
+
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .card {
+    background: var(--bg);
+  }
+
+  .card-link {
+    display: block;
+    padding: 32px 24px;
+    border-top: 1px solid var(--rule);
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    transition:
+      border-color var(--duration-medium) var(--ease-standard),
+      background-color var(--duration-medium) var(--ease-standard);
+  }
+
+  @media (min-width: 768px) {
+    .card-link {
+      border-top: 0;
+    }
+  }
+
+  .card:hover .card-link {
+    border-color: var(--ink);
+    background: var(--bg-elevated);
+  }
+
+  .index {
+    display: block;
+    color: var(--ink-subtle);
+    margin-bottom: 24px;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: var(--text-h4);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 16px;
+    color: var(--ink);
+  }
+
+  .card-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    margin: 0 0 24px;
+  }
+
+  .card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .card-meta dt {
+    color: var(--ink-subtle);
+    margin-bottom: 2px;
+  }
+
+  .card-meta dd {
+    margin: 0;
+    color: var(--ink);
+    font-size: 13px;
+  }
+
+  .card-meta .mono {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-muted);
+  }
+</style>

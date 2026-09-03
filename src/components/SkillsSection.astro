@@ -1,0 +1,94 @@
+---
+import { skills } from "../lib/data";
+---
+
+<section class="skills section" aria-label="Skills">
+  <div class="container">
+    <header class="head">
+      <span class="micro label">The toolbox</span>
+      <h2 class="text-h2">Skills.</h2>
+    </header>
+
+    <div class="grid">
+      {
+        skills.map((group) => (
+          <div class="group">
+            <h3 class="micro group-label">{group.label}</h3>
+            <ul class="chips">
+              {group.items.map((item) => (
+                <li class="chip">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    border-top: 1px solid var(--rule);
+  }
+
+  .head {
+    margin-bottom: 64px;
+  }
+
+  .label {
+    color: var(--ink-subtle);
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .group-label {
+    color: var(--ink-subtle);
+    margin: 0 0 16px;
+  }
+
+  .chips {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink);
+    padding: 4px 10px;
+    border: 1px solid var(--rule);
+    border-radius: 9999px;
+    background: transparent;
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard);
+    white-space: nowrap;
+  }
+
+  .chip:hover {
+    background-color: var(--bg-elevated);
+    border-color: var(--ink-muted);
+  }
+</style>

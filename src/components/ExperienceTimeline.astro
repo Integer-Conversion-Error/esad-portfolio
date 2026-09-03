@@ -1,0 +1,195 @@
+---
+import { experience } from "../lib/data";
+
+// Group by year (most recent first). Each year gets a sticky marker.
+const byYear = new Map<number, typeof experience>();
+for (const role of experience) {
+  const list = byYear.get(role.year) ?? [];
+  list.push(role);
+  byYear.set(role.year, list);
+}
+const years = Array.from(byYear.keys()).sort((a, b) => b - a);
+---
+
+<section class="timeline section" aria-label="Experience">
+  <div class="container">
+    <header class="head">
+      <span class="micro label">Where I've worked</span>
+      <h2 class="text-h2">Experience.</h2>
+    </header>
+
+    <div class="rail-wrap">
+      <div class="rail" aria-hidden="true"></div>
+
+      <div class="entries">
+        {
+          years.map((year) => (
+            <div class="year-block" data-year-block data-year={year}>
+              <h2 class="year-marker tabular">{year}</h2>
+              <ul class="role-list">
+                {(byYear.get(year) ?? []).map((role) => (
+                  <li class="role">
+                    <span class="dot" aria-hidden="true"></span>
+                    <div class="role-body">
+                      <h4 class="role-title">
+                        {role.role} <span class="dim">·</span> {role.company}
+                      </h4>
+                      <p class="role-meta caption">
+                        {role.location} · {role.start} — {role.end}
+                      </p>
+              <ul class="role-bullets">
+                {role.highlights.map((h) => (
+                  <li class="role-bullet">— {h}</li>
+                ))}
+              </ul>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    border-top: 1px solid var(--rule);
+  }
+
+  .head {
+    margin-bottom: 64px;
+  }
+
+  .label {
+    color: var(--ink-subtle);
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .rail-wrap {
+    position: relative;
+  }
+
+  .rail {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 96px;
+    width: 1px;
+    background: var(--rule);
+  }
+
+  @media (min-width: 768px) {
+    .rail {
+      display: block;
+    }
+  }
+
+  .entries {
+    display: flex;
+    flex-direction: column;
+    gap: 96px;
+  }
+
+  .year-block {
+    position: relative;
+  }
+
+  .year-marker {
+    font-family: var(--font-display);
+    font-size: var(--text-h2);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 32px;
+    position: sticky;
+    top: 96px;
+    background: var(--bg);
+    padding: 16px 0;
+    z-index: 1;
+  }
+
+  @media (max-width: 767px) {
+    .year-marker {
+      position: static;
+      padding: 0;
+    }
+  }
+
+  .role-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  @media (min-width: 768px) {
+    .role-list {
+      padding-left: 96px;
+    }
+  }
+
+  .role {
+    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .role {
+      padding-left: 24px;
+    }
+
+    .dot {
+      position: absolute;
+      left: -4px;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+  }
+
+  .role-title {
+    font-family: var(--font-display);
+    font-size: var(--text-h4);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+
+  .role-title .dim {
+    color: var(--ink-subtle);
+    margin: 0 6px;
+  }
+
+  .role-meta {
+    color: var(--ink-muted);
+    margin: 0 0 16px;
+    font-size: 13px;
+  }
+
+  .role-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .role-bullet {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 38rem;
+  }
+</style>

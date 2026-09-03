@@ -1,0 +1,334 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  draft?: boolean;
+}
+
+const { title, description, pubDate, draft = false } = Astro.props;
+
+const formatDate = (date: Date): string =>
+  date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+---
+
+<BaseLayout title={`${title} — Esad Kaya`} description={description}>
+  <article class="post">
+    <header class="post-head container">
+      <a href="/blog" class="back-link">← Writing</a>
+      <h1 class="post-title">{title}</h1>
+      <p class="post-desc">{description}</p>
+      <p class="post-meta">
+        <time datetime={pubDate.toISOString()} class="tabular">{formatDate(pubDate)}</time>
+        {draft && <span class="draft-badge">Draft</span>}
+      </p>
+    </header>
+
+    <div class="post-body container">
+      <div class="prose">
+        <slot />
+      </div>
+
+      <hr class="post-rule" />
+
+      <a href="/blog" class="back-link">← Back to writing</a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  /* Prose styles — written directly per spec (no @tailwindcss/typography). */
+  .post {
+    padding-top: 128px;
+    padding-bottom: 96px;
+  }
+
+  .post-head {
+    max-width: 76rem;
+    margin: 0 auto 64px;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+    text-decoration: none;
+    margin-bottom: 48px;
+    transition: color var(--duration-instant) var(--ease-standard);
+  }
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 24px;
+  }
+
+  .post-desc {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    margin: 0 0 32px;
+  }
+
+  .post-meta,
+  .post-date {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-subtle);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .draft-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .post-body {
+    max-width: 76rem;
+  }
+
+  .prose {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .prose > * + * {
+    margin-top: 24px;
+  }
+
+  .prose h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: var(--ink);
+    margin-top: 64px;
+    margin-bottom: 16px;
+  }
+
+  .prose h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+    color: var(--ink);
+    margin-top: 48px;
+    margin-bottom: 12px;
+  }
+
+  .prose p {
+    margin: 0;
+  }
+
+  .prose a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    transition: color var(--duration-instant) var(--ease-standard), border-color var(--duration-instant) var(--ease-standard);
+  }
+
+  .prose a:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  .prose em {
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .prose strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .prose blockquote {
+    margin: 32px 0;
+    padding: 0 0 0 24px;
+    border-left: 1px solid var(--rule-strong);
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    background: var(--bg-elevated);
+    padding: 2px 6px;
+    border-radius: var(--radius-xs);
+    color: var(--ink);
+  }
+
+  .prose pre {
+    font-family: var(--font-mono);
+    background: var(--bg-elevated);
+    border: 1px solid var(--rule);
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .prose pre code {
+    background: transparent;
+    padding: 0;
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: 24px;
+    margin: 0;
+  }
+
+  .prose li {
+    margin: 8px 0;
+  }
+
+  .prose hr {
+    margin: 64px 0;
+    border: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .post-rule {
+    margin: 96px 0 32px;
+    border: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* Stat graphics inside prose */
+  .post-figure {
+    margin: 64px 0;
+    padding: 32px 0 8px;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    gap: 24px;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  @media (max-width: 720px) {
+    .stat-row {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .stat-num {
+    font-family: var(--font-mono);
+    font-size: clamp(48px, 6vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .stat-label {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--ink-muted);
+  }
+
+  .stat-source {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-subtle);
+    margin-top: 4px;
+  }
+
+  .bar-chart {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .bar-chart text {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    fill: var(--ink);
+  }
+
+  .bar-chart .chart-title {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    fill: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .bar-chart .row-label {
+    fill: var(--ink-muted);
+  }
+
+  .bar-chart .row-value {
+    fill: var(--ink);
+  }
+
+  .bar-chart .bar-line {
+    fill: var(--ink-subtle);
+  }
+
+  .bar-chart .bar-line-strong {
+    fill: var(--accent);
+  }
+
+  .figure-caption {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    margin: 0;
+    max-width: 56rem;
+  }
+</style>

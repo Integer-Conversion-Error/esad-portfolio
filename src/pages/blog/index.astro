@@ -1,0 +1,147 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+// Filter out drafts from the public list.
+const allPosts = await getCollection("blog", ({ data }) => data.draft !== true);
+allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const formatDate = (date: Date): string =>
+  date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+---
+
+<BaseLayout
+  title="Writing — Esad Kaya"
+  description="Essays on systems and craft by Esad Kaya."
+>
+  <section class="blog section">
+    <div class="container">
+      <header class="head">
+        <span class="micro label">Writing</span>
+        <h1 class="text-h1">Writing.</h1>
+        <p class="lede">
+          Technical notes on systems, tools, and lessons from recent projects.
+        </p>
+      </header>
+
+      {
+        allPosts.length === 0 ? (
+          <div class="empty">
+            <p class="body-lg">
+              No posts yet. The archive is being written.
+            </p>
+            <hr class="rule" />
+          </div>
+        ) : (
+          <ul class="list">
+            {allPosts.map((post) => (
+              <li class="item">
+                <a href={`/blog/${post.id}/`} class="item-link">
+                  <time class="micro date tabular" datetime={post.data.pubDate.toISOString()}>
+                    {formatDate(post.data.pubDate)}
+                  </time>
+                  <h3 class="item-title">{post.data.title}</h3>
+                  <p class="item-dek">{post.data.description}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .blog {
+    padding-top: 128px;
+  }
+
+  .head {
+    margin-bottom: 96px;
+  }
+
+  .label {
+    color: var(--ink-subtle);
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .lede {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    margin-top: 24px;
+    max-width: 38rem;
+  }
+
+  .empty {
+    margin-top: 64px;
+  }
+
+  .empty .body-lg {
+    color: var(--ink-muted);
+  }
+
+  .rule {
+    margin-top: 48px;
+  }
+
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .item {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .item-link {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 32px 0;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity var(--duration-instant) var(--ease-standard);
+  }
+
+  @media (min-width: 768px) {
+    .item-link {
+      grid-template-columns: 160px 1fr 1.5fr;
+      gap: 32px;
+      align-items: baseline;
+      padding: 40px 0;
+    }
+  }
+
+  .item-link:hover {
+    opacity: 0.65;
+  }
+
+  .date {
+    color: var(--ink-subtle);
+  }
+
+  .item-title {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .item-dek {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    margin: 0;
+  }
+</style>

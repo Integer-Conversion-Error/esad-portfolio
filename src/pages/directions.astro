@@ -1,0 +1,1663 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { leadProjects, personal } from "../lib/data";
+
+const demoProjects = [
+  {
+    project: leadProjects[0],
+    reason: "I needed to verify where a crew member had clocked in.",
+    note: "50 crews / Ottawa",
+    accent: "oxide",
+  },
+  {
+    project: leadProjects[1],
+    reason: "I wanted a simple intercom for my family home.",
+    note: "2 rooms / local network",
+    accent: "blue",
+  },
+  {
+    project: leadProjects[2],
+    reason: "I wanted to combine parking information with enforcement alerts.",
+    note: "< 50 Wh / overnight",
+    accent: "green",
+  },
+];
+
+const atlasNodes = [
+  "crew dispatch",
+  "geo check",
+  "local voice",
+  "edge sensing",
+  "home network",
+  "catalog sync",
+];
+---
+
+<BaseLayout
+  title="Design directions — Esad Kaya"
+  description="Four visual directions for Esad Kaya's software portfolio."
+  chrome={false}
+>
+  <div class="lab">
+    <header class="lab-header">
+      <div class="lab-header-inner">
+        <a class="lab-mark" href="/">EK</a>
+        <p class="lab-kicker">Design direction lab / 24.08.26</p>
+        <a class="lab-back" href="/">Back to portfolio <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <section class="lab-intro" aria-labelledby="lab-title">
+      <div class="lab-intro-inner">
+        <p class="lab-eyebrow">Four visual directions for the portfolio.</p>
+        <h1 id="lab-title">A clearer frame<br /><em>for the work.</em></h1>
+        <p class="lab-lede">
+          The content is already there: workforce software, a local intercom, a parking system,
+          and several smaller tools. These directions test different ways to organize it.
+        </p>
+        <nav class="lab-tabs" aria-label="Jump to a design direction">
+          <a href="#direction-workbench"><span>01</span> Workbench</a>
+          <a href="#direction-atlas"><span>02</span> Atlas</a>
+          <a href="#direction-dispatch"><span>03</span> Dispatch</a>
+          <a href="#direction-crimson"><span>04</span> Crimson</a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="direction direction-workbench" id="direction-workbench" aria-labelledby="workbench-title">
+      <div class="direction-frame">
+        <header class="direction-header">
+          <p class="direction-number">01 / 04</p>
+          <div>
+          <p class="direction-kind">Personal archive / field notes</p>
+            <h2 id="workbench-title">The Workbench</h2>
+          </div>
+          <p class="direction-verdict">Projects from Ottawa.<br />Built for practical needs.</p>
+        </header>
+
+        <div class="workbench-hero">
+          <div class="workbench-note">
+            <p class="note-date">Ottawa, Canada / 2026</p>
+            <p class="note-title">Projects built<br />for people<br /><em>around me.</em></p>
+            <span class="note-line" aria-hidden="true"></span>
+            <p class="note-signoff">Esad Kaya<br /><span>software + hardware</span></p>
+          </div>
+
+          <div class="workbench-copy">
+            <p class="workbench-stamp">Projects from Ottawa / 2026</p>
+            <h3>Work with<br />a clear purpose.</h3>
+            <p>
+              Each project starts with a practical problem. The archive records the constraint,
+              the result, and the tools used to build it.
+            </p>
+            <a class="workbench-link" href="#direction-workbench-projects">See the projects <span aria-hidden="true">↓</span></a>
+          </div>
+
+          <div class="workbench-object" aria-label="Raindropticon project mark">
+            <img src="/images/raindropticon-logo.jpeg" alt="Raindropticon project mark" />
+            <span>RAINDROPTICON</span>
+            <small>field tool / 01</small>
+          </div>
+        </div>
+
+        <div class="workbench-projects" id="direction-workbench-projects">
+          {demoProjects.map(({ project, reason, note, accent }, index) => (
+            <article class={`workbench-row ${accent}`}>
+              <div class="workbench-row-index">0{index + 1}</div>
+              <div class="workbench-row-main">
+                <p class="row-type">{project.role}</p>
+                <h3>{project.title}</h3>
+                <p>{reason}</p>
+              </div>
+              <div class="workbench-row-note">
+                <span>{note}</span>
+                <span>{project.year}</span>
+              </div>
+              <span class="row-arrow" aria-hidden="true">↗</span>
+            </article>
+          ))}
+        </div>
+
+        <footer class="direction-signoff workbench-signoff">
+          <p>Esad Kaya / Ottawa</p>
+          <p>Selected work / 2025-2026</p>
+        </footer>
+      </div>
+    </section>
+
+    <section class="direction direction-atlas" id="direction-atlas" aria-labelledby="atlas-title">
+      <div class="atlas-grid-bg" aria-hidden="true">
+        {Array.from({ length: 40 }).map((_, index) => <span class={index % 7 === 0 ? "grid-cell is-marked" : "grid-cell"}></span>)}
+      </div>
+      <div class="direction-frame atlas-frame">
+        <header class="atlas-masthead">
+          <p>EK / SYSTEMS INDEX</p>
+          <p>Ottawa / 45.4215 N, 75.6972 W</p>
+          <p>Issue 01 / 2026</p>
+        </header>
+
+        <div class="atlas-hero">
+          <div>
+            <p class="atlas-kicker">02 / 04 - Technical index</p>
+            <h2 id="atlas-title">
+              <span class="atlas-title-quiet">Systems I built</span>
+              <span class="atlas-title-bright">for work and home.</span>
+            </h2>
+          </div>
+          <div class="atlas-aside">
+            <p class="atlas-aside-label">Current role</p>
+            <p>CS student, software engineer intern, and technical support for a family business.</p>
+            <p class="atlas-aside-detail">Available summer 2027</p>
+          </div>
+        </div>
+
+        <div class="atlas-system">
+          <div class="atlas-system-label">
+            <span>MAP 01</span>
+            <span>RELATIONSHIPS BETWEEN PROJECTS</span>
+          </div>
+          <div class="atlas-map" aria-label="Map of Esad's projects and recurring themes">
+            <div class="atlas-map-rail rail-a"></div>
+            <div class="atlas-map-rail rail-b"></div>
+            <div class="atlas-map-rail rail-c"></div>
+            {atlasNodes.map((node, index) => (
+              <div class={`atlas-node node-${index + 1}`}>
+                <span class="node-dot"></span>
+                <span>{node}</span>
+              </div>
+            ))}
+            <div class="atlas-map-center">build<br />test<br />document</div>
+          </div>
+        </div>
+
+        <div class="atlas-projects">
+          {leadProjects.slice(0, 4).map((project, index) => (
+            <article class="atlas-project">
+              <div class="atlas-project-count">0{index + 1}</div>
+              <div class="atlas-project-title">
+                <h3>{project.title}</h3>
+                <p>{project.subtitle}</p>
+              </div>
+              <p class="atlas-project-note">{project.stack.slice(0, 3).join(" / ")}</p>
+              <span class="atlas-project-arrow" aria-hidden="true">+</span>
+            </article>
+          ))}
+        </div>
+
+        <footer class="direction-signoff atlas-signoff">
+          <p>System atlas / selected work</p>
+          <p>04 records / Ottawa, 2026</p>
+        </footer>
+      </div>
+    </section>
+
+    <section class="direction direction-dispatch" id="direction-dispatch" aria-labelledby="dispatch-title">
+      <div class="direction-frame dispatch-frame">
+        <header class="dispatch-topline">
+          <p>THE ESAD KAYA ARCHIVE</p>
+          <p>SELECTED WORK / 2025-2026</p>
+          <p>SOFTWARE / HARDWARE / WRITING</p>
+        </header>
+
+        <div class="dispatch-hero">
+          <p class="dispatch-issue">Selected work</p>
+          <h2 id="dispatch-title">Selected<br /><em>work.</em></h2>
+          <p class="dispatch-deck">
+            Workforce software, a local home intercom, a street-parking app, and other tools
+            built to solve specific problems.
+          </p>
+          <div class="dispatch-portrait" aria-hidden="true">
+            <span class="portrait-number">04</span>
+            <span class="portrait-caption">ABOUT THE<br />BUILDER</span>
+            <span class="portrait-rule"></span>
+            <span class="portrait-copy">3D print / payroll / radar / LAN</span>
+          </div>
+        </div>
+
+        <div class="dispatch-divider"><span>Selected work</span><span>View project list</span></div>
+
+        <div class="dispatch-projects">
+          {demoProjects.map(({ project, reason }, index) => (
+            <article class="dispatch-project">
+              <div class="dispatch-project-image" aria-hidden="true">
+                {index === 0 ? <img src="/images/raindropticon-logo.jpeg" alt="" /> : <span class={`dispatch-glyph glyph-${index + 1}`}></span>}
+                <span>FIG. 0{index + 1}</span>
+              </div>
+              <div class="dispatch-project-body">
+                <p class="dispatch-project-meta">{project.year} / {project.role}</p>
+                <h3>{project.title}</h3>
+                <p>{reason}</p>
+                <a href="#direction-dispatch">View project <span aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <footer class="direction-signoff dispatch-signoff">
+          <p>End of selected work</p>
+          <p>Designed and built in Ottawa</p>
+        </footer>
+      </div>
+    </section>
+
+    <section class="direction direction-crimson" id="direction-crimson" aria-labelledby="crimson-title">
+      <div class="crimson-frame">
+        <header class="crimson-topline">
+          <p>EK / 04</p>
+          <p>Crimson index</p>
+          <p>Ottawa / 2026</p>
+        </header>
+
+        <div class="crimson-hero">
+          <p class="crimson-index">04 / 04 - Editorial systems</p>
+          <h2 id="crimson-title">Software<br />and<br /><span>hardware.</span></h2>
+          <p class="crimson-copy">
+            Software for work, home, and the systems in between. The projects are small in
+            scope, but each one has a clear problem to solve.
+          </p>
+          <div class="crimson-stamp" aria-hidden="true">EK</div>
+        </div>
+
+        <div class="crimson-section-line">
+          <span>Selected work / 2025-2026</span>
+          <span>Software and hardware</span>
+        </div>
+
+        <div class="crimson-projects">
+          {demoProjects.map(({ project, reason }, index) => (
+            <article class="crimson-project">
+              <p class="crimson-project-index">0{index + 1}</p>
+              <div class="crimson-project-main">
+                <p>{project.role}</p>
+                <h3>{project.title}</h3>
+                <p>{reason}</p>
+              </div>
+              <p class="crimson-project-stack">{project.stack.slice(0, 3).join(" / ")}</p>
+              <span class="crimson-project-arrow" aria-hidden="true">↗</span>
+            </article>
+          ))}
+        </div>
+
+        <footer class="crimson-signoff">
+          <p>Esad Kaya / software + hardware</p>
+          <p>Jet black / crimson red</p>
+        </footer>
+      </div>
+    </section>
+
+    <section class="lab-conclusion" aria-labelledby="conclusion-title">
+      <div class="lab-conclusion-inner">
+        <p class="lab-eyebrow">Recommendation</p>
+        <h2 id="conclusion-title">Two directions<br /><em>to consider.</em></h2>
+        <p>
+          Workbench is warmer and closer to the physical material. Crimson Index is more
+          typographic and structured. Both benefit from the same next step: real photos of
+          the desk, boards, printed parts, and interfaces you use.
+        </p>
+        <div class="lab-conclusion-signoff">
+          <span>{personal.name}</span>
+          <span>software I can maintain</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .lab {
+    --lab-ink: #171713;
+    --lab-muted: #6b695f;
+    --lab-paper: #f4f0e7;
+    --lab-rule: #d5cfc2;
+    --bg: var(--lab-paper);
+    --ink: var(--lab-ink);
+    --accent: #b44a32;
+    background: var(--lab-paper);
+    color: var(--lab-ink);
+  }
+
+  .lab-header {
+    height: 64px;
+    border-bottom: 1px solid var(--lab-rule);
+    background: var(--lab-paper);
+  }
+
+  .lab-header-inner,
+  .lab-intro-inner,
+  .direction-frame,
+  .lab-conclusion-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: clamp(24px, 5vw, 80px);
+    padding-right: clamp(24px, 5vw, 80px);
+  }
+
+  .lab-header-inner {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .lab-mark {
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+
+  .lab-kicker {
+    color: var(--lab-muted);
+  }
+
+  .lab-back {
+    justify-self: end;
+    color: var(--lab-muted);
+  }
+
+  .lab-back span,
+  .workbench-link span,
+  .dispatch-project-body a span {
+    color: #b44a32;
+  }
+
+  .lab-intro {
+    padding: clamp(96px, 15vw, 208px) 0 clamp(96px, 12vw, 160px);
+    border-bottom: 1px solid var(--lab-rule);
+  }
+
+  .lab-intro-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    column-gap: clamp(40px, 10vw, 160px);
+    align-items: end;
+  }
+
+  .lab-eyebrow,
+  .direction-kind,
+  .direction-number,
+  .direction-verdict,
+  .direction-signoff,
+  .row-type,
+  .workbench-stamp,
+  .note-date,
+  .note-signoff,
+  .lab-tabs,
+  .lab-conclusion-signoff {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .lab-eyebrow {
+    grid-column: 1 / -1;
+    color: #b44a32;
+    margin-bottom: 28px;
+  }
+
+  .lab-intro h1 {
+    font-family: var(--font-display);
+    font-size: clamp(58px, 9vw, 132px);
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    font-weight: 500;
+  }
+
+  .lab-intro h1 em,
+  .direction-workbench h2,
+  .direction-dispatch h2,
+  .lab-conclusion h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+  }
+
+  .lab-lede {
+    max-width: 34ch;
+    margin: 0 0 28px;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--lab-muted);
+  }
+
+  .lab-tabs {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    border-top: 1px solid var(--lab-rule);
+    padding-top: 14px;
+  }
+
+  .lab-tabs a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 32px;
+    color: var(--lab-ink);
+  }
+
+  .lab-tabs a span {
+    color: #b44a32;
+  }
+
+  .lab-tabs a:hover,
+  .lab-back:hover,
+  .workbench-link:hover,
+  .dispatch-project-body a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .direction {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .direction-frame {
+    position: relative;
+    padding-top: clamp(64px, 8vw, 112px);
+    padding-bottom: clamp(64px, 8vw, 112px);
+  }
+
+  .direction-header {
+    display: grid;
+    grid-template-columns: 1fr minmax(240px, 2fr) 1fr;
+    gap: 24px;
+    align-items: start;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--lab-rule);
+  }
+
+  .direction-number,
+  .direction-kind,
+  .direction-verdict {
+    color: var(--lab-muted);
+  }
+
+  .direction-header h2 {
+    margin-top: 8px;
+    font-size: clamp(42px, 6vw, 88px);
+    line-height: 0.98;
+  }
+
+  .direction-verdict {
+    justify-self: end;
+    text-align: right;
+  }
+
+  /* Direction one: a quiet, tactile studio archive. */
+  .direction-workbench {
+    background: #ebe5d8;
+  }
+
+  .workbench-hero {
+    display: grid;
+    grid-template-columns: minmax(250px, 1fr) minmax(280px, 1.15fr) minmax(220px, 0.8fr);
+    gap: clamp(24px, 5vw, 80px);
+    align-items: center;
+    padding: clamp(64px, 10vw, 144px) 0;
+  }
+
+  .workbench-note {
+    position: relative;
+    min-height: 420px;
+    padding: 32px 28px;
+    background: #f8f4eb;
+    border: 1px solid #cdc5b5;
+    box-shadow: 10px 12px 0 #d5cabb;
+    transform: rotate(-2deg);
+  }
+
+  .note-date,
+  .note-signoff {
+    color: #716c61;
+  }
+
+  .note-title {
+    margin-top: 104px;
+    font-family: var(--font-serif);
+    font-size: clamp(40px, 5vw, 66px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+
+  .note-title em {
+    color: #b44a32;
+  }
+
+  .note-line {
+    display: block;
+    width: 72px;
+    height: 1px;
+    margin: 28px 0;
+    background: #b44a32;
+  }
+
+  .note-signoff {
+    position: absolute;
+    bottom: 30px;
+    left: 28px;
+  }
+
+  .note-signoff span {
+    color: #9a9388;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .workbench-copy {
+    max-width: 32rem;
+  }
+
+  .workbench-stamp {
+    color: #b44a32;
+    margin-bottom: 20px;
+  }
+
+  .workbench-copy h3 {
+    max-width: 10ch;
+    font-family: var(--font-serif);
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 0.98;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    margin-bottom: 24px;
+  }
+
+  .workbench-copy > p:not(.workbench-stamp) {
+    max-width: 35ch;
+    color: #625f56;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .workbench-link {
+    display: inline-flex;
+    gap: 12px;
+    margin-top: 32px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #b44a32;
+    color: var(--lab-ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .workbench-object {
+    align-self: end;
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    padding: 20px 20px 24px;
+    background: #f6f1e7;
+    border: 1px solid #cdc5b5;
+    text-align: center;
+    transform: rotate(3deg);
+  }
+
+  .workbench-object img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    filter: saturate(0.75) contrast(1.02);
+  }
+
+  .workbench-object span,
+  .workbench-object small {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .workbench-object small {
+    color: #8d887e;
+  }
+
+  .workbench-projects {
+    border-top: 1px solid #cfc7b8;
+  }
+
+  .workbench-row {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) minmax(180px, 0.5fr) 24px;
+    gap: 24px;
+    align-items: start;
+    padding: 28px 0;
+    border-bottom: 1px solid #cfc7b8;
+  }
+
+  .workbench-row-index,
+  .row-type,
+  .workbench-row-note,
+  .row-arrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .workbench-row-index,
+  .workbench-row-note {
+    color: #8d887e;
+  }
+
+  .workbench-row-main h3 {
+    margin: 6px 0 8px;
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+  }
+
+  .workbench-row-main > p:last-child {
+    max-width: 48ch;
+    color: #625f56;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .workbench-row.oxide .row-type { color: #b44a32; }
+  .workbench-row.blue .row-type { color: #376080; }
+  .workbench-row.green .row-type { color: #5a754f; }
+
+  .workbench-row-note {
+    display: grid;
+    gap: 8px;
+    padding-top: 2px;
+  }
+
+  .row-arrow {
+    justify-self: end;
+    color: #b44a32;
+    font-size: 16px;
+  }
+
+  .direction-signoff {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 18px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .workbench-signoff {
+    border-top: 1px solid #cfc7b8;
+    color: #716c61;
+  }
+
+  /* Direction two: a dark technical catalogue, kept human through coordinates and context. */
+  .direction-atlas {
+    --atlas-bg: #18211d;
+    --atlas-ink: #e8ebdf;
+    --atlas-muted: #95a095;
+    --atlas-rule: #3d4b42;
+    background: var(--atlas-bg);
+    color: var(--atlas-ink);
+  }
+
+  .atlas-grid-bg {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-auto-rows: 96px;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .grid-cell {
+    border-right: 1px solid #2b3930;
+    border-bottom: 1px solid #2b3930;
+  }
+
+  .grid-cell.is-marked {
+    background: #ccdb55;
+    border-color: #ccdb55;
+    opacity: 0.8;
+  }
+
+  .atlas-frame {
+    z-index: 1;
+  }
+
+  .atlas-masthead,
+  .atlas-kicker,
+  .atlas-aside,
+  .atlas-system-label,
+  .atlas-project-count,
+  .atlas-project-note,
+  .atlas-project-arrow {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .atlas-masthead {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--atlas-rule);
+    color: var(--atlas-muted);
+  }
+
+  .atlas-masthead p:nth-child(2) { text-align: center; }
+  .atlas-masthead p:nth-child(3) { text-align: right; }
+
+  .atlas-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.6fr);
+    gap: clamp(40px, 10vw, 160px);
+    align-items: end;
+    padding: clamp(100px, 15vw, 208px) 0 clamp(80px, 11vw, 144px);
+  }
+
+  .atlas-kicker {
+    color: #ccdb55;
+    margin-bottom: 20px;
+  }
+
+  .atlas-hero h2 {
+    max-width: 9ch;
+    font-family: var(--font-display);
+    font-size: clamp(56px, 8vw, 124px);
+    line-height: 0.86;
+    letter-spacing: -0.06em;
+    font-weight: 500;
+    color: var(--atlas-ink);
+  }
+
+  .atlas-hero h2 span {
+    display: block;
+  }
+
+  .atlas-hero h2 .atlas-title-quiet {
+    color: #d8dfd2;
+  }
+
+  .atlas-hero h2 .atlas-title-bright {
+    color: #ccdb55;
+  }
+
+  .atlas-aside {
+    max-width: 30ch;
+    color: var(--atlas-muted);
+    letter-spacing: 0;
+    text-transform: none;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .atlas-aside-label,
+  .atlas-aside-detail {
+    color: var(--atlas-ink);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .atlas-aside-label { margin-bottom: 12px; }
+  .atlas-aside-detail { margin-top: 24px; color: #ccdb55; }
+
+  .atlas-system {
+    border-top: 1px solid var(--atlas-rule);
+    border-bottom: 1px solid var(--atlas-rule);
+  }
+
+  .atlas-system-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px 0;
+    color: var(--atlas-muted);
+  }
+
+  .atlas-map {
+    position: relative;
+    min-height: 420px;
+    border-top: 1px solid var(--atlas-rule);
+    overflow: hidden;
+  }
+
+  .atlas-map-rail {
+    position: absolute;
+    height: 1px;
+    background: #66746a;
+    transform-origin: left center;
+  }
+
+  .rail-a { width: 74%; top: 50%; left: 10%; transform: rotate(-18deg); }
+  .rail-b { width: 56%; top: 55%; left: 22%; transform: rotate(25deg); }
+  .rail-c { width: 42%; top: 36%; left: 32%; transform: rotate(90deg); }
+
+  .atlas-map-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 124px;
+    height: 124px;
+    display: grid;
+    place-content: center;
+    border: 1px solid #ccdb55;
+    border-radius: 50%;
+    color: #ccdb55;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+    transform: translate(-50%, -50%);
+  }
+
+  .atlas-node {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--atlas-ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .node-dot {
+    width: 8px;
+    height: 8px;
+    border: 1px solid #ccdb55;
+    border-radius: 50%;
+  }
+
+  .node-1 { left: 8%; top: 20%; }
+  .node-2 { left: 20%; top: 75%; }
+  .node-3 { left: 42%; top: 12%; }
+  .node-4 { right: 8%; top: 25%; }
+  .node-5 { right: 18%; bottom: 14%; }
+  .node-6 { right: 3%; top: 58%; }
+
+  .atlas-projects {
+    margin-top: clamp(64px, 8vw, 112px);
+    border-top: 1px solid var(--atlas-rule);
+  }
+
+  .atlas-project {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) minmax(180px, 0.5fr) 24px;
+    gap: 24px;
+    align-items: center;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--atlas-rule);
+  }
+
+  .atlas-project-count,
+  .atlas-project-note {
+    color: var(--atlas-muted);
+  }
+
+  .atlas-project-title h3 {
+    margin-bottom: 6px;
+    color: var(--atlas-ink);
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+  }
+
+  .atlas-project-title p {
+    color: var(--atlas-muted);
+    font-size: 14px;
+  }
+
+  .atlas-project-arrow {
+    justify-self: end;
+    color: #ccdb55;
+    font-size: 18px;
+  }
+
+  .atlas-signoff {
+    border-top: 1px solid var(--atlas-rule);
+    color: var(--atlas-muted);
+  }
+
+  /* Direction three: a small independent magazine with a strong cover and simple index. */
+  .direction-dispatch {
+    background: #f8f8f3;
+    color: #11131a;
+  }
+
+  .dispatch-frame {
+    padding-top: clamp(48px, 6vw, 88px);
+  }
+
+  .dispatch-topline,
+  .dispatch-issue,
+  .dispatch-project-meta,
+  .dispatch-project-image > span,
+  .dispatch-divider,
+  .portrait-caption,
+  .portrait-copy {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .dispatch-topline {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #11131a;
+  }
+
+  .dispatch-topline p:nth-child(2) { text-align: center; }
+  .dispatch-topline p:nth-child(3) { text-align: right; }
+
+  .dispatch-hero {
+    display: grid;
+    grid-template-areas:
+      "issue issue"
+      "title deck"
+      "title portrait";
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+    column-gap: clamp(40px, 8vw, 120px);
+    row-gap: 28px;
+    padding: clamp(72px, 11vw, 160px) 0;
+    border-bottom: 1px solid #aeb3bf;
+  }
+
+  .dispatch-issue {
+    grid-area: issue;
+    color: #e34d35;
+  }
+
+  .dispatch-hero h2 {
+    grid-area: title;
+    max-width: 8ch;
+    align-self: center;
+    font-size: clamp(72px, 10vw, 152px);
+    line-height: 0.82;
+  }
+
+  .dispatch-hero h2 em {
+    color: #e34d35;
+  }
+
+  .dispatch-deck {
+    grid-area: deck;
+    max-width: 30ch;
+    align-self: start;
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: clamp(22px, 2.4vw, 34px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+
+  .dispatch-portrait {
+    grid-area: portrait;
+    width: min(100%, 280px);
+    aspect-ratio: 0.78;
+    display: flex;
+    flex-direction: column;
+    justify-self: end;
+    align-self: end;
+    justify-content: space-between;
+    padding: 20px;
+    background: #dce2ff;
+    border: 1px solid #11131a;
+    transform: rotate(4deg);
+  }
+
+  .portrait-number {
+    font-family: var(--font-display);
+    font-size: clamp(68px, 10vw, 132px);
+    line-height: 0.8;
+    letter-spacing: -0.07em;
+  }
+
+  .portrait-caption,
+  .portrait-copy {
+    color: #2336b7;
+  }
+
+  .portrait-rule {
+    display: block;
+    width: 56%;
+    height: 8px;
+    background: #e34d35;
+  }
+
+  .dispatch-divider {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 2px solid #11131a;
+    color: #2336b7;
+  }
+
+  .dispatch-projects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 48px 0;
+  }
+
+  .dispatch-project {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-width: 0;
+    border-top: 1px solid #11131a;
+  }
+
+  .dispatch-project-image {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1.15;
+    margin-bottom: 20px;
+    background: #e6e8ee;
+    overflow: hidden;
+  }
+
+  .dispatch-project-image > span {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    color: #2336b7;
+  }
+
+  .dispatch-project-image img {
+    display: block;
+    width: 42%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.15);
+    mix-blend-mode: multiply;
+  }
+
+  .dispatch-glyph {
+    position: relative;
+    display: block;
+    width: 45%;
+    aspect-ratio: 1;
+    border: 1px solid #11131a;
+  }
+
+  .glyph-2::before,
+  .glyph-2::after {
+    content: "";
+    position: absolute;
+    background: #e34d35;
+  }
+
+  .glyph-2::before { width: 100%; height: 1px; top: 50%; left: 0; }
+  .glyph-2::after { width: 1px; height: 100%; top: 0; left: 50%; }
+
+  .glyph-3 {
+    border-radius: 50%;
+    border: 2px solid #2336b7;
+  }
+
+  .glyph-3::after {
+    content: "";
+    position: absolute;
+    inset: 18%;
+    border: 1px solid #e34d35;
+    border-radius: 50%;
+  }
+
+  .dispatch-project-meta {
+    margin-bottom: 10px;
+    color: #2336b7;
+  }
+
+  .dispatch-project-body h3 {
+    margin-bottom: 12px;
+    font-family: var(--font-serif);
+    font-size: clamp(28px, 3vw, 42px);
+    line-height: 0.96;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+  }
+
+  .dispatch-project-body > p:not(.dispatch-project-meta) {
+    max-width: 30ch;
+    color: #51565f;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .dispatch-project-body a {
+    display: inline-flex;
+    gap: 8px;
+    margin-top: 20px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #e34d35;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .dispatch-signoff {
+    border-top: 2px solid #11131a;
+    color: #51565f;
+  }
+
+  /* Direction four: a type-led editorial index in jet black and crimson. */
+  .direction-crimson {
+    --crimson: #e3153b;
+    --crimson-muted: #a50f2b;
+    --crimson-ink: #080808;
+    --crimson-paper: #f4f1eb;
+    background: var(--crimson-ink);
+    color: var(--crimson-paper);
+  }
+
+  .crimson-frame {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: clamp(48px, 7vw, 104px) clamp(24px, 5vw, 80px) clamp(64px, 8vw, 112px);
+  }
+
+  .crimson-topline,
+  .crimson-index,
+  .crimson-section-line,
+  .crimson-project-index,
+  .crimson-project-main > p:first-child,
+  .crimson-project-stack,
+  .crimson-project-arrow,
+  .crimson-signoff {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .crimson-topline {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--crimson);
+    color: var(--crimson-paper);
+  }
+
+  .crimson-topline p:nth-child(2) {
+    color: var(--crimson);
+    text-align: center;
+  }
+
+  .crimson-topline p:nth-child(3) {
+    text-align: right;
+  }
+
+  .crimson-hero {
+    display: grid;
+    grid-template-areas:
+      "index index"
+      "title title"
+      "copy stamp";
+    grid-template-columns: minmax(0, 1fr) minmax(200px, 0.42fr);
+    column-gap: clamp(32px, 7vw, 104px);
+    row-gap: 28px;
+    padding: clamp(64px, 11vw, 152px) 0 clamp(56px, 8vw, 112px);
+  }
+
+  .crimson-index {
+    grid-area: index;
+    color: var(--crimson);
+  }
+
+  .crimson-hero h2 {
+    grid-area: title;
+    max-width: 7ch;
+    margin: 0;
+    color: var(--crimson-paper);
+    font-family: var(--font-display);
+    font-size: clamp(84px, 15vw, 220px);
+    font-weight: 600;
+    line-height: 0.76;
+    letter-spacing: 0;
+  }
+
+  .crimson-hero h2 span {
+    color: var(--crimson);
+  }
+
+  .crimson-copy {
+    grid-area: copy;
+    max-width: 34ch;
+    color: var(--crimson-paper);
+    font-family: var(--font-serif);
+    font-size: clamp(22px, 2.4vw, 34px);
+    line-height: 1.08;
+  }
+
+  .crimson-stamp {
+    grid-area: stamp;
+    align-self: end;
+    justify-self: end;
+    color: transparent;
+    font-family: var(--font-display);
+    font-size: clamp(100px, 16vw, 240px);
+    font-weight: 600;
+    line-height: 0.72;
+    letter-spacing: 0;
+    -webkit-text-stroke: 1px var(--crimson);
+    text-stroke: 1px var(--crimson);
+  }
+
+  .crimson-section-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px 0;
+    border-top: 1px solid var(--crimson);
+    border-bottom: 1px solid var(--crimson);
+    color: var(--crimson);
+  }
+
+  .crimson-projects {
+    border-bottom: 1px solid var(--crimson-muted);
+  }
+
+  .crimson-project {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) minmax(180px, 0.55fr) 28px;
+    gap: 24px;
+    align-items: center;
+    padding: 28px 0;
+    border-top: 1px solid var(--crimson-muted);
+  }
+
+  .crimson-project-index,
+  .crimson-project-stack {
+    color: var(--crimson);
+  }
+
+  .crimson-project-main > p:first-child {
+    margin-bottom: 6px;
+    color: var(--crimson);
+  }
+
+  .crimson-project-main h3 {
+    margin: 0 0 8px;
+    color: var(--crimson-paper);
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 500;
+    line-height: 0.92;
+    letter-spacing: 0;
+  }
+
+  .crimson-project-main > p:last-child {
+    max-width: 48ch;
+    color: #d7d1cc;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .crimson-project-arrow {
+    justify-self: end;
+    color: var(--crimson);
+    font-size: 18px;
+  }
+
+  .crimson-signoff {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 18px;
+    color: var(--crimson);
+  }
+
+  .lab-conclusion {
+    background: #b44a32;
+    color: #f9f1e8;
+  }
+
+  .lab-conclusion-inner {
+    padding-top: clamp(80px, 12vw, 176px);
+    padding-bottom: clamp(80px, 12vw, 176px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    gap: 48px 12vw;
+    align-items: end;
+  }
+
+  .lab-conclusion .lab-eyebrow {
+    grid-column: 1 / -1;
+    color: #f9d9c6;
+    margin: 0;
+  }
+
+  .lab-conclusion h2 {
+    font-size: clamp(64px, 10vw, 148px);
+    line-height: 0.85;
+  }
+
+  .lab-conclusion > .lab-conclusion-inner > p:not(.lab-eyebrow) {
+    max-width: 36ch;
+    margin-bottom: 4px;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #f9d9c6;
+  }
+
+  .lab-conclusion-signoff {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #d88870;
+    color: #f9d9c6;
+  }
+
+  .lab-conclusion-signoff span:first-child {
+    color: #f9f1e8;
+  }
+
+  @media (max-width: 900px) {
+    .lab-intro-inner,
+    .workbench-hero,
+    .atlas-hero,
+    .dispatch-hero,
+    .lab-conclusion-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .lab-tabs {
+      grid-column: 1;
+      margin-top: 20px;
+    }
+
+    .direction-header {
+      grid-template-columns: 56px 1fr;
+    }
+
+    .direction-verdict {
+      grid-column: 2;
+      justify-self: start;
+      text-align: left;
+    }
+
+    .workbench-note {
+      max-width: 420px;
+      width: 80%;
+      margin-left: 8%;
+    }
+
+    .workbench-copy {
+      max-width: 42rem;
+    }
+
+    .workbench-object {
+      width: min(260px, 70%);
+      justify-self: end;
+      margin-right: 8%;
+    }
+
+    .dispatch-hero {
+      grid-template-areas:
+        "issue"
+        "title"
+        "deck"
+        "portrait";
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      min-height: auto;
+      gap: 32px;
+      padding: 80px 0;
+    }
+
+    .dispatch-deck {
+      max-width: 27ch;
+    }
+
+    .dispatch-portrait {
+      width: min(260px, 70%);
+      justify-self: end;
+    }
+
+    .crimson-hero {
+      grid-template-areas:
+        "index"
+        "title"
+        "copy"
+        "stamp";
+      grid-template-columns: 1fr;
+      row-gap: 32px;
+    }
+
+    .crimson-stamp {
+      justify-self: start;
+      align-self: start;
+    }
+
+    .lab-conclusion .lab-eyebrow,
+    .lab-conclusion-signoff {
+      grid-column: 1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .lab-header-inner {
+      grid-template-columns: 1fr auto;
+    }
+
+    .lab-kicker {
+      display: none;
+    }
+
+    .lab-intro h1 {
+      font-size: clamp(56px, 17vw, 86px);
+    }
+
+    .direction-frame,
+    .lab-intro-inner,
+    .lab-conclusion-inner,
+    .crimson-frame {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .direction-header {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .direction-verdict {
+      grid-column: 1;
+    }
+
+    .workbench-hero {
+      gap: 72px;
+    }
+
+    .workbench-note {
+      width: 88%;
+      min-height: 380px;
+      margin-left: 5%;
+    }
+
+    .note-title {
+      margin-top: 80px;
+      font-size: 48px;
+    }
+
+    .workbench-object {
+      width: 66%;
+      margin-right: 4%;
+    }
+
+    .workbench-row,
+    .atlas-project {
+      grid-template-columns: 40px minmax(0, 1fr) 20px;
+      gap: 12px;
+    }
+
+    .workbench-row-note,
+    .atlas-project-note {
+      grid-column: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+    }
+
+    .row-arrow,
+    .atlas-project-arrow {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .direction-signoff {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .atlas-masthead,
+    .dispatch-topline {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .atlas-masthead p:nth-child(2),
+    .dispatch-topline p:nth-child(2) {
+      display: none;
+    }
+
+    .atlas-masthead p:nth-child(3),
+    .dispatch-topline p:nth-child(3) {
+      text-align: right;
+    }
+
+    .atlas-hero {
+      padding-top: 96px;
+    }
+
+    .atlas-hero h2 {
+      font-size: clamp(56px, 16vw, 90px);
+    }
+
+    .atlas-map {
+      min-height: 360px;
+    }
+
+    .atlas-node {
+      font-size: 9px;
+    }
+
+    .node-1 { left: 0; }
+    .node-2 { left: 8%; }
+    .node-4 { right: 0; }
+    .node-5 { right: 4%; }
+    .node-6 { right: 0; }
+
+    .dispatch-hero {
+      min-height: auto;
+      padding: 72px 0;
+    }
+
+    .dispatch-hero h2 {
+      font-size: clamp(60px, 18vw, 88px);
+    }
+
+    .dispatch-deck {
+      max-width: 24ch;
+      font-size: 24px;
+    }
+
+    .dispatch-portrait {
+      width: min(230px, 66vw);
+    }
+
+    .crimson-topline {
+      grid-template-columns: 1fr auto;
+    }
+
+    .crimson-topline p:nth-child(2) {
+      display: none;
+    }
+
+    .crimson-hero {
+      padding: 72px 0 56px;
+    }
+
+    .crimson-hero h2 {
+      font-size: clamp(72px, 20vw, 112px);
+    }
+
+    .crimson-copy {
+      font-size: 24px;
+    }
+
+    .crimson-stamp {
+      font-size: clamp(104px, 30vw, 156px);
+    }
+
+    .crimson-section-line,
+    .crimson-signoff {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .crimson-project {
+      grid-template-columns: 40px minmax(0, 1fr) 20px;
+      gap: 12px;
+    }
+
+    .crimson-project-stack {
+      grid-column: 2;
+    }
+
+    .crimson-project-arrow {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .dispatch-projects {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .dispatch-project-image {
+      aspect-ratio: 1.35;
+    }
+
+    .lab-conclusion h2 {
+      font-size: clamp(64px, 19vw, 104px);
+    }
+
+    .lab-conclusion-signoff {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+</style>

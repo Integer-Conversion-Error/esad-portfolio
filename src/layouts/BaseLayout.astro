@@ -1,0 +1,74 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { personal } from "../lib/data";
+
+interface Props {
+  title?: string;
+  description?: string;
+  theme?: "auto" | "light" | "dark";
+  chrome?: boolean;
+}
+
+const {
+  title = `${personal.name} — ${personal.tagline}`,
+  description = `${personal.name}. Software engineer building tools that respect the user. ${personal.status}.`,
+  theme = "dark",
+  chrome = true,
+} = Astro.props;
+
+// The production site is a deliberate dark experience. Auto remains available
+// for experiments that need to honor the user's operating-system preference.
+const dataTheme = theme === "auto" ? null : theme;
+---
+
+<!doctype html>
+<html lang="en" data-theme={dataTheme}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#080808" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap"
+    />
+
+    <title>{title}</title>
+
+    {
+      theme === "auto" && (
+        <script is:inline>
+          (() => {
+            try {
+              const stored = localStorage.getItem("theme");
+              if (stored === "light" || stored === "dark") {
+                document.documentElement.setAttribute("data-theme", stored);
+              }
+            } catch (e) {
+              /* localStorage may be unavailable; system preference will apply */
+            }
+          })();
+        </script>
+      )
+    }
+  </head>
+  <body>
+    {chrome && <a href="#main" class="skip-link">Skip to content</a>}
+    {chrome && <Nav />}
+    <main id="main">
+      <slot />
+    </main>
+    {chrome && <Footer />}
+
+  </body>
+</html>

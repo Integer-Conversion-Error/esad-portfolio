@@ -1,0 +1,142 @@
+---
+import { personal } from "../lib/data";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-topline">
+      <p>EK / Ottawa</p>
+      <p>Software and hardware / 2026</p>
+    </div>
+
+    <div class="footer-grid">
+      <p class="footer-lede">I build software and hardware systems for work and home.</p>
+
+      <nav aria-label="Footer work links">
+        <a href="/#work">Selected work <span aria-hidden="true">-&gt;</span></a>
+        <a href="/#resume">Resume <span aria-hidden="true">-&gt;</span></a>
+        <a href="/blog">Writing <span aria-hidden="true">-&gt;</span></a>
+      </nav>
+
+      <nav aria-label="Footer contact links">
+        <a href={personal.links.github} target="_blank" rel="noopener">GitHub <span aria-hidden="true">-&gt;</span></a>
+        <a href={personal.links.linkedin} target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">-&gt;</span></a>
+        <a href={`mailto:${personal.email}`}>Email <span aria-hidden="true">-&gt;</span></a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p>Esad Kaya / {year}</p>
+      <p>Astro / static output / Cloudflare ready</p>
+      <a href="#main">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--accent);
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  .footer-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 64px clamp(24px, 5vw, 72px) 20px;
+  }
+
+  .footer-topline,
+  .footer-bottom,
+  .footer nav,
+  .footer-lede {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .footer-topline,
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .footer-topline {
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--accent);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 0.7fr 0.7fr;
+    gap: 48px;
+    padding: 64px 0;
+  }
+
+  .footer-lede {
+    max-width: 24ch;
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-size: 28px;
+    line-height: 1.04;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .footer nav {
+    display: grid;
+    align-content: start;
+    gap: 10px;
+  }
+
+  .footer nav a,
+  .footer-bottom a {
+    width: fit-content;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+
+  .footer nav a:hover,
+  .footer-bottom a:hover {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .footer nav span,
+  .footer-bottom span {
+    color: var(--accent);
+  }
+
+  .footer-bottom {
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    color: var(--accent);
+  }
+
+  @media (max-width: 720px) {
+    .footer-inner {
+      padding-top: 48px;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 48px 0;
+    }
+
+    .footer-bottom,
+    .footer-topline {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+</style>

@@ -1,0 +1,3 @@
+# Redirects handled automatically by Cloudflare Pages — Astro emits
+# clean index.html for directory routes (/blog/ → /blog/index.html).
+# Add rules below only if you encounter an unmatched route.

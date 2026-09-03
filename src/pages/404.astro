@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="404 — Esad Kaya" description="Page not found.">
+  <section class="not-found section">
+    <div class="container">
+      <span class="micro label">404</span>
+      <h1 class="text-h1">Page not found.</h1>
+      <p class="lede">
+        That route doesn't resolve. The link may be old, or it may have moved.
+      </p>
+      <a href="/" class="back">← Back to home</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .label {
+    color: var(--ink-subtle);
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .lede {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    margin: 32px 0 64px;
+    max-width: 32rem;
+  }
+
+  .back {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+    transition: color var(--duration-instant) var(--ease-standard);
+  }
+
+  .back:hover {
+    color: var(--accent);
+  }
+</style>

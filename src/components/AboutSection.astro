@@ -1,0 +1,109 @@
+---
+// AboutSection — Rams pull-quote + restrained bio.
+---
+
+<section id="about" class="about section">
+  <div class="container">
+    <div class="quote-block">
+      <span class="micro attribution-label">Principle 10 — Dieter Rams</span>
+
+      <blockquote class="quote">
+        <h2 class="quote-text">Less, but better.</h2>
+        <cite class="quote-cite">— Dieter Rams</cite>
+      </blockquote>
+
+      <span class="quote-rule" aria-hidden="true"></span>
+    </div>
+
+    <div class="prose">
+      <p>
+        I'm finishing a CS degree at the University of Ottawa in May 2027. Born in
+        2004. Most of the projects on this page began with a practical problem. I
+        thought through how to build a solution and then did the work. Some became
+        useful tools; others taught me what to build next.
+      </p>
+
+      <p>
+        My first language was C, learned across grade 11 and 12. I wrote a
+        command-line ATM program that got as far as pointers and file I/O, and a
+        top-down shooter on an Arduino board with an OLED screen, a joystick, four
+        buttons, and a piezo buzzer. Neither of those is a project I'm proudest of.
+        They're the ones that made me want to keep going.
+      </p>
+
+      <p>
+        I 3D print, run a homelab, and keep local AI models running on available
+        hardware. The AI and embedded work I'm
+        proud of is mostly self-taught — I read datasheets and source before I read
+        tutorials. Since 2020 I've been the technical support person at my family's
+        janitorial company, which includes running payroll for fifty people in
+        QuickBooks and maintaining the dispatch system. I spent a term on
+        Solace's support team maintaining the tooling. Before that I built PyQt
+        tools for radar analysis at the Communications Research Center, and
+        prototyped Power BI dashboards for HR directors at Infrastructure Canada
+        over the summer.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    border-top: 1px solid var(--rule);
+  }
+
+  .quote-block {
+    margin-bottom: 64px;
+  }
+
+  .attribution-label {
+    display: block;
+    color: var(--ink-subtle);
+    margin-bottom: 32px;
+  }
+
+  .quote {
+    margin: 0 0 32px;
+    padding: 0;
+  }
+
+  .quote-text {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 16px;
+  }
+
+  .quote-cite {
+    display: block;
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .quote-rule {
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .prose {
+    max-width: 38rem;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .prose p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+</style>

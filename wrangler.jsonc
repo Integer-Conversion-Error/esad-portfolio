@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "esad-portfolio",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-08-24",
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "esadkaya.ca",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.esadkaya.ca",
+      "custom_domain": true
+    }
+  ],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

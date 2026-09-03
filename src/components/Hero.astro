@@ -1,0 +1,122 @@
+---
+import { personal } from "../lib/data";
+---
+
+<section class="hero" aria-labelledby="hero-name">
+  <div class="container hero-inner">
+    <h1 id="hero-name" class="hero-name">
+      <span class="word">{personal.givenName}</span>
+      <span class="word">{personal.surname}</span>
+    </h1>
+
+    <p class="hero-tagline">{personal.tagline}</p>
+
+    <div class="hero-meta">
+      <p class="status">{personal.status}</p>
+    </div>
+  </div>
+
+  <div class="scroll-affordance" aria-hidden="true">
+    <span class="scroll-label">Scroll</span>
+    <span class="scroll-line"></span>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: center;
+    padding-top: 64px;
+  }
+
+  .hero-inner {
+    width: 100%;
+  }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 9vw, 80px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 32px;
+    overflow: hidden;
+  }
+
+  /* Words are inline; reveal animates translateY of inner mask */
+  .hero-name .word {
+    display: inline-block;
+    will-change: transform, opacity;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-sans);
+    font-size: var(--text-body-lg);
+    line-height: 1.55;
+    color: var(--ink-muted);
+    max-width: 28ch;
+    margin: 0 0 96px;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .status {
+    font-family: var(--font-sans);
+    font-size: var(--text-caption);
+    color: var(--ink-subtle);
+    margin: 0;
+  }
+
+  .scroll-affordance {
+    position: absolute;
+    right: clamp(24px, 5vw, 64px);
+    bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-subtle);
+  }
+
+  @media (min-width: 768px) {
+    .scroll-affordance .scroll-line {
+      display: block;
+    }
+  }
+
+  .scroll-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .scroll-line {
+    display: block;
+    width: 1px;
+    height: 24px;
+    background: var(--ink-subtle);
+    transform-origin: top;
+    animation: scroll-pulse 2.4s var(--ease-standard) infinite;
+  }
+
+  @keyframes scroll-pulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.6; }
+    50% { transform: scaleY(0.4); opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-line {
+      animation: none;
+    }
+  }
+</style>
