@@ -47,6 +47,25 @@ Then deploy:
 npm run deploy:worker
 ```
 
+## Continuous Deployment
+
+The GitHub Actions workflow in `.github/workflows/deploy.yml` builds and
+deploys this Worker for every push to `main`. It cancels an older in-progress
+deployment when a newer commit arrives, so production finishes on the latest
+commit.
+
+Before the first automatic deployment, add these repository Actions secrets:
+
+| Secret | Value |
+| --- | --- |
+| `CLOUDFLARE_ACCOUNT_ID` | The Cloudflare account that owns `esad-portfolio` |
+| `CLOUDFLARE_API_TOKEN` | A restricted Cloudflare API token with permission to edit this Worker |
+
+Create the API token from Cloudflare's **Edit Cloudflare Workers** template and
+scope it to the account and zone used by this site. Never commit the token to
+the repository. Until both secrets are present, the workflow builds the site
+and reports that deployment was skipped.
+
 The Worker name is `esad-portfolio`. Its production Custom Domain is declared
 as `esadkaya.ca` in `wrangler.jsonc`, so Cloudflare will create the DNS record
 and certificate when that zone is present in the authenticated account. Change
