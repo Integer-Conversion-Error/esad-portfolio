@@ -92,9 +92,8 @@ const facts = [
   <section class="cp-work" id="work" aria-labelledby="work-title">
     <div class="cp-shell">
       <header class="cp-section-head">
-        <p>01 / Selected work</p>
         <h2 id="work-title">Selected work.</h2>
-        <p>2025-2026 / software and hardware</p>
+        <p class="cp-section-detail">2025-2026 / software and hardware</p>
       </header>
 
       <div class="cp-projects">
@@ -179,9 +178,8 @@ const facts = [
   <section class="cp-record" id="record" aria-labelledby="record-title">
     <div class="cp-shell">
       <header class="cp-section-head cp-section-head-record">
-        <p>03 / Experience</p>
         <h2 id="record-title">Where I've worked.</h2>
-        <p>Selected roles and results</p>
+        <p class="cp-section-detail">Selected roles and results</p>
       </header>
 
       <div class="cp-record-list">
@@ -207,9 +205,8 @@ const facts = [
   <section class="cp-resume" id="resume" aria-labelledby="resume-title">
     <div class="cp-shell">
       <header class="cp-section-head">
-        <p>04 / Resume</p>
         <h2 id="resume-title">Resume.</h2>
-        <p>Current PDF / 4 pages</p>
+        <p class="cp-section-detail">Current PDF / 4 pages</p>
       </header>
 
       <div class="cp-resume-intro">
@@ -229,9 +226,8 @@ const facts = [
   <section class="cp-toolbox" aria-labelledby="toolbox-title">
     <div class="cp-shell">
       <header class="cp-section-head">
-        <p>05 / Tools</p>
         <h2 id="toolbox-title">Tools and technologies.</h2>
-        <p>Current working set</p>
+        <p class="cp-section-detail">Current working set</p>
       </header>
 
       <div class="cp-skill-groups">
@@ -252,9 +248,8 @@ const facts = [
   <section class="cp-small" aria-labelledby="small-title">
     <div class="cp-shell">
       <header class="cp-section-head cp-section-head-small">
-        <p>06 / Other projects</p>
         <h2 id="small-title">Other projects.</h2>
-        <p>Selected side projects</p>
+        <p class="cp-section-detail">Selected side projects</p>
       </header>
 
       <div class="cp-small-list">
@@ -659,18 +654,14 @@ const facts = [
 
   .cp-section-head {
     display: grid;
-    grid-template-columns: 1fr minmax(0, 2.4fr) 1fr;
+    grid-template-columns: minmax(0, 2.4fr) 1fr;
     gap: 24px;
     align-items: end;
     padding-bottom: 28px;
     border-bottom: 1px solid var(--cp-red);
   }
 
-  .cp-section-head > p {
-    color: var(--cp-red);
-  }
-
-  .cp-section-head > p:last-child {
+  .cp-section-detail {
     justify-self: end;
     color: var(--cp-muted);
     text-align: right;
@@ -1336,24 +1327,19 @@ const facts = [
     }
 
     .cp-section-head {
-      grid-template-columns: 1fr auto;
+      grid-template-columns: 1fr;
       gap: 16px;
     }
 
     .cp-section-head h2 {
-      grid-column: 1 / -1;
-      grid-row: 1;
+      grid-column: 1;
       font-size: 52px;
     }
 
-    .cp-section-head > p:first-child {
+    .cp-section-detail {
       grid-column: 1;
-      grid-row: 2;
-    }
-
-    .cp-section-head > p:last-child {
-      grid-column: 2;
-      grid-row: 2;
+      justify-self: start;
+      text-align: left;
     }
 
     .cp-project {

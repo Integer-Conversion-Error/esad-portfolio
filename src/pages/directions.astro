@@ -200,7 +200,6 @@ const atlasNodes = [
         </header>
 
         <div class="dispatch-hero">
-          <p class="dispatch-issue">Selected work</p>
           <h2 id="dispatch-title">Selected<br /><em>work.</em></h2>
           <p class="dispatch-deck">
             Workforce software, a local home intercom, a street-parking app, and other tools
@@ -951,7 +950,6 @@ const atlasNodes = [
   }
 
   .dispatch-topline,
-  .dispatch-issue,
   .dispatch-project-meta,
   .dispatch-project-image > span,
   .dispatch-divider,
@@ -978,20 +976,14 @@ const atlasNodes = [
   .dispatch-hero {
     display: grid;
     grid-template-areas:
-      "issue issue"
       "title deck"
       "title portrait";
-    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-rows: minmax(0, 1fr) auto;
     grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
     column-gap: clamp(40px, 8vw, 120px);
     row-gap: 28px;
     padding: clamp(72px, 11vw, 160px) 0;
     border-bottom: 1px solid #aeb3bf;
-  }
-
-  .dispatch-issue {
-    grid-area: issue;
-    color: #e34d35;
   }
 
   .dispatch-hero h2 {
@@ -1427,7 +1419,6 @@ const atlasNodes = [
 
     .dispatch-hero {
       grid-template-areas:
-        "issue"
         "title"
         "deck"
         "portrait";
