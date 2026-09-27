@@ -1,0 +1,830 @@
+---
+import { experience, leadProjects, personal, smallProjects } from "../lib/data";
+import ProjectVisual from "./ProjectVisual.astro";
+
+const capabilities = [
+  { label: "Web + mobile", items: "TypeScript / React / React Native / NestJS" },
+  { label: "Data + vision", items: "Python / PostGIS / OpenCV / ONNX" },
+  { label: "Devices + delivery", items: "ESP32 / Docker / AWS / Cloudflare" },
+];
+---
+
+<div class="tp" id="top">
+  <a class="tp-skip" href="#work">Skip to selected work</a>
+
+  <header class="tp-nav" data-tp-nav>
+    <div class="tp-shell tp-nav-inner">
+      <a class="tp-mark" href="#top" aria-label={personal.name + " - back to top"}>EK</a>
+      <nav class="tp-nav-links" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#record">Experience</a>
+        <a href="#about">About</a>
+        <a href="#resume">Resume</a>
+        <a href="/blog">Writing</a>
+      </nav>
+      <a class="tp-nav-contact" href="#contact">Contact <span aria-hidden="true">↗</span></a>
+      <button class="tp-menu" type="button" data-tp-menu aria-label="Open navigation" aria-expanded="false" aria-controls="tp-mobile-navigation">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+    <div class="tp-drawer" id="tp-mobile-navigation" data-tp-drawer aria-hidden="true" inert>
+      <nav aria-label="Mobile navigation">
+        <a href="#work">Work</a>
+        <a href="#record">Experience</a>
+        <a href="#about">About</a>
+        <a href="#resume">Resume</a>
+        <a href="/blog">Writing</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="tp-hero" aria-labelledby="tp-hero-title" data-terminal-hero>
+    <div class="tp-shell tp-hero-shell">
+      <div class="tp-hero-stage">
+        <div class="tp-login" data-terminal-login aria-hidden="true" hidden>
+          <p>Ubuntu &nbsp; ottawa tty1</p>
+          <p>ottawa login: <span>esad</span></p>
+          <p>Password: ••••••••</p>
+          <p>Authentication successful.</p>
+          <p><span>Loading portfolio...</span></p>
+        </div>
+        <div class="tp-hero-content">
+          <p class="tp-hero-prompt"><span>esad@ottawa</span>:~$ ./portfolio</p>
+          <div class="tp-hero-signal" aria-hidden="true"></div>
+          <h1 id="tp-hero-title">I build software<br />for work <span>and home.</span></h1>
+          <ol class="tp-hero-records" aria-label="What I build">
+            <li><span>01</span> <strong>Ottawa crews</strong> / workforce tools</li>
+            <li><span>02</span> <strong>Family business</strong> / payroll for 50+ staff</li>
+            <li><span>03</span> <strong>The house</strong> / local intercom</li>
+          </ol>
+          <a class="tp-hero-link" href="#work" aria-label="Jump to selected work">
+            <span>esad@ottawa</span>:~$ cd work/ <span aria-hidden="true">↵</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (() => {
+      const hero = document.querySelector("[data-terminal-hero]");
+      const login = hero?.querySelector("[data-terminal-login]");
+      const link = hero?.querySelector(".tp-hero-link");
+      if (!hero || !login || !link || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      login.hidden = false;
+      link.inert = true;
+      hero.classList.add("is-logging-in");
+      window.setTimeout(() => {
+        hero.classList.remove("is-logging-in");
+        login.hidden = true;
+        link.inert = false;
+      }, 2100);
+    })();
+  </script>
+
+  <section class="tp-section tp-work" id="work" aria-labelledby="work-title">
+    <div class="tp-shell">
+      <h2 class="tp-section-title" id="work-title" aria-label="Selected work">
+        <span aria-hidden="true"><span class="tp-dollar">$</span> ls work/</span>
+      </h2>
+      <div class="tp-projects">
+        {leadProjects.map((project, index) => (
+          <article class="tp-project" id={project.slug}>
+            <div class="tp-project-copy">
+              <div class="tp-project-heading">
+                <span class="tp-project-index">{String(index + 1).padStart(2, "0")}</span>
+                <h3>{project.title}</h3>
+              </div>
+              <p class="tp-project-outcome">{project.outcome}</p>
+              <p class="tp-project-evidence">{project.evidence}</p>
+              <div class="tp-project-footer">
+                <p>{project.year}</p>
+                {(project.url || project.github) && (
+                  <div class="tp-project-links">
+                    {project.url && <a href={project.url} target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a>}
+                    {project.github && <a href={project.github} target="_blank" rel="noopener">Source <span aria-hidden="true">↗</span></a>}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div class="tp-project-visual"><ProjectVisual hint={project.visualHint} /></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tp-section tp-record" id="record" aria-labelledby="record-title">
+    <div class="tp-shell">
+      <h2 class="tp-section-title" id="record-title" aria-label="Experience">
+        <span aria-hidden="true"><span class="tp-dollar">$</span> history</span>
+      </h2>
+      <div class="tp-history">
+        {experience.map((role) => (
+          <article class="tp-history-row">
+            <div class="tp-history-identity">
+              <h3>{role.company}</h3>
+              <p>{role.role}</p>
+              <p>{role.start} – {role.end}</p>
+            </div>
+            <p class="tp-history-result">{role.result}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tp-section tp-about" id="about" aria-labelledby="about-title">
+    <div class="tp-shell">
+      <h2 class="tp-section-title" id="about-title" aria-label="About">
+        <span aria-hidden="true"><span class="tp-dollar">$</span> whoami</span>
+      </h2>
+      <p class="tp-about-copy">
+        I've run payroll for more than 50 people, built field tools for Ottawa crews,
+        and put together local hardware for my family. I'm finishing a CS degree at
+        the University of Ottawa in May 2027.
+      </p>
+    </div>
+  </section>
+
+  <section class="tp-section tp-toolbox" aria-labelledby="toolbox-title">
+    <div class="tp-shell">
+      <h2 class="tp-section-title" id="toolbox-title" aria-label="Tools">
+        <span aria-hidden="true"><span class="tp-dollar">$</span> ls tools/</span>
+      </h2>
+      <dl class="tp-capabilities">
+        {capabilities.map((group) => (
+          <div><dt>{group.label}</dt><dd>{group.items}</dd></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="tp-section tp-resume" id="resume" aria-labelledby="resume-title">
+    <div class="tp-shell">
+      <h2 class="tp-section-title" id="resume-title" aria-label="Resume">
+        <span aria-hidden="true"><span class="tp-dollar">$</span> open resume.pdf</span>
+      </h2>
+      <div class="tp-resume-actions">
+        <a href="/resume.pdf" target="_blank" rel="noopener">View résumé <span aria-hidden="true">↗</span></a>
+        <a href="/resume.pdf" download>Download PDF <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tp-section tp-side" aria-labelledby="side-title">
+    <div class="tp-shell">
+      <h2 class="tp-section-title" id="side-title" aria-label="Other projects">
+        <span aria-hidden="true"><span class="tp-dollar">$</span> ls side/</span>
+      </h2>
+      <div class="tp-side-list">
+        {smallProjects.map((project) => (
+          <article class="tp-side-row">
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+            {project.github && <a href={project.github} target="_blank" rel="noopener" aria-label={"Open " + project.title + " source"}>Source <span aria-hidden="true">↗</span></a>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tp-section tp-contact" id="contact" aria-labelledby="contact-title">
+    <div class="tp-shell">
+      <h2 class="tp-section-title" id="contact-title" aria-label="Contact">
+        <span aria-hidden="true"><span class="tp-dollar">$</span> contact</span>
+      </h2>
+      <p>Available for Summer 2027 roles and contract work.</p>
+      <a class="tp-email" href={"mailto:" + personal.email}>{personal.email}<span aria-hidden="true">↗</span></a>
+      <div class="tp-social-links">
+        <a href={personal.links.github} target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+        <a href={personal.links.linkedin} target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="tp-footer">
+    <div class="tp-shell"><a href="#top">Back to top <span aria-hidden="true">↑</span></a></div>
+  </footer>
+</div>
+
+<style>
+  .tp {
+    --tp-black: #0b0a0d;
+    --tp-surface: #121014;
+    --tp-aubergine: #1b131b;
+    --tp-orange: #e99855;
+    --tp-paper: #f4f1eb;
+    --tp-muted: #b8aeb2;
+    --tp-rule: #51454b;
+    --accent: var(--tp-orange);
+    --accent-soft: #36231c;
+    --bg: var(--tp-black);
+    --bg-sunken: var(--tp-surface);
+    --ink: var(--tp-paper);
+    min-height: 100vh;
+    overflow-x: clip;
+    background: var(--tp-black);
+    color: var(--tp-paper);
+    font-family: var(--font-mono);
+  }
+  .tp *, .tp *::before, .tp *::after { box-sizing: border-box; }
+  .tp a { color: inherit; }
+  .tp h1, .tp h2, .tp h3 { font-family: var(--font-mono); }
+  .tp-shell {
+    width: min(100%, 1440px);
+    margin: 0 auto;
+    padding-inline: 72px;
+  }
+  .tp section[id] { scroll-margin-top: 64px; }
+  .tp-skip {
+    position: fixed;
+    z-index: 100;
+    top: 16px;
+    left: 16px;
+    padding: 12px 16px;
+    background: var(--tp-orange);
+    color: var(--tp-black);
+    font-size: 13px;
+    transform: translateY(-200%);
+  }
+  .tp-skip:focus { transform: translateY(0); }
+
+  .tp-nav {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    border-bottom: 1px solid var(--tp-rule);
+    background: var(--tp-black);
+  }
+  .tp-nav-inner {
+    min-height: 64px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+  }
+  .tp-mark {
+    width: max-content;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .tp-nav-links { display: flex; align-items: center; gap: 24px; }
+  .tp-nav-links a, .tp-nav-contact {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+  .tp-nav-links a:hover, .tp-nav-contact:hover {
+    color: var(--tp-orange);
+    border-bottom-color: var(--tp-orange);
+  }
+  .tp-nav-contact { justify-self: end; color: var(--tp-orange); gap: 8px; }
+  .tp-menu, .tp-drawer { display: none; }
+
+  .tp-hero {
+    min-height: max(680px, calc(100svh - 154px));
+    border-bottom: 1px solid var(--tp-orange);
+  }
+  .tp-hero-shell {
+    min-height: inherit;
+    display: flex;
+    flex-direction: column;
+    padding-block: 28px 24px;
+  }
+  .tp-hero-stage {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 64px 78px;
+  }
+  .tp-hero-content { transition: opacity 180ms ease-out; }
+  .tp-hero-prompt {
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.055em;
+  }
+  .tp-hero-prompt span,
+  .tp-hero-link span:first-child,
+  .tp-hero-records li > span,
+  .tp-hero-link span:last-child,
+  .tp-login span { color: var(--tp-orange); }
+  .tp-hero-signal {
+    width: 76px;
+    height: 2px;
+    margin: 20px 0 28px;
+    background: var(--tp-orange);
+  }
+  .tp-hero h1 {
+    color: var(--tp-paper);
+    font-size: 80px;
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.075em;
+  }
+  .tp-hero h1 span { color: var(--tp-orange); }
+  .tp-hero-records {
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin: 32px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .tp-hero-records li {
+    padding-top: 12px;
+    border-top: 1px solid var(--tp-rule);
+    color: #c9bec2;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .tp-hero-records li > span { margin-right: 8px; font-weight: 500; }
+  .tp-hero-records strong { color: var(--tp-paper); font-weight: 500; }
+  .tp-hero-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 36px;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.04em;
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+  .tp-hero-link:hover { color: var(--tp-orange); }
+  .tp-login {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    padding-top: 72px;
+    background: var(--tp-black);
+    font-size: 22px;
+    line-height: 1.7;
+    letter-spacing: -0.04em;
+    pointer-events: none;
+  }
+  .tp-login[hidden] { display: none; }
+  .tp-login p { margin-bottom: 4px; }
+  .tp-hero.is-logging-in .tp-hero-content { opacity: 0; }
+  .tp-hero.is-logging-in .tp-login p {
+    opacity: 0;
+    animation: tp-terminal-line 100ms ease-out both;
+  }
+  .tp-hero.is-logging-in .tp-login p:nth-child(1) { animation-delay: 100ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(2) { animation-delay: 350ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(3) { animation-delay: 800ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(4) { animation-delay: 1250ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(5) { animation-delay: 1650ms; }
+  @keyframes tp-terminal-line { to { opacity: 1; } }
+
+  .tp-section { border-bottom: 1px solid var(--tp-rule); }
+  .tp-section > .tp-shell { padding-block: 104px; }
+  .tp-work > .tp-shell { padding-top: 48px; }
+  .tp-section-title {
+    margin-bottom: 42px;
+    color: var(--tp-paper);
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.065em;
+    overflow-wrap: anywhere;
+  }
+  .tp-dollar { color: var(--tp-orange); }
+
+  .tp-project {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(260px, .8fr);
+    align-items: center;
+    gap: 64px;
+    padding: 58px 0;
+    border-top: 1px solid var(--tp-rule);
+  }
+  .tp-project-copy { min-width: 0; }
+  .tp-project-heading { display: flex; align-items: baseline; gap: 18px; }
+  .tp-project-index {
+    flex: none;
+    color: var(--tp-orange);
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .tp-project h3 {
+    color: var(--tp-paper);
+    font-size: 44px;
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.06em;
+    overflow-wrap: anywhere;
+  }
+  .tp-project-outcome {
+    max-width: 32ch;
+    margin-top: 22px;
+    color: var(--tp-paper);
+    font-size: 23px;
+    line-height: 1.42;
+    letter-spacing: -0.035em;
+  }
+  .tp-project-evidence {
+    max-width: 58ch;
+    margin-top: 14px;
+    color: var(--tp-muted);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .tp-project-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 28px;
+    margin-top: 28px;
+    color: var(--tp-muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .tp-project-links { display: flex; flex-wrap: wrap; gap: 18px; }
+  .tp-project-links a {
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--tp-orange);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .tp-project-links a:hover { border-color: var(--tp-orange); }
+  .tp-project-visual {
+    width: 100%;
+    max-width: 460px;
+    min-height: 260px;
+    justify-self: end;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    border: 1px solid var(--tp-rule);
+    background: var(--tp-surface);
+    color: var(--tp-paper);
+  }
+  .tp-project-visual :global(.illus) { max-height: 260px; }
+  .tp-project-visual :global(img.illus) { margin: 0 auto; }
+
+  .tp-record, .tp-resume { background: #0f0d10; }
+  .tp-history-row {
+    display: grid;
+    grid-template-columns: minmax(220px, .58fr) minmax(0, 1fr);
+    gap: 32px;
+    padding: 30px 0;
+    border-top: 1px solid var(--tp-rule);
+  }
+  .tp-history-identity h3 {
+    color: var(--tp-paper);
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  .tp-history-identity p {
+    margin-top: 6px;
+    color: var(--tp-muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .tp-history-result {
+    align-self: center;
+    max-width: 46ch;
+    color: var(--tp-paper);
+    font-size: 20px;
+    line-height: 1.45;
+    letter-spacing: -0.035em;
+  }
+
+  .tp-about { background: var(--tp-aubergine); }
+  .tp-about-copy {
+    max-width: 56ch;
+    color: var(--tp-paper);
+    font-size: 25px;
+    line-height: 1.55;
+    letter-spacing: -0.035em;
+  }
+
+  .tp-capabilities {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    margin: 0;
+  }
+  .tp-capabilities div {
+    padding-top: 18px;
+    border-top: 1px solid var(--tp-rule);
+  }
+  .tp-capabilities dt {
+    color: var(--tp-orange);
+    font-size: 17px;
+    line-height: 1.4;
+  }
+  .tp-capabilities dd {
+    margin: 14px 0 0;
+    color: var(--tp-paper);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .tp-resume-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 48px;
+    align-items: center;
+  }
+  .tp-resume-actions a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--tp-paper);
+    font-size: 22px;
+    line-height: 1.4;
+    text-decoration: none;
+    border-bottom: 1px solid var(--tp-rule);
+  }
+  .tp-resume-actions a:hover { color: var(--tp-orange); border-color: var(--tp-orange); }
+  .tp-resume-actions span { color: var(--tp-orange); }
+
+  .tp-side-row {
+    display: grid;
+    grid-template-columns: minmax(190px, .65fr) minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid var(--tp-rule);
+  }
+  .tp-side-row h3 {
+    color: var(--tp-paper);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.04em;
+  }
+  .tp-side-row p {
+    color: var(--tp-muted);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .tp-side-row a {
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--tp-orange);
+    font-size: 14px;
+    white-space: nowrap;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .tp-side-row a:hover { border-color: var(--tp-orange); }
+
+  .tp-contact {
+    border-top: 1px solid var(--tp-orange);
+    border-bottom: 0;
+    background: var(--tp-aubergine);
+  }
+  .tp-contact .tp-section-title { margin-bottom: 32px; }
+  .tp-contact p {
+    color: var(--tp-muted);
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .tp-email {
+    width: fit-content;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+    margin-top: 28px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--tp-orange);
+    color: var(--tp-paper);
+    font-size: 42px;
+    line-height: 1.2;
+    letter-spacing: -0.065em;
+    overflow-wrap: anywhere;
+    text-decoration: none;
+  }
+  .tp-email:hover { color: var(--tp-orange); }
+  .tp-email span { color: var(--tp-orange); }
+  .tp-social-links { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 48px; }
+  .tp-social-links a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--tp-muted);
+    font-size: 15px;
+    text-decoration: none;
+  }
+  .tp-social-links a:hover { color: var(--tp-orange); }
+  .tp-social-links span { color: var(--tp-orange); }
+
+  .tp-footer { background: var(--tp-black); }
+  .tp-footer .tp-shell {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .tp-footer a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--tp-muted);
+    font-size: 14px;
+    text-decoration: none;
+  }
+  .tp-footer a:hover { color: var(--tp-orange); }
+  .tp :global(*:focus-visible) {
+    outline: 2px solid var(--tp-orange);
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 1080px) {
+    .tp-shell { padding-inline: 48px; }
+    .tp-hero h1 { font-size: 64px; }
+    .tp-project { gap: 36px; }
+    .tp-project h3 { font-size: 38px; }
+    .tp-project-outcome { font-size: 21px; }
+  }
+
+  @media (max-width: 800px) {
+    .tp-shell { padding-inline: 24px; }
+    .tp-nav-inner { grid-template-columns: 1fr auto; }
+    .tp-nav-links, .tp-nav-contact { display: none; }
+    .tp-menu {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-content: center;
+      gap: 7px;
+      border: 0;
+      background: transparent;
+      color: var(--tp-paper);
+      cursor: pointer;
+    }
+    .tp-menu span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: currentColor;
+      transition: transform 180ms ease;
+    }
+    .tp-nav.is-open .tp-menu span:first-child { transform: translateY(4px) rotate(45deg); }
+    .tp-nav.is-open .tp-menu span:last-child { transform: translateY(-4px) rotate(-45deg); }
+    .tp-drawer {
+      position: fixed;
+      inset: 64px 0 0;
+      z-index: 29;
+      display: grid;
+      align-content: start;
+      padding: 48px 24px 32px;
+      background: var(--tp-black);
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateX(100%);
+      transition: transform 220ms ease;
+    }
+    .tp-nav.is-open .tp-drawer {
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(0);
+    }
+    .tp-drawer nav { display: grid; gap: 14px; }
+    .tp-drawer a {
+      width: fit-content;
+      color: var(--tp-paper);
+      font-size: 40px;
+      line-height: 1.1;
+      letter-spacing: -0.05em;
+      text-decoration: none;
+    }
+    .tp-drawer a:hover { color: var(--tp-orange); }
+
+    .tp-hero-shell { padding-block: 20px 28px; }
+    .tp-hero-stage { padding-block: 52px 60px; }
+    .tp-hero h1 { font-size: 50px; }
+    .tp-hero-prompt { font-size: 26px; }
+    .tp-hero-records { gap: 16px; }
+    .tp-hero-records li { font-size: 13px; }
+    .tp-hero-link { font-size: 20px; }
+    .tp-login { padding-top: 56px; font-size: 18px; }
+
+    .tp-section > .tp-shell { padding-block: 72px; }
+    .tp-work > .tp-shell { padding-top: 48px; }
+    .tp-section-title { font-size: 46px; margin-bottom: 32px; }
+    .tp-project {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 46px 0;
+    }
+    .tp-project-visual {
+      max-width: 520px;
+      min-height: 220px;
+      justify-self: start;
+    }
+    .tp-history-row { grid-template-columns: minmax(180px, .65fr) minmax(0, 1fr); gap: 24px; }
+    .tp-about-copy { font-size: 22px; }
+    .tp-capabilities { gap: 18px; }
+    .tp-capabilities dd { font-size: 14px; }
+    .tp-side-row { grid-template-columns: minmax(150px, .6fr) minmax(0, 1fr) auto; }
+    .tp-email { font-size: 34px; }
+  }
+
+  @media (max-width: 680px) {
+    .tp-hero h1 { font-size: 42px; }
+    .tp-hero-prompt { font-size: 24px; }
+    .tp-hero-records {
+      max-width: 480px;
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-top: 24px;
+    }
+    .tp-hero-records li { padding: 8px 0; }
+    .tp-history-row, .tp-side-row { grid-template-columns: 1fr; gap: 12px; }
+    .tp-history-result { font-size: 18px; }
+    .tp-capabilities { grid-template-columns: 1fr; gap: 0; }
+    .tp-capabilities div { padding: 16px 0; }
+    .tp-capabilities dd { margin-top: 8px; }
+  }
+
+  @media (max-width: 480px) {
+    .tp-hero { min-height: max(620px, calc(100svh - 154px)); }
+    .tp-hero-stage { padding-block: 42px 54px; }
+    .tp-hero-prompt { font-size: 20px; overflow-wrap: anywhere; }
+    .tp-hero h1 { font-size: 34px; line-height: 1.18; }
+    .tp-hero-link { margin-top: 20px; font-size: 18px; }
+    .tp-login { padding-top: 46px; font-size: 16px; }
+    .tp-section > .tp-shell { padding-block: 64px; }
+    .tp-work > .tp-shell { padding-top: 42px; }
+    .tp-section-title { font-size: 34px; }
+    .tp-project { padding: 38px 0; }
+    .tp-project-heading { gap: 12px; }
+    .tp-project-index { font-size: 13px; }
+    .tp-project h3 { font-size: 29px; }
+    .tp-project-outcome { font-size: 19px; margin-top: 16px; }
+    .tp-project-evidence { font-size: 14px; }
+    .tp-project-visual { min-height: 180px; padding: 12px; }
+    .tp-project-visual :global(.illus) { max-height: 210px; }
+    .tp-history-identity h3 { font-size: 20px; }
+    .tp-history-result { font-size: 17px; }
+    .tp-about-copy { font-size: 19px; }
+    .tp-resume-actions { display: grid; gap: 14px; }
+    .tp-resume-actions a { width: fit-content; font-size: 18px; }
+    .tp-side-row h3 { font-size: 21px; }
+    .tp-contact p { font-size: 16px; }
+    .tp-email { font-size: 24px; }
+    .tp-social-links { margin-top: 32px; }
+  }
+</style>
+
+<script>
+  const nav = document.querySelector<HTMLElement>("[data-tp-nav]");
+  const menu = document.querySelector<HTMLButtonElement>("[data-tp-menu]");
+  const drawer = document.querySelector<HTMLElement>("[data-tp-drawer]");
+  if (nav && menu && drawer) {
+    const close = () => {
+      nav.classList.remove("is-open");
+      menu.setAttribute("aria-expanded", "false");
+      menu.setAttribute("aria-label", "Open navigation");
+      drawer.setAttribute("aria-hidden", "true");
+      drawer.inert = true;
+      document.body.style.overflow = "";
+    };
+    menu.addEventListener("click", () => {
+      const open = nav.classList.toggle("is-open");
+      menu.setAttribute("aria-expanded", String(open));
+      menu.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+      drawer.setAttribute("aria-hidden", String(!open));
+      drawer.inert = !open;
+      document.body.style.overflow = open ? "hidden" : "";
+    });
+    drawer.querySelectorAll("a").forEach((link) => link.addEventListener("click", close));
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && nav.classList.contains("is-open")) {
+        close();
+        menu.focus();
+      }
+    });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 800 && nav.classList.contains("is-open")) close();
+    });
+  }
+</script>

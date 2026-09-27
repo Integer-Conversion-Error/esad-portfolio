@@ -44,7 +44,7 @@ async function main() {
         console.log(`  -> ${url}`);
         const tab = await context.newPage();
         await tab.goto(url, { waitUntil: "networkidle", timeout: 20000 });
-        // give GSAP/Lenis a moment to settle
+        // Let page layout and font loading settle.
         await tab.waitForTimeout(800);
 
         // Full page
@@ -55,12 +55,14 @@ async function main() {
         // Section-specific screenshots
         if (page.name === "home") {
           for (const sel of [
-            "section.hero",
-            "section.about",
-            "section.showcase",
-            "section.timeline",
-            "section.skills",
-            "section.contact",
+            "section.tp-hero",
+            "section.tp-work",
+            "section.tp-record",
+            "section.tp-about",
+            "section.tp-toolbox",
+            "section.tp-resume",
+            "section.tp-side",
+            "section.tp-contact",
           ]) {
             const el = await tab.$(sel);
             if (el) {
@@ -71,7 +73,7 @@ async function main() {
           }
 
           // Also: scroll to each project card and snap it
-          const projects = await tab.$$("article.project-pin");
+          const projects = await tab.$$("article.tp-project");
           for (let i = 0; i < projects.length; i++) {
             await projects[i].scrollIntoViewIfNeeded();
             await tab.waitForTimeout(300);

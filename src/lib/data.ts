@@ -26,6 +26,7 @@ export type Experience = {
   start: string;
   end: string;
   year: number;
+  result: string;
   highlights: string[];
 };
 
@@ -34,6 +35,8 @@ export type Project = {
   title: string;
   subtitle: string;
   narrative: string;
+  outcome: string;
+  evidence: string;
   year: string;
   stack: string[];
   role: string;
@@ -97,12 +100,13 @@ export const experience: Experience[] = [
     start: "May 2026",
     end: "Present",
     year: yearOf("May 2026"),
+    result: "Built a Redis heartbeat that paged on-call within five minutes of failure.",
     highlights: [
       "Shipped UI changes to the IDaaS platform with TypeScript and JavaScript on the front end and Java on the back end.",
       "Improved insights and real-time analysis for anonymized customer usage across production systems serving more than 10 million users.",
       "Built an AWS S3 data store for customer-success data with fast lookups and restricted access.",
       "Worked with the team through stand-ups and backlog grooming.",
-      "Added a Redis heartbeat that notified customer users within five minutes of a failure.",
+      "Built a Redis-based heartbeat that paged on-call within five minutes of failure.",
       "Wrote Jest mocks and DOM tests to catch regressions before release.",
       "Built an Identity Threat Detection and Response dashboard on Redis with modular components.",
     ],
@@ -114,6 +118,7 @@ export const experience: Experience[] = [
     start: "Sept 2025",
     end: "Dec 2025",
     year: yearOf("Sept 2025"),
+    result: "Maintained the team's support tools and runbooks.",
     highlights: [
       "Maintained internal support tools and runbooks for the team.",
     ],
@@ -125,6 +130,7 @@ export const experience: Experience[] = [
     start: "Jan 2025",
     end: "April 2025",
     year: yearOf("Jan 2025"),
+    result: "Cut radar-tool setup time 98% and startup time 95%.",
     highlights: [
       "Built cross-platform PyQt tools for radar analysis. Cut investigator setup time by 98% and startup time by 95%.",
       "Parallelized Python data pipelines for visualizations. Reduced one report from an overnight run to under four hours.",
@@ -138,6 +144,7 @@ export const experience: Experience[] = [
     start: "May 2024",
     end: "Aug 2024",
     year: yearOf("May 2024"),
+    result: "Made HR pipeline bottlenecks visible in Power BI reports.",
     highlights: [
       "Prototyped Power BI dashboards with DAX measures for senior directors across HR datasets.",
       "Cleaned and standardized data with Power Query, removing missing-value friction in recurring reports.",
@@ -151,6 +158,7 @@ export const experience: Experience[] = [
     start: "Jan 2020",
     end: "Present",
     year: yearOf("Jan 2020"),
+    result: "Ran payroll for more than 50 employees and maintained office systems.",
     highlights: [
       "Maintained the head office's hardware and network.",
       "Ran QuickBooks payroll for more than 50 employees and maintained the supporting systems.",
@@ -166,11 +174,13 @@ export const leadProjects: Project[] = [
     subtitle: "Workforce management with geofenced clock-ins.",
     narrative:
       "I built this for a janitorial company with about fifty crews across Ottawa. The main requirement was that a clock-in had to be tied to a real location. Each clock-in is checked against a PostGIS polygon, so supervisors can see whether a worker was on site. The backend uses NestJS, GraphQL, Prisma, and PostGIS. The admin dashboard is React; the field app is React Native with Expo and is designed to keep working when LTE is unreliable. CI runs unit and end-to-end tests on every merge. A Gemini Vision check reviews task-completion photos so supervisors have more context than a thumbnail.",
+    outcome: "Verify on-site clock-ins and give supervisors clearer proof of completed work.",
+    evidence: "PostGIS geofences, a field app designed for unreliable LTE, and photo review.",
     year: "Nov 2025 — Present",
     role: "Solo founder & full-stack engineer",
     stack: ["NestJS", "GraphQL", "Prisma", "PostGIS", "React", "React Native", "Expo"],
     visualHint: "raindropticon",
-    url: "https://www.raindropticon.com",
+    url: "https://raindropticon.com",
   },
   {
     slug: "home-intercom",
@@ -178,6 +188,8 @@ export const leadProjects: Project[] = [
     subtitle: "A local network intercom for the house.",
     narrative:
       "I built two ESP32-S3 room stations and a Dockerized hub for my home network. WebSocket carries control messages; raw UDP carries 16 kHz PCM audio for push-to-talk. A broadcast mode sends a call to every station. The system runs locally with no accounts or cloud service. I built it because I wanted a simple intercom for my mom, and because the audio path was a useful embedded-systems problem.",
+    outcome: "Call any room or broadcast to the whole house without a cloud service.",
+    evidence: "Two ESP32-S3 stations and a Docker hub carry local push-to-talk audio.",
     year: "May 2026",
     role: "Firmware + backend",
     stack: ["ESP32-S3", "Docker", "WebSocket", "UDP", "C++"],
@@ -189,6 +201,8 @@ export const leadProjects: Project[] = [
     subtitle: "A real-time street-parking map with enforcement alerts.",
     narrative:
       "I built a React Native and Expo app for sharing open parking spots and nearby enforcement activity. Drivers can add pins, and the app can notify people parked in the same zone. A separate in-car device uses an Orange Pi 5, ESP32-S3, camera, mmWave radar, and a quantized YOLOv8 model to collect some of that data. It draws under 50 Wh overnight, so it can remain in a parked car over a weekend without draining the battery. The app and device use the same pin and geofence model.",
+    outcome: "Give drivers a shared map of open spots and nearby enforcement activity.",
+    evidence: "Mobile pins and zone alerts; the in-car device draws under 50 Wh overnight.",
     year: "Nov 2025",
     role: "Mobile + edge-AI",
     stack: ["React Native", "Expo", "YOLOv8", "ONNX", "ESP32-S3", "Orange Pi"],
@@ -201,6 +215,8 @@ export const leadProjects: Project[] = [
     subtitle: "A desktop focus monitor using head-pose tracking.",
     narrative:
       "I built this to understand how much time I spend looking at a screen, a phone, or something else. MediaPipe provides the face mesh; OpenCV turns it into a head-pose vector. The app compares that signal with the active window and records the result. A pie chart summarizes the time, and a block list manages distracting applications. Tkinter keeps the interface small, while tracking runs on a separate thread.",
+    outcome: "See where screen time goes and manage distracting applications.",
+    evidence: "Head-pose tracking and active-window data feed a time breakdown.",
     year: "May 2025",
     role: "Solo developer",
     stack: ["Python", "MediaPipe", "OpenCV", "Tkinter"],
@@ -213,6 +229,8 @@ export const leadProjects: Project[] = [
     subtitle: "A production flooring site with supplier data and private deployment.",
     narrative:
       "I built this marketing site for an Ottawa flooring company. The frontend is a Vite and TypeScript SPA; the API uses Express and SQLite; supplier scrapers update the catalog overnight. The admin diff view shows which supplier records changed during the latest sync.",
+    outcome: "Keep a flooring catalog current as supplier data changes.",
+    evidence: "Overnight supplier scrapers and an admin view of changed records.",
     year: "Jul 2026 — Present",
     role: "Full-stack & DevOps",
     stack: ["Vite", "TypeScript", "Express", "SQLite", "Cloudflare"],
@@ -224,6 +242,8 @@ export const leadProjects: Project[] = [
     subtitle: "A Next.js rebuild for search and answer engines.",
     narrative:
       "I rebuilt Raindrop Janitorial's marketing site from PHP in Next.js. I handle the build, technical SEO, and answer-engine content. The site uses static App Router output, route metadata, JSON-LD on service and area pages, a sitemap, robots rules, and an llms.txt file. The goal is to make the company easy to find when people search for commercial cleaning in Ottawa, including through answer engines.",
+    outcome: "Put Ottawa cleaning services on search-ready pages.",
+    evidence: "A Next.js rebuild with service pages, area pages, metadata, and JSON-LD.",
     year: "Sep 2025 — Present",
     role: "Solo build (design, code, SEO/GEO)",
     stack: ["Next.js 16", "React 19", "TypeScript", "Tailwind v4", "JSON-LD"],
@@ -238,7 +258,7 @@ export const smallProjects: SmallProject[] = [
     index: "01 / 03",
     title: "Budg-It",
     description:
-      "A budgeting tool with receipt reading and an AI chat service. FastAPI handles the backend, Firebase handles authentication, and Gemini 2.0 provides the budget conversation.",
+      "Track spending from receipts and discuss a budget with an AI assistant.",
     role: "Developer",
     duration: "Mar 2025",
     stack: ["Python", "FastAPI", "Gemini", "Firebase"],
@@ -249,7 +269,7 @@ export const smallProjects: SmallProject[] = [
     index: "02 / 03",
     title: "Notesplicer",
     description:
-      "RAG over personal notes. LiteLLM routes requests between Gemini and Deepseek; ChromaDB stores embeddings. Model selection is configured in one place.",
+      "Search personal notes and route questions to Gemini or DeepSeek.",
     role: "Solo developer",
     duration: "Jul — Nov 2025",
     stack: ["LiteLLM", "ChromaDB", "Gemini", "Deepseek"],
@@ -260,7 +280,7 @@ export const smallProjects: SmallProject[] = [
     index: "03 / 03",
     title: "AutoScraper (Kaya Auto)",
     description:
-      "Marketplace for vehicle listings. Python scrapers run concurrently, Firebase stores the data, and Gemini flags listings whose prices look unusual.",
+      "Collect vehicle listings concurrently and flag unusual prices.",
     role: "Solo developer",
     duration: "Dec 2024 — Jun 2025",
     stack: ["Python", "Flask", "Firebase", "Gemini"],

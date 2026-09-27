@@ -1,22 +1,20 @@
 @import "tailwindcss";
 
-/* =========================================================================
-   Shared tokens — the site defaults to the Crimson Index dark system.
-   ========================================================================= */
+/* Shared tokens for the terminal portfolio. */
 
 @theme {
   /* --- Colors (semantic) --- */
-  --color-bg: #080808;
-  --color-bg-elevated: #0d0d0d;
-  --color-bg-sunken: #121212;
+  --color-bg: #0b0a0d;
+  --color-bg-elevated: #121014;
+  --color-bg-sunken: #171319;
   --color-ink: #f4f1eb;
-  --color-ink-muted: #aaa39d;
-  --color-ink-subtle: #7f7771;
-  --color-rule: #55101d;
-  --color-rule-strong: #e3153b;
-  --color-accent: #e3153b;
-  --color-accent-hover: #ff3a5e;
-  --color-accent-soft: #2d0b12;
+  --color-ink-muted: #b8aeb2;
+  --color-ink-subtle: #96898f;
+  --color-rule: #51454b;
+  --color-rule-strong: #e99855;
+  --color-accent: #e99855;
+  --color-accent-hover: #f6b57d;
+  --color-accent-soft: #36231c;
 
   /* --- Spacing scale (8pt grid) --- */
   --spacing-2: 2px;
@@ -104,9 +102,7 @@
   --ease-glide: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* =========================================================================
-   Production defaults.
-   ========================================================================= */
+/* Production defaults. */
 
 :root {
   --bg: var(--color-bg);
@@ -122,22 +118,20 @@
   --accent-soft: var(--color-accent-soft);
 }
 
-/* =========================================================================
-   Explicit dark mode matches the production defaults.
-   ========================================================================= */
+/* Explicit dark mode matches the production defaults. */
 
 [data-theme="dark"] {
-  --bg: #080808;
-  --bg-elevated: #0d0d0d;
-  --bg-sunken: #121212;
+  --bg: #0b0a0d;
+  --bg-elevated: #121014;
+  --bg-sunken: #171319;
   --ink: #f4f1eb;
-  --ink-muted: #aaa39d;
-  --ink-subtle: #7f7771;
-  --rule: #55101d;
-  --rule-strong: #e3153b;
-  --accent: #e3153b;
-  --accent-hover: #ff3a5e;
-  --accent-soft: #2d0b12;
+  --ink-muted: #b8aeb2;
+  --ink-subtle: #96898f;
+  --rule: #51454b;
+  --rule-strong: #e99855;
+  --accent: #e99855;
+  --accent-hover: #f6b57d;
+  --accent-soft: #36231c;
 }
 
 /* =========================================================================
@@ -146,17 +140,17 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #080808;
-    --bg-elevated: #0d0d0d;
-    --bg-sunken: #121212;
+    --bg: #0b0a0d;
+    --bg-elevated: #121014;
+    --bg-sunken: #171319;
     --ink: #f4f1eb;
-    --ink-muted: #aaa39d;
-    --ink-subtle: #7f7771;
-    --rule: #55101d;
-    --rule-strong: #e3153b;
-    --accent: #e3153b;
-    --accent-hover: #ff3a5e;
-    --accent-soft: #2d0b12;
+    --ink-muted: #b8aeb2;
+    --ink-subtle: #96898f;
+    --rule: #51454b;
+    --rule-strong: #e99855;
+    --accent: #e99855;
+    --accent-hover: #f6b57d;
+    --accent-soft: #36231c;
   }
 }
 
@@ -212,7 +206,7 @@
     font-feature-settings: "tnum";
   }
 
-  /* Focus rings use the same crimson signal as the production interface. */
+  /* Focus rings use the terminal's orange signal. */
   *:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;

@@ -14,7 +14,7 @@ const { hint } = Astro.props;
 )}
 
 {hint === "raindrop-web" && (
-  <svg viewBox="0 0 480 320" role="img" aria-label="A browser window showing search results with the Raindrop Janitorial site ranked in the top three" class="illus">
+  <svg viewBox="0 0 480 320" role="img" aria-label="Schematic browser window listing Raindrop Janitorial service and area pages, a sitemap, and structured data" class="illus">
     {/* Browser frame */}
     <g fill="none" stroke="currentColor" stroke-width="2">
       <rect x="40" y="30" width="400" height="260" rx="2" />
@@ -30,51 +30,51 @@ const { hint } = Astro.props;
 
     {/* URL bar text */}
     <text x="108" y="46" font-family="var(--font-mono)" font-size="8" fill="currentColor" opacity="0.55">
-      google.com/search?q=janitorial+services+ottawa
+      raindropjanitorial.com
     </text>
 
-    {/* Result 1 — top result, highlighted (Raindrop's site) */}
+    {/* Service page record */}
     <g>
       <rect x="56" y="72" width="368" height="44" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5" />
-      {/* Position marker */}
-      <text x="62" y="84" font-family="var(--font-mono)" font-size="8" fill="var(--accent)" font-weight="500">1.</text>
-      {/* Title (the page title would render in blue, but we're monochrome with accent) */}
+      {/* Page index */}
+      <text x="62" y="84" font-family="var(--font-mono)" font-size="8" fill="var(--accent)" font-weight="500">01</text>
+      {/* Page title */}
       <rect x="76" y="78" width="180" height="6" fill="var(--accent)" />
       {/* URL line */}
       <rect x="76" y="90" width="140" height="3" fill="currentColor" opacity="0.45" />
-      <text x="76" y="97" font-family="var(--font-mono)" font-size="7" fill="currentColor" opacity="0.6">raindropjanitorial.com › services</text>
+      <text x="76" y="97" font-family="var(--font-mono)" font-size="7" fill="currentColor" opacity="0.6">SERVICE PAGES</text>
       {/* Snippet */}
       <rect x="76" y="103" width="340" height="3" fill="currentColor" opacity="0.3" />
       <rect x="76" y="109" width="280" height="3" fill="currentColor" opacity="0.3" />
     </g>
 
-    {/* Result 2 */}
+    {/* Area page record */}
     <g opacity="0.55">
-      <text x="62" y="133" font-family="var(--font-mono)" font-size="8" fill="currentColor">2.</text>
+      <text x="62" y="133" font-family="var(--font-mono)" font-size="8" fill="currentColor">02</text>
       <rect x="76" y="127" width="160" height="6" fill="currentColor" />
-      <text x="76" y="146" font-family="var(--font-mono)" font-size="7" fill="currentColor" opacity="0.6">competitor-a.ca</text>
+      <text x="76" y="146" font-family="var(--font-mono)" font-size="7" fill="currentColor" opacity="0.6">AREA PAGES</text>
       <rect x="76" y="152" width="320" height="3" fill="currentColor" opacity="0.3" />
       <rect x="76" y="158" width="240" height="3" fill="currentColor" opacity="0.3" />
     </g>
 
-    {/* Result 3 */}
+    {/* Sitemap record */}
     <g opacity="0.4">
-      <text x="62" y="181" font-family="var(--font-mono)" font-size="8" fill="currentColor">3.</text>
+      <text x="62" y="181" font-family="var(--font-mono)" font-size="8" fill="currentColor">03</text>
       <rect x="76" y="175" width="140" height="6" fill="currentColor" />
-      <text x="76" y="194" font-family="var(--font-mono)" font-size="7" fill="currentColor" opacity="0.6">competitor-b.com</text>
+      <text x="76" y="194" font-family="var(--font-mono)" font-size="7" fill="currentColor" opacity="0.6">SITEMAP</text>
       <rect x="76" y="200" width="300" height="3" fill="currentColor" opacity="0.3" />
       <rect x="76" y="206" width="220" height="3" fill="currentColor" opacity="0.3" />
     </g>
 
-    {/* Result 4 — faded, shows there are more */}
+    {/* Structured data record */}
     <g opacity="0.22">
-      <text x="62" y="229" font-family="var(--font-mono)" font-size="8" fill="currentColor">4.</text>
+      <text x="62" y="229" font-family="var(--font-mono)" font-size="8" fill="currentColor">04</text>
       <rect x="76" y="223" width="120" height="6" fill="currentColor" />
-      <text x="76" y="242" font-family="var(--font-mono)" font-size="7" fill="currentColor" opacity="0.6">aggregator.example</text>
+      <text x="76" y="242" font-family="var(--font-mono)" font-size="7" fill="currentColor" opacity="0.6">JSON-LD</text>
     </g>
 
     {/* Footer label */}
-    <text x="240" y="280" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="currentColor" opacity="0.5" letter-spacing="0.1em">SEO · GEO · TOP 3</text>
+    <text x="240" y="280" text-anchor="middle" font-family="var(--font-mono)" font-size="9" fill="currentColor" opacity="0.5" letter-spacing="0.1em">SERVICE PAGES · AREA PAGES · JSON-LD</text>
   </svg>
 )}
 

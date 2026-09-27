@@ -18,33 +18,32 @@ const formatDate = (date: Date): string =>
   title="Writing — Esad Kaya"
   description="Essays on systems and craft by Esad Kaya."
 >
-  <section class="blog section">
+  <section class="blog" aria-labelledby="blog-title">
     <div class="container">
       <header class="head">
-        <h1 class="text-h1">Writing.</h1>
-        <p class="lede">
-          Technical notes on systems, tools, and lessons from recent projects.
-        </p>
+        <p class="command"><span>esad@ottawa:~$</span> ls writing/</p>
+        <h1 id="blog-title">Writing<span>/</span></h1>
       </header>
 
       {
         allPosts.length === 0 ? (
           <div class="empty">
-            <p class="body-lg">
-              No posts yet. The archive is being written.
-            </p>
-            <hr class="rule" />
+            <p>No posts yet.</p>
           </div>
         ) : (
           <ul class="list">
-            {allPosts.map((post) => (
+            {allPosts.map((post, index) => (
               <li class="item">
                 <a href={`/blog/${post.id}/`} class="item-link">
-                  <time class="micro date tabular" datetime={post.data.pubDate.toISOString()}>
-                    {formatDate(post.data.pubDate)}
-                  </time>
-                  <h3 class="item-title">{post.data.title}</h3>
-                  <p class="item-dek">{post.data.description}</p>
+                  <span class="item-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                  <span class="item-main">
+                    <h2 class="item-title">{post.data.title}</h2>
+                    <span class="item-dek">{post.data.description}</span>
+                  </span>
+                  <span class="item-meta">
+                    <time class="date tabular" datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+                    <span class="item-arrow" aria-hidden="true">↗</span>
+                  </span>
                 </a>
               </li>
             ))}
@@ -57,31 +56,50 @@ const formatDate = (date: Date): string =>
 
 <style>
   .blog {
-    padding-top: 128px;
+    --page-bg: #0b0a0d;
+    --page-ink: #f4f1eb;
+    --page-muted: #b9adb1;
+    --page-orange: #e99855;
+    --page-rule: #51454b;
+    min-height: 70vh;
+    padding: clamp(80px, 10vw, 144px) 0 clamp(96px, 12vw, 160px);
+    background: var(--page-bg);
+    color: var(--page-ink);
   }
 
   .head {
-    margin-bottom: 96px;
+    padding-bottom: clamp(56px, 7vw, 96px);
+    border-bottom: 1px solid var(--page-orange);
   }
 
-  .lede {
-    font-size: 18px;
-    line-height: 1.55;
-    color: var(--ink-muted);
-    margin-top: 24px;
-    max-width: 38rem;
+  .command {
+    margin-bottom: 32px;
+    color: var(--page-ink);
+    font-family: var(--font-mono);
+    font-size: clamp(14px, 1.5vw, 18px);
+    line-height: 1.5;
+    letter-spacing: -0.05em;
+  }
+
+  .command span,
+  .head h1 span {
+    color: var(--page-orange);
+  }
+
+  .head h1 {
+    color: var(--page-ink);
+    font-family: var(--font-mono);
+    font-size: clamp(58px, 9vw, 116px);
+    font-weight: 500;
+    line-height: 0.94;
+    letter-spacing: -0.085em;
   }
 
   .empty {
-    margin-top: 64px;
-  }
-
-  .empty .body-lg {
-    color: var(--ink-muted);
-  }
-
-  .rule {
-    margin-top: 48px;
+    padding: 48px 0;
+    color: var(--page-muted);
+    font-family: var(--font-mono);
+    font-size: 18px;
   }
 
   .list {
@@ -91,50 +109,92 @@ const formatDate = (date: Date): string =>
   }
 
   .item {
-    border-bottom: 1px solid var(--rule);
+    border-bottom: 1px solid var(--page-rule);
   }
 
   .item-link {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-    padding: 32px 0;
+    grid-template-columns: 56px minmax(0, 1fr) auto;
+    gap: 28px;
+    align-items: start;
+    padding: 40px 0;
     text-decoration: none;
-    color: inherit;
-    transition: opacity var(--duration-instant) var(--ease-standard);
+    color: var(--page-ink);
+    transition: color 160ms ease;
   }
 
-  @media (min-width: 768px) {
-    .item-link {
-      grid-template-columns: 160px 1fr 1.5fr;
-      gap: 32px;
-      align-items: baseline;
-      padding: 40px 0;
-    }
+  .item-link:hover .item-title,
+  .item-link:hover .item-arrow {
+    color: var(--page-orange);
   }
 
-  .item-link:hover {
-    opacity: 0.65;
+  .item-index,
+  .item-meta {
+    font-family: var(--font-mono);
   }
 
-  .date {
-    color: var(--ink-subtle);
+  .item-index {
+    padding-top: 5px;
+    color: var(--page-orange);
+    font-size: 14px;
   }
 
   .item-title {
-    font-family: var(--font-display);
-    font-size: var(--text-h3);
-    line-height: 1.2;
-    letter-spacing: -0.015em;
+    color: var(--page-ink);
+    font-family: var(--font-mono);
+    font-size: clamp(27px, 3vw, 42px);
     font-weight: 500;
-    color: var(--ink);
+    line-height: 1.1;
+    letter-spacing: -0.065em;
     margin: 0;
+    transition: color 160ms ease;
   }
 
   .item-dek {
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--ink-muted);
-    margin: 0;
+    display: block;
+    max-width: 68ch;
+    margin-top: 14px;
+    color: var(--page-muted);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .item-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    padding-top: 5px;
+    white-space: nowrap;
+  }
+
+  .date {
+    color: var(--page-muted);
+    font-size: 13px;
+  }
+
+  .item-arrow {
+    color: var(--page-orange);
+    font-size: 24px;
+    line-height: 1;
+    transition: color 160ms ease;
+  }
+
+  @media (max-width: 720px) {
+    .item-link {
+      grid-template-columns: 32px minmax(0, 1fr);
+      gap: 14px;
+      padding: 32px 0;
+    }
+
+    .item-meta {
+      grid-column: 2;
+      justify-content: space-between;
+      margin-top: 6px;
+      padding: 0;
+    }
+
+    .item-dek {
+      margin-top: 10px;
+    }
   }
 </style>
