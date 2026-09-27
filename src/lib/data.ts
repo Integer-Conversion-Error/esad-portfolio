@@ -158,7 +158,7 @@ export const experience: Experience[] = [
     start: "Jan 2020",
     end: "Present",
     year: yearOf("Jan 2020"),
-    result: "Ran payroll for more than 50 employees and maintained office systems.",
+    result: "Rebuilt the company site in Next.js; building its workforce system.",
     highlights: [
       "Maintained the head office's hardware and network.",
       "Ran QuickBooks payroll for more than 50 employees and maintained the supporting systems.",
