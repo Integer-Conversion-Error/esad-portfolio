@@ -48,46 +48,68 @@ const facts = [
     </div>
   </header>
 
-  <section class="cp-hero" aria-labelledby="cp-hero-title">
-    <div class="cp-shell">
-      <div class="cp-hero-topline">
-        <p>Esad Kaya / software + hardware</p>
-        <p>Ottawa / 45.4215 N, 75.6972 W</p>
+  <section class="cp-hero" aria-labelledby="cp-hero-title" data-terminal-hero>
+    <div class="cp-shell cp-terminal-shell">
+      <div class="cp-terminal-topline">
+        <p><span class="cp-terminal-status-dot" aria-hidden="true">●</span> Ubuntu / tty1</p>
+        <p>esad@ottawa &nbsp; online</p>
       </div>
 
-      <div class="cp-hero-main">
-        <p class="cp-kicker">Independent systems / 2026</p>
-        <h1 id="cp-hero-title">Real<br />projects,<br /><span>real solutions</span></h1>
-      </div>
-
-      <div class="cp-hero-bottom">
-        <div class="cp-hero-copy">
-          <p class="cp-hero-lede">
-            I build software for work and home: workforce tools for crews in Ottawa, payroll
-            systems for a family business, and a local intercom for the house.
-          </p>
-          <a class="cp-hero-resume" href="#resume">View resume <span aria-hidden="true">-&gt;</span></a>
+      <div class="cp-terminal-stage">
+        <div class="cp-terminal-login" data-terminal-login aria-hidden="true" hidden>
+          <p>Ubuntu &nbsp; ottawa tty1</p>
+          <p>ottawa login: <span>esad</span></p>
+          <p>Password: ••••••••</p>
+          <p>Authentication successful.</p>
+          <p><span>Loading portfolio...</span></p>
         </div>
 
-        <dl class="cp-hero-stats">
-          <div>
-            <dt>Current</dt>
-            <dd>Software engineer intern</dd>
-          </div>
-          <div>
-            <dt>Working on</dt>
-            <dd>Field-work systems and local hardware</dd>
-          </div>
-          <div>
-            <dt>Open to</dt>
-            <dd>Internships and contract work</dd>
-          </div>
-        </dl>
+        <div class="cp-terminal-content">
+          <p class="cp-terminal-prompt"><span>esad@ottawa</span>:~$ ./portfolio</p>
+          <div class="cp-terminal-signal" aria-hidden="true"></div>
+          <p class="cp-terminal-output-label">Output / 01</p>
+          <h1 id="cp-hero-title">I build software<br />for work <span>and home.</span></h1>
 
-        <div class="cp-hero-mark" aria-hidden="true">EK</div>
+          <ol class="cp-terminal-records" aria-label="What I build">
+            <li><span>01</span> <strong>Ottawa crews</strong> / workforce tools</li>
+            <li><span>02</span> <strong>Family business</strong> / payroll systems</li>
+            <li><span>03</span> <strong>The house</strong> / local intercom</li>
+          </ol>
+
+          <a class="cp-terminal-link" href="#work" aria-label="Jump to selected work">
+            <span>esad@ottawa</span>:~$ cd work/ <span aria-hidden="true">↵</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="cp-terminal-bottom">
+        <p>Esad Kaya / software + hardware</p>
+        <p>↓ &nbsp; Scroll</p>
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    (() => {
+      const hero = document.querySelector("[data-terminal-hero]");
+      const login = hero?.querySelector("[data-terminal-login]");
+      const link = hero?.querySelector(".cp-terminal-link");
+
+      if (!hero || !login || !link || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+      }
+
+      login.hidden = false;
+      link.inert = true;
+      hero.classList.add("is-logging-in");
+
+      window.setTimeout(() => {
+        hero.classList.remove("is-logging-in");
+        login.hidden = true;
+        link.inert = false;
+      }, 2100);
+    })();
+  </script>
 
   <section class="cp-work" id="work" aria-labelledby="work-title">
     <div class="cp-shell">
@@ -379,9 +401,6 @@ const facts = [
   .cp-nav-contact,
   .cp-menu,
   .cp-drawer,
-  .cp-hero-topline,
-  .cp-kicker,
-  .cp-hero-stats dt,
   .cp-section-head p,
   .cp-section-number,
   .cp-project-number,
@@ -455,123 +474,197 @@ const facts = [
   }
 
   .cp-hero {
+    --cp-terminal-orange: #e99855;
+    min-height: max(680px, calc(100svh - 154px));
     border-bottom: 1px solid var(--cp-red);
+    background: #0b0a0d;
+    font-family: var(--font-mono);
   }
 
-  .cp-hero .cp-shell {
+  .cp-terminal-shell {
+    min-height: inherit;
+    display: flex;
+    flex-direction: column;
     padding-top: 28px;
     padding-bottom: 24px;
   }
 
-  .cp-hero-topline {
+  .cp-terminal-topline,
+  .cp-terminal-bottom {
     display: flex;
     justify-content: space-between;
-    gap: 24px;
+    gap: 16px;
     color: var(--cp-muted);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
-  .cp-hero-topline p:last-child {
+  .cp-terminal-topline {
+    align-items: center;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #64525a;
+  }
+
+  .cp-terminal-topline p:last-child,
+  .cp-terminal-bottom p:last-child {
     text-align: right;
   }
 
-  .cp-hero-main {
-    padding: 60px 0 32px;
+  .cp-terminal-status-dot {
+    color: var(--cp-terminal-orange);
+    font-size: 13px;
+    letter-spacing: 0;
   }
 
-  .cp-kicker {
-    margin-bottom: 28px;
-    color: var(--cp-red);
+  .cp-terminal-stage {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 64px;
+    padding-bottom: 78px;
+  }
+
+  .cp-terminal-content {
+    transition: opacity 180ms ease-out;
+  }
+
+  .cp-terminal-prompt {
+    margin: 0;
+    color: var(--cp-paper);
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.055em;
+  }
+
+  .cp-terminal-prompt span,
+  .cp-terminal-link span:first-child,
+  .cp-terminal-records li > span,
+  .cp-terminal-link span:last-child,
+  .cp-terminal-login span {
+    color: var(--cp-terminal-orange);
+  }
+
+  .cp-terminal-signal {
+    width: 76px;
+    height: 2px;
+    margin: 20px 0 28px;
+    background: var(--cp-terminal-orange);
+  }
+
+  .cp-terminal-output-label {
+    margin: 0 0 9px;
+    color: var(--cp-muted);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .cp-hero h1 {
-    max-width: 7ch;
-    color: var(--cp-paper);
-    font-family: var(--font-display);
-    font-size: 144px;
-    font-weight: 600;
-    line-height: 0.76;
-    letter-spacing: 0;
-  }
-
-  .cp-hero h1 span,
-  .cp-about h2 span,
-  .cp-contact h2 span {
-    color: var(--cp-red);
-  }
-
-  .cp-hero-bottom {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.7fr) minmax(140px, 0.25fr);
-    gap: 40px;
-    align-items: end;
-  }
-
-  .cp-hero-lede {
-    color: var(--cp-paper);
-    font-family: var(--font-serif);
-    font-size: 30px;
-    line-height: 1.08;
-  }
-
-  .cp-hero-copy {
-    max-width: 36ch;
-  }
-
-  .cp-hero-resume {
-    display: inline-flex;
-    gap: 10px;
-    margin-top: 28px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--cp-red);
+    margin: 0;
     color: var(--cp-paper);
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
+    font-size: 80px;
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.075em;
   }
 
-  .cp-hero-resume span {
-    color: var(--cp-red);
+  .cp-hero h1 span {
+    color: var(--cp-terminal-orange);
   }
 
-  .cp-hero-resume:hover {
-    color: var(--cp-red);
-  }
-
-  .cp-hero-stats {
+  .cp-terminal-records {
     display: grid;
-    gap: 18px;
-    margin: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    max-width: 1100px;
+    margin: 32px 0 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .cp-hero-stats div {
-    padding-top: 10px;
-    border-top: 1px solid var(--cp-rule);
-  }
-
-  .cp-hero-stats dt {
-    margin-bottom: 4px;
-    color: var(--cp-red);
-  }
-
-  .cp-hero-stats dd {
-    margin: 0;
-    color: var(--cp-muted);
+  .cp-terminal-records li {
+    padding-top: 12px;
+    border-top: 1px solid #51454b;
+    color: #c9bec2;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
-  .cp-hero-mark {
-    justify-self: end;
-    color: transparent;
-    font-family: var(--font-display);
-    font-size: 160px;
-    font-weight: 600;
-    line-height: 0.72;
-    letter-spacing: 0;
-    -webkit-text-stroke: 1px var(--cp-red);
-    text-stroke: 1px var(--cp-red);
+  .cp-terminal-records li > span {
+    margin-right: 8px;
+    font-weight: 500;
+  }
+
+  .cp-terminal-records strong {
+    color: var(--cp-paper);
+    font-weight: 500;
+  }
+
+  .cp-terminal-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 36px;
+    color: var(--cp-paper);
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.04em;
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+
+  .cp-terminal-link:hover {
+    color: var(--cp-terminal-orange);
+  }
+
+  .cp-terminal-login {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    padding-top: 72px;
+    background: #0b0a0d;
+    color: var(--cp-paper);
+    font-size: 22px;
+    line-height: 1.7;
+    letter-spacing: -0.04em;
+    pointer-events: none;
+  }
+
+  .cp-terminal-login[hidden] {
+    display: none;
+  }
+
+  .cp-terminal-login p {
+    margin: 0 0 4px;
+  }
+
+  .cp-hero.is-logging-in .cp-terminal-content {
+    opacity: 0;
+  }
+
+  .cp-hero.is-logging-in .cp-terminal-login p {
+    opacity: 0;
+    animation: cp-terminal-line 100ms ease-out both;
+  }
+
+  .cp-hero.is-logging-in .cp-terminal-login p:nth-child(1) { animation-delay: 100ms; }
+  .cp-hero.is-logging-in .cp-terminal-login p:nth-child(2) { animation-delay: 350ms; }
+  .cp-hero.is-logging-in .cp-terminal-login p:nth-child(3) { animation-delay: 800ms; }
+  .cp-hero.is-logging-in .cp-terminal-login p:nth-child(4) { animation-delay: 1250ms; }
+  .cp-hero.is-logging-in .cp-terminal-login p:nth-child(5) { animation-delay: 1650ms; }
+
+  @keyframes cp-terminal-line {
+    to { opacity: 1; }
   }
 
   .cp-work,
@@ -1144,15 +1237,7 @@ const facts = [
     }
 
     .cp-hero h1 {
-      font-size: 136px;
-    }
-
-    .cp-hero-bottom {
-      grid-template-columns: minmax(0, 1fr) minmax(220px, 0.7fr);
-    }
-
-    .cp-hero-mark {
-      display: none;
+      font-size: 64px;
     }
 
     .cp-project {
@@ -1263,42 +1348,43 @@ const facts = [
       color: var(--cp-red);
     }
 
-    .cp-hero .cp-shell {
+    .cp-terminal-shell {
       padding-top: 20px;
       padding-bottom: 28px;
     }
 
-    .cp-hero-main {
-      padding: 72px 0 48px;
+    .cp-terminal-stage {
+      padding-top: 52px;
+      padding-bottom: 60px;
     }
 
     .cp-hero h1 {
-      font-size: 104px;
+      font-size: 50px;
     }
 
-    .cp-hero-bottom,
     .cp-about-prose {
       grid-template-columns: 1fr;
     }
 
-    .cp-hero-bottom {
-      gap: 28px;
+    .cp-terminal-prompt {
+      font-size: 26px;
     }
 
-    .cp-hero-lede {
-      font-size: 24px;
+    .cp-terminal-records {
+      gap: 16px;
     }
 
-    .cp-hero-stats {
-      gap: 0;
-    }
-
-    .cp-hero-stats div:not(:last-child) {
-      display: none;
-    }
-
-    .cp-hero-stats dd {
+    .cp-terminal-records li {
       font-size: 13px;
+    }
+
+    .cp-terminal-link {
+      font-size: 20px;
+    }
+
+    .cp-terminal-login {
+      padding-top: 56px;
+      font-size: 18px;
     }
 
   .cp-work .cp-shell,
@@ -1443,21 +1529,64 @@ const facts = [
     }
   }
 
-  @media (max-width: 480px) {
-    .cp-hero-topline {
-      display: block;
+  @media (max-width: 680px) {
+    .cp-hero h1 {
+      font-size: 42px;
     }
 
-    .cp-hero-topline p:last-child {
+    .cp-terminal-prompt {
+      font-size: 24px;
+    }
+
+    .cp-terminal-records {
+      max-width: 480px;
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-top: 24px;
+    }
+
+    .cp-terminal-records li {
+      padding: 8px 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cp-hero {
+      min-height: max(620px, calc(100svh - 154px));
+    }
+
+    .cp-terminal-topline p:last-child {
       display: none;
     }
 
-    .cp-hero h1 {
-      font-size: 80px;
+    .cp-terminal-topline,
+    .cp-terminal-bottom {
+      font-size: 10px;
     }
 
-    .cp-hero-lede {
-      font-size: 23px;
+    .cp-terminal-stage {
+      padding-top: 42px;
+      padding-bottom: 54px;
+    }
+
+    .cp-terminal-prompt {
+      font-size: 20px;
+      overflow-wrap: anywhere;
+    }
+
+    .cp-hero h1 {
+      font-size: 34px;
+      line-height: 1.18;
+    }
+
+    .cp-terminal-link {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .cp-terminal-login {
+      padding-top: 46px;
+      font-size: 16px;
     }
 
     .cp-section-head h2 {
