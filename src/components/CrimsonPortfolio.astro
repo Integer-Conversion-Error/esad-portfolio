@@ -50,11 +50,6 @@ const facts = [
 
   <section class="cp-hero" aria-labelledby="cp-hero-title" data-terminal-hero>
     <div class="cp-shell cp-terminal-shell">
-      <div class="cp-terminal-topline">
-        <p><span class="cp-terminal-status-dot" aria-hidden="true">●</span> Ubuntu / tty1</p>
-        <p>esad@ottawa &nbsp; online</p>
-      </div>
-
       <div class="cp-terminal-stage">
         <div class="cp-terminal-login" data-terminal-login aria-hidden="true" hidden>
           <p>Ubuntu &nbsp; ottawa tty1</p>
@@ -67,7 +62,6 @@ const facts = [
         <div class="cp-terminal-content">
           <p class="cp-terminal-prompt"><span>esad@ottawa</span>:~$ ./portfolio</p>
           <div class="cp-terminal-signal" aria-hidden="true"></div>
-          <p class="cp-terminal-output-label">Output / 01</p>
           <h1 id="cp-hero-title">I build software<br />for work <span>and home.</span></h1>
 
           <ol class="cp-terminal-records" aria-label="What I build">
@@ -80,11 +74,6 @@ const facts = [
             <span>esad@ottawa</span>:~$ cd work/ <span aria-hidden="true">↵</span>
           </a>
         </div>
-      </div>
-
-      <div class="cp-terminal-bottom">
-        <p>Esad Kaya / software + hardware</p>
-        <p>↓ &nbsp; Scroll</p>
       </div>
     </div>
   </section>
@@ -489,36 +478,6 @@ const facts = [
     padding-bottom: 24px;
   }
 
-  .cp-terminal-topline,
-  .cp-terminal-bottom {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    color: var(--cp-muted);
-    font-size: 11px;
-    font-weight: 500;
-    line-height: 1.5;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .cp-terminal-topline {
-    align-items: center;
-    padding-bottom: 18px;
-    border-bottom: 1px solid #64525a;
-  }
-
-  .cp-terminal-topline p:last-child,
-  .cp-terminal-bottom p:last-child {
-    text-align: right;
-  }
-
-  .cp-terminal-status-dot {
-    color: var(--cp-terminal-orange);
-    font-size: 13px;
-    letter-spacing: 0;
-  }
-
   .cp-terminal-stage {
     position: relative;
     flex: 1;
@@ -555,16 +514,6 @@ const facts = [
     height: 2px;
     margin: 20px 0 28px;
     background: var(--cp-terminal-orange);
-  }
-
-  .cp-terminal-output-label {
-    margin: 0 0 9px;
-    color: var(--cp-muted);
-    font-size: 11px;
-    font-weight: 500;
-    line-height: 1.5;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
   }
 
   .cp-hero h1 {
@@ -1553,15 +1502,6 @@ const facts = [
   @media (max-width: 480px) {
     .cp-hero {
       min-height: max(620px, calc(100svh - 154px));
-    }
-
-    .cp-terminal-topline p:last-child {
-      display: none;
-    }
-
-    .cp-terminal-topline,
-    .cp-terminal-bottom {
-      font-size: 10px;
     }
 
     .cp-terminal-stage {
