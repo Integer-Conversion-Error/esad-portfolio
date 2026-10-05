@@ -44,6 +44,7 @@ const dataTheme = theme === "auto" ? null : theme;
     />
 
     <title>{title}</title>
+    <slot name="head" />
 
     {
       theme === "auto" && (

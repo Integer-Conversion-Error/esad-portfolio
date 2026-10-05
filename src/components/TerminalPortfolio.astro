@@ -1,6 +1,10 @@
 ---
 import { experience, leadProjects, personal, smallProjects } from "../lib/data";
+import { caseStudies, caseStudyHref } from "../lib/case-studies";
 import ProjectVisual from "./ProjectVisual.astro";
+
+const hasCaseStudy = (slug: string) => caseStudies.some((project) => project.slug === slug);
+const additionalProjects = caseStudies.filter((project) => !leadProjects.some((lead) => lead.slug === project.slug));
 
 const capabilities = [
   { label: "Web + mobile", items: "TypeScript / React / React Native / NestJS" },
@@ -95,14 +99,15 @@ const capabilities = [
             <div class="tp-project-copy">
               <div class="tp-project-heading">
                 <span class="tp-project-index">{String(index + 1).padStart(2, "0")}</span>
-                <h3>{project.title}</h3>
+                <h3>{hasCaseStudy(project.slug) ? <a href={caseStudyHref(project.slug)}>{project.title}</a> : project.title}</h3>
               </div>
               <p class="tp-project-outcome">{project.outcome}</p>
               <p class="tp-project-evidence">{project.evidence}</p>
               <div class="tp-project-footer">
                 <p>{project.year}</p>
-                {(project.url || project.github) && (
+                {(hasCaseStudy(project.slug) || project.url || project.github) && (
                   <div class="tp-project-links">
+                    {hasCaseStudy(project.slug) && <a href={caseStudyHref(project.slug)}>Case study <span aria-hidden="true">→</span></a>}
                     {project.url && <a href={project.url} target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a>}
                     {project.github && <a href={project.github} target="_blank" rel="noopener">Source <span aria-hidden="true">↗</span></a>}
                   </div>
@@ -182,6 +187,13 @@ const capabilities = [
         <span aria-hidden="true"><span class="tp-dollar">$</span> ls side/</span>
       </h2>
       <div class="tp-side-list">
+        {additionalProjects.map((project) => (
+          <article class="tp-side-row" id={project.slug}>
+            <h3><a href={caseStudyHref(project.slug)}>{project.title}</a></h3>
+            <p>{project.summary}</p>
+            <a href={caseStudyHref(project.slug)} aria-label={"Read " + project.title + " case study"}>Case study <span aria-hidden="true">→</span></a>
+          </article>
+        ))}
         {smallProjects.map((project) => (
           <article class="tp-side-row">
             <h3>{project.title}</h3>
@@ -593,6 +605,15 @@ const capabilities = [
     border-bottom: 1px solid transparent;
   }
   .tp-side-row a:hover { border-color: var(--tp-orange); }
+  .tp-project h3 a, .tp-side-row h3 a {
+    display: inline;
+    color: inherit;
+    font: inherit;
+    white-space: normal;
+    text-decoration: none;
+    border: 0;
+  }
+  .tp-project h3 a:hover, .tp-side-row h3 a:hover { color: var(--tp-orange); }
 
   .tp-contact {
     border-top: 1px solid var(--tp-orange);
