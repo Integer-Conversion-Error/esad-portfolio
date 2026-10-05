@@ -187,9 +187,9 @@ export const leadProjects: Project[] = [
     title: "Home Intercom",
     subtitle: "A local network intercom for the house.",
     narrative:
-      "I built two ESP32-S3 room stations and a Dockerized hub for my home network. WebSocket carries control messages; raw UDP carries 16 kHz PCM audio for push-to-talk. A broadcast mode sends a call to every station. The system runs locally with no accounts or cloud service. I built it because I wanted a simple intercom for my mom, and because the audio path was a useful embedded-systems problem.",
+      "I'm building ESP32-S3 room stations and a Dockerized hub for my home network. WebSocket carries control messages; UDP carries PCM audio for push-to-talk. The hub supports selected-room calls and broadcast. I also worked on the wall-station PCB layout; routing and enclosure work remain. I started it because I wanted a simple intercom for my mom.",
     outcome: "Call any room or broadcast to the whole house without a cloud service.",
-    evidence: "Two ESP32-S3 stations and a Docker hub carry local push-to-talk audio.",
+    evidence: "A Docker hub routes ESP32-S3 audio; wall-station PCB routing is in progress.",
     year: "May 2026",
     role: "Firmware + backend",
     stack: ["ESP32-S3", "Docker", "WebSocket", "UDP", "C++"],
@@ -228,13 +228,14 @@ export const leadProjects: Project[] = [
     title: "Legend Flooring",
     subtitle: "A production flooring site with supplier data and private deployment.",
     narrative:
-      "I built this marketing site for an Ottawa flooring company. The frontend is a Vite and TypeScript SPA; the API uses Express and SQLite; supplier scrapers update the catalog overnight. The admin diff view shows which supplier records changed during the latest sync.",
+      "I built this marketing site for an Ottawa flooring company. The frontend is a Vite and TypeScript SPA; the API uses Express and SQLite. Supplier scrapers synchronize the catalogue, and customers can save a shortlist before sending a quote request.",
     outcome: "Keep a flooring catalog current as supplier data changes.",
-    evidence: "Overnight supplier scrapers and an admin view of changed records.",
+    evidence: "Supplier sync updates changed products; quote and contact enquiries persist in SQLite.",
     year: "Jul 2026 — Present",
     role: "Full-stack & DevOps",
     stack: ["Vite", "TypeScript", "Express", "SQLite", "Cloudflare"],
     visualHint: "legend-flooring",
+    url: "https://legendflooring.ca",
   },
   {
     slug: "raindrop-web",

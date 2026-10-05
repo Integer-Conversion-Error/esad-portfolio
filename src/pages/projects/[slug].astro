@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCaseStudy from "../../components/ProjectCaseStudy.astro";
+import { caseStudies, caseStudyHref, type CaseStudy } from "../../lib/case-studies";
+
+export function getStaticPaths() {
+  return caseStudies.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+interface Props { project: CaseStudy }
+const { project } = Astro.props;
+const canonical = new URL(caseStudyHref(project.slug), Astro.site);
+---
+
+<BaseLayout title={`${project.title} - Esad Kaya`} description={project.summary} theme="dark" chrome={false}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonical} />
+    <meta property="og:url" content={canonical} />
+  </Fragment>
+  <ProjectCaseStudy project={project} />
+</BaseLayout>
