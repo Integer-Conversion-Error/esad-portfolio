@@ -7,7 +7,7 @@ import { chromium } from "playwright";
 
 const base = process.argv[2] || "http://localhost:4321";
 const shots = process.env.PORTFOLIO_SHOTS_DIR;
-const slugs = ["home-intercom", "legend-flooring", "raindrop-web", "kaya-auto", "hugging-stocks", "law-buddy", "home-security-node", "home-media-server"];
+const slugs = ["hack-the-nest", "home-intercom", "legend-flooring", "raindrop-web", "kaya-auto", "hugging-stocks", "law-buddy", "home-security-node", "home-media-server"];
 const paths = ["/", ...slugs.map((slug) => `/projects/${slug}/`)];
 const privateRepoNames = ["home-intercom", "intercom-node-kicad", "legend-flooring", "Raindrop-Web", "Raindrop-Website", "Kaya-Auto", "Hugging-Stocks-2", "Law-Buddy", "home-security-node", "home-media-server"];
 const results = [];
@@ -65,7 +65,7 @@ try {
         await page.keyboard.press("Tab");
         assert.equal(await page.locator(".study-skip").evaluate((el) => el === document.activeElement), true);
         await page.keyboard.press("Enter");
-        assert.equal(new URL(page.url()).hash, "#project-content");
+        await page.waitForURL((url) => url.hash === "#project-content");
         if (shots) {
           await page.evaluate(() => window.scrollTo(0, 0));
           await page.screenshot({ path: join(shots, `${slug}-${width}.png`), fullPage: true });
