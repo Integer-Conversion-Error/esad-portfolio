@@ -41,6 +41,7 @@ export type Project = {
   stack: string[];
   role: string;
   visualHint:
+    | "hack-the-nest"
     | "raindropticon"
     | "raindrop-web"
     | "home-intercom"
@@ -168,6 +169,20 @@ export const experience: Experience[] = [
 ];
 
 export const leadProjects: Project[] = [
+  {
+    slug: "hack-the-nest",
+    title: "QuantumLoop",
+    subtitle: "A quantum optimization agent built at Hack the Nest.",
+    narrative:
+      "My team built QuantumLoop to turn plain-English optimization problems into runnable solvers. I built the Gemini planning loop and connected it to Fleet Lab, where you can adjust inputs and replay the verified dispatch schedule.",
+    outcome: "Turn a plain-English fleet dispatch problem into a schedule you can replay.",
+    evidence: "A recorded five-qubit simulation matched the exact classical cost of $15.78.",
+    year: "Hack the Nest · Nov 2026",
+    role: "Agent planning and dashboard integration",
+    stack: ["Python", "Gemini", "Quantum Rings", "Qiskit", "JavaScript", "Pygame"],
+    visualHint: "hack-the-nest",
+    github: "https://github.com/Integer-Conversion-Error/hack-the-nest",
+  },
   {
     slug: "raindropticon",
     title: "Raindropticon",

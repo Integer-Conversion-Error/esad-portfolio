@@ -15,9 +15,37 @@ export type CaseStudy = {
   next: string;
   stack: string[];
   url?: string;
+  github?: string;
+  devpost?: string;
+  screenshot?: { src: string; alt: string; width: number; height: number; caption: string };
 };
 
 export const caseStudies: CaseStudy[] = [
+  {
+    slug: "hack-the-nest",
+    title: "QuantumLoop",
+    summary: "A quantum optimization agent that turns an EV dispatch prompt into a schedule you can replay.",
+    status: "Hack the Nest 2026 · team prototype",
+    role: "Agent planning and dashboard integration",
+    purpose: "An EV fleet has to fit charging stops around delivery deadlines and battery limits. At Hack the Nest, my team built QuantumLoop to turn a plain-English dispatch problem into a solver and show its schedule in the Fleet Lab dashboard.",
+    contribution: "I built the Gemini planning loop and connected it to Fleet Lab. I added progress tracking for solver revisions, controls from the approved plan, and browser replay for driving, waiting, charging, and deliveries. I worked with Chenkai Mu, Ehan Hassan, and Maegen Hill.",
+    architecture: "The Python pipeline uses Gemini to interpret the prompt, draft a plan, and generate a solver. The EV example encodes dispatch choices for a QAOA circuit on the Quantum Rings simulator. After verification, a JSON handoff gives Fleet Lab the timed routes, cost breakdown, and adjustable settings.",
+    flow: ["Dispatch prompt → Gemini plan", "Generated solver → circuit simulation and checks", "Verified schedule → Fleet Lab replay"],
+    flowNote: "Fleet Lab uses the same handoff format for fresh and recorded runs.",
+    challenge: "Changing a van's starting charge can make a previously valid route infeasible. Fleet Lab reruns the solver with the approved setting and checks the new schedule before updating the map. The progress view keeps earlier attempts and the reasons they were revised.",
+    outcome: "In the recorded two-van example, a five-qubit QAOA simulation matched the exact classical reference at $15.78. Fleet Lab replays the routes and shows how driving, waiting, and charging contributed to that cost.",
+    next: "The recorded run can be replayed locally. Starting a fresh prompt-to-solver run requires Gemini and Quantum Rings credentials.",
+    stack: ["Python", "Gemini", "Quantum Rings", "Qiskit", "JavaScript", "Pygame"],
+    github: "https://github.com/Integer-Conversion-Error/hack-the-nest",
+    devpost: "https://devpost.com/software/quantumloop",
+    screenshot: {
+      src: "/images/hack-the-nest-fleet-lab.webp",
+      alt: "Fleet Lab shows two delivery routes, a charging stop, the replay timeline, and the $15.78 total cost.",
+      width: 1100,
+      height: 1045,
+      caption: "Fleet Lab paused at 08:36 in the recorded two-van dispatch run.",
+    },
+  },
   {
     slug: "home-intercom",
     title: "Home Intercom",
