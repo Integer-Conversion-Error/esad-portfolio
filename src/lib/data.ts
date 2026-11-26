@@ -73,7 +73,7 @@ export const personal: Personal = {
   givenName: "Esad",
   surname: "Kaya",
   tagline: "I build software I can maintain.",
-  status: "Ottawa, Canada · Available Summer 2027",
+  status: "Ottawa, Canada · Available Summer 2027 for internships and full-time roles",
   location: "Ottawa, ON, Canada",
   email: "ekaya064@uottawa.ca",
   links: {
@@ -101,7 +101,7 @@ export const experience: Experience[] = [
     start: "May 2026",
     end: "Present",
     year: yearOf("May 2026"),
-    result: "Built a Redis heartbeat that paged on-call within five minutes of failure.",
+    result: "Built a Redis-backed ITDR dashboard and a heartbeat that paged on-call within five minutes of failure.",
     highlights: [
       "Shipped UI changes to the IDaaS platform with TypeScript and JavaScript on the front end and Java on the back end.",
       "Improved insights and real-time analysis for anonymized customer usage across production systems serving more than 10 million users.",
@@ -131,11 +131,12 @@ export const experience: Experience[] = [
     start: "Jan 2025",
     end: "April 2025",
     year: yearOf("Jan 2025"),
-    result: "Cut radar-tool setup time 98% and startup time 95%.",
+    result: "Updated radar-tool UIs, cut setup time 98% and startup time 95%, and used AI to document the full project.",
     highlights: [
       "Built cross-platform PyQt tools for radar analysis. Cut investigator setup time by 98% and startup time by 95%.",
       "Parallelized Python data pipelines for visualizations. Reduced one report from an overnight run to under four hours.",
       "Wrote a setup script generator so researchers could reproduce experiments without engineering help.",
+      "Updated radar-tool UIs and used AI to document the full project.",
     ],
   },
   {
@@ -176,7 +177,7 @@ export const leadProjects: Project[] = [
     narrative:
       "My team built QuantumLoop to turn plain-English optimization problems into runnable solvers. I built the Gemini planning loop and connected it to Fleet Lab, where you can adjust inputs and replay the verified dispatch schedule.",
     outcome: "Turn a plain-English fleet dispatch problem into a schedule you can replay.",
-    evidence: "A recorded five-qubit simulation matched the exact classical cost of $15.78.",
+    evidence: "I built the Gemini planning loop and connected it to Fleet Lab's controls and route replay.",
     year: "Hack the Nest · Nov 2026",
     role: "Agent planning and dashboard integration",
     stack: ["Python", "Gemini", "Quantum Rings", "Qiskit", "JavaScript", "Pygame"],
@@ -202,11 +203,11 @@ export const leadProjects: Project[] = [
     title: "Home Intercom",
     subtitle: "A local network intercom for the house.",
     narrative:
-      "I'm building ESP32-S3 room stations and a Dockerized hub for my home network. WebSocket carries control messages; UDP carries PCM audio for push-to-talk. The hub supports selected-room calls and broadcast. I also worked on the wall-station PCB layout; routing and enclosure work remain. I started it because I wanted a simple intercom for my mom.",
+      "I'm building ESP32-S3 room stations and a Dockerized hub for my home network. WebSocket carries control messages; UDP carries PCM audio for push-to-talk. The hub supports selected-room calls and broadcast. I designed the wall-station PCB; routing and enclosure work remain. I started it because I wanted a simple intercom for my mom.",
     outcome: "Call any room or broadcast to the whole house without a cloud service.",
     evidence: "A Docker hub routes ESP32-S3 audio; wall-station PCB routing is in progress.",
     year: "May 2026",
-    role: "Firmware + backend",
+    role: "Solo developer · firmware, backend, and PCB design",
     stack: ["ESP32-S3", "Docker", "WebSocket", "UDP", "C++"],
     visualHint: "home-intercom",
   },
@@ -218,7 +219,7 @@ export const leadProjects: Project[] = [
       "I built a React Native and Expo app for sharing open parking spots and nearby enforcement activity. Drivers can add pins, and the app can notify people parked in the same zone. A separate in-car device uses an Orange Pi 5, ESP32-S3, camera, mmWave radar, and a quantized YOLOv8 model to collect some of that data. It draws under 50 Wh overnight, so it can remain in a parked car over a weekend without draining the battery. The app and device use the same pin and geofence model.",
     outcome: "Give drivers a shared map of open spots and nearby enforcement activity.",
     evidence: "Mobile pins and zone alerts; the in-car device draws under 50 Wh overnight.",
-    year: "Nov 2025",
+    year: "Nov 2025 — Present",
     role: "Mobile + edge-AI",
     stack: ["React Native", "Expo", "YOLOv8", "ONNX", "ESP32-S3", "Orange Pi"],
     visualHint: "parkopticon",
@@ -296,7 +297,7 @@ export const smallProjects: SmallProject[] = [
     index: "03 / 03",
     title: "AutoScraper (Kaya Auto)",
     description:
-      "Collect vehicle listings concurrently and flag unusual prices.",
+      "Collect vehicle listings concurrently and flag unusual prices. It helped me find my current car.",
     role: "Solo developer",
     duration: "Dec 2024 — Jun 2025",
     stack: ["Python", "Flask", "Firebase", "Gemini"],

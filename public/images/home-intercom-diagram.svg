@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" role="img" aria-labelledby="title description">
+  <title id="title">Home Intercom: room-to-room audio</title>
+  <desc id="description">Illustrative audio flow from a push-to-talk wall station in the kitchen, through a local home-network hub, to a station in another room. Audio stays on the home network.</desc>
+
+  <rect width="640" height="420" fill="#0b0a0d"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+    <!-- Two room boundaries establish where the physical stations live. -->
+    <g fill="#121014" stroke="#51454b" stroke-width="1.5">
+      <rect x="32" y="44" width="200" height="332" rx="4"/>
+      <rect x="408" y="44" width="200" height="332" rx="4"/>
+    </g>
+    <g fill="#f4f1eb" font-size="28" text-anchor="middle">
+      <text x="132" y="91">Kitchen</text>
+      <text x="508" y="91">Room</text>
+    </g>
+
+    <!-- Generic wall-station symbols: speaker grille and talk control. -->
+    <g fill="#0b0a0d" stroke="#f4f1eb" stroke-width="1.8">
+      <rect x="70" y="116" width="124" height="218" rx="8"/>
+      <rect x="446" y="116" width="124" height="218" rx="8"/>
+    </g>
+    <g fill="#51454b">
+      <circle cx="80" cy="126" r="2"/><circle cx="184" cy="126" r="2"/>
+      <circle cx="80" cy="324" r="2"/><circle cx="184" cy="324" r="2"/>
+      <circle cx="456" cy="126" r="2"/><circle cx="560" cy="126" r="2"/>
+      <circle cx="456" cy="324" r="2"/><circle cx="560" cy="324" r="2"/>
+    </g>
+    <g stroke="#b8aeb2" stroke-width="3" stroke-linecap="round">
+      <path d="M100 146V176M116 146V176M132 146V176M148 146V176M164 146V176"/>
+      <path d="M476 146V176M492 146V176M508 146V176M524 146V176M540 146V176"/>
+    </g>
+    <g stroke="#51454b" stroke-width="1.5">
+      <path d="M86 198H178M462 198H554"/>
+    </g>
+    <rect x="102" y="240" width="60" height="62" rx="5" fill="#36231c" stroke="#e99855" stroke-width="1.8"/>
+    <g fill="none" stroke="#e99855" stroke-width="2.5" stroke-linecap="round">
+      <rect x="126" y="250" width="12" height="22" rx="6"/>
+      <path d="M120 266V269A12 12 0 0 0 144 269V266M132 281V290M125 290H139"/>
+    </g>
+    <g fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M486 262H496L508 252V288L496 278H486Z" stroke="#f4f1eb"/>
+      <path d="M518 260Q530 270 518 280M526 252Q546 270 526 288" stroke="#e99855"/>
+    </g>
+
+    <!-- The highlighted route is one selected-room, push-to-talk call. -->
+    <g fill="none" stroke="#e99855" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M195 218H270M261 212L270 218L261 224"/>
+      <path d="M366 218H444M435 212L444 218L435 224"/>
+    </g>
+    <text x="320" y="175" fill="#f4f1eb" font-size="26" text-anchor="middle">Local hub</text>
+    <rect x="274" y="192" width="92" height="66" rx="5" fill="#121014" stroke="#f4f1eb" stroke-width="1.8"/>
+    <path d="M286 224H354" stroke="#51454b" stroke-width="1.5"/>
+    <path d="M288 207H312" stroke="#e99855" stroke-width="3" stroke-linecap="round"/>
+    <g fill="#0b0a0d" stroke="#b8aeb2" stroke-width="1.5">
+      <rect x="288" y="236" width="12" height="10"/>
+      <rect x="312" y="236" width="12" height="10"/>
+      <rect x="336" y="236" width="12" height="10"/>
+    </g>
+
+  </g>
+</svg>

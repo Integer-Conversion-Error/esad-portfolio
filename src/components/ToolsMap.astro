@@ -1,0 +1,103 @@
+---
+import { leadProjects, skills, smallProjects } from "../lib/data";
+import { caseStudies } from "../lib/case-studies";
+
+const knownTools = new Set(skills.flatMap((group) => group.items));
+const groups = [
+  { label: "Languages", items: ["Python", "TypeScript", "JavaScript", "Java", "C/C++", "SQL"] },
+  { label: "Web + mobile", items: ["React", "React Native", "Expo", "Node.js", "NestJS", "GraphQL", "Flask"] },
+  { label: "Data + vision", items: ["Redis", "NumPy", "Pandas", "ONNX Runtime", "OpenCV", "MediaPipe", "YOLOv8", "Power BI"] },
+  { label: "Hardware", items: ["ESP32", "Orange Pi", "Arduino", "mmWave radar", "KiCAD", "3D printing"] },
+  { label: "Delivery", items: ["Docker", "Linux", "Cloudflare", "AWS EC2", "Tailscale", "Git/GitHub", "CI/CD"] },
+  { label: "Desktop + testing", items: ["PyQt", "Tkinter", "Matplotlib", "Playwright", "Selenium", "Jest"] },
+].map((group) => ({ ...group, items: group.items.filter((tool) => knownTools.has(tool)) }));
+
+const aliases: Record<string, string> = {
+  "c++": "c/c++",
+  "esp32-s3": "esp32",
+  "esp32-wrover": "esp32",
+  "orange pi 5": "orange pi",
+  "onnx": "onnx runtime",
+  "react 19": "react",
+};
+const normalize = (tool: string) => aliases[tool.toLowerCase()] ?? tool.toLowerCase();
+// Count each project once, including projects with a separate case study.
+const projects = new Map([...leadProjects, ...caseStudies, ...smallProjects].map((project) => [project.slug, project.stack]));
+const projectTools = [...projects.values()].map((stack) => new Set(stack.map(normalize)));
+const sizeOf = (tool: string) => {
+  const uses = projectTools.filter((stack) => stack.has(normalize(tool))).length;
+  return uses >= 4 ? "frequent" : uses >= 2 ? "recurring" : "standard";
+};
+---
+
+<div class="tools-map">
+  <p class="tools-map-note">Larger names appear in more of my projects.</p>
+  <div class="tools-map-groups">
+    {groups.map((group, index) => (
+      <section class="tools-map-group" aria-labelledby={`tools-group-${index}`}>
+        <h3 id={`tools-group-${index}`}>{group.label}</h3>
+        <ul>
+          {group.items.map((tool) => <li class={sizeOf(tool)}>{tool}</li>)}
+        </ul>
+      </section>
+    ))}
+  </div>
+</div>
+
+<style>
+  .tools-map { font-family: var(--font-mono); }
+  .tools-map-note {
+    max-width: 58ch;
+    margin: 0 0 32px;
+    color: var(--tp-muted, var(--ink-muted));
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .tools-map-groups {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px 36px;
+  }
+  .tools-map-group {
+    min-width: 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--tp-rule, var(--rule));
+  }
+  .tools-map-group h3 {
+    margin: 0 0 20px;
+    color: var(--tp-orange, var(--accent));
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .tools-map-group ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px 20px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .tools-map-group li {
+    max-width: 100%;
+    color: var(--tp-muted, var(--ink-muted));
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+  .tools-map-group li.recurring { color: var(--tp-paper, var(--ink)); font-size: 20px; }
+  .tools-map-group li.frequent { color: var(--tp-paper, var(--ink)); font-size: 26px; font-weight: 500; letter-spacing: -.035em; }
+  @media (max-width: 1080px) {
+    .tools-map-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 28px; }
+  }
+  @media (max-width: 680px) {
+    .tools-map-groups { grid-template-columns: 1fr; gap: 28px; }
+    .tools-map-note { margin-bottom: 24px; }
+    .tools-map-group { padding-top: 16px; }
+    .tools-map-group h3 { margin-bottom: 16px; }
+    .tools-map-group ul { gap: 10px 18px; }
+    .tools-map-group li.frequent { font-size: 24px; }
+  }
+</style>

@@ -2,15 +2,10 @@
 import { experience, leadProjects, personal, smallProjects } from "../lib/data";
 import { caseStudies, caseStudyHref } from "../lib/case-studies";
 import ProjectVisual from "./ProjectVisual.astro";
+import ToolsMap from "./ToolsMap.astro";
 
 const hasCaseStudy = (slug: string) => caseStudies.some((project) => project.slug === slug);
 const additionalProjects = caseStudies.filter((project) => !leadProjects.some((lead) => lead.slug === project.slug));
-
-const capabilities = [
-  { label: "Web + mobile", items: "TypeScript / React / React Native / NestJS" },
-  { label: "Data + vision", items: "Python / PostGIS / OpenCV / ONNX" },
-  { label: "Devices + delivery", items: "ESP32 / Docker / AWS / Cloudflare" },
-];
 ---
 
 <div class="tp" id="top">
@@ -47,11 +42,17 @@ const capabilities = [
   <section class="tp-hero" aria-labelledby="tp-hero-title" data-terminal-hero>
     <div class="tp-shell tp-hero-shell">
       <div class="tp-hero-stage">
+        <!-- OpenSSH 10.2 first-connection wording; illustrative host and generated demo fingerprint.
+             Source: https://github.com/openssh/openssh-portable/blob/V_10_2_P1/sshconnect.c -->
         <div class="tp-login" data-terminal-login aria-hidden="true" hidden>
-          <p>Ubuntu &nbsp; ottawa tty1</p>
-          <p>ottawa login: <span>esad</span></p>
-          <p>Password: ••••••••</p>
-          <p>Authentication successful.</p>
+          <p><span>$</span> ssh esad@ottawa</p>
+          <p>The authenticity of host 'ottawa (192.0.2.26)' can't be established.</p>
+          <p>ED25519 key fingerprint is: SHA256:xBa75I9aOl/AKR0P5IBT7gRUGwHO6EhJfCwXxaiYb0w</p>
+          <p>This key is not known by any other names.</p>
+          <p>Are you sure you want to continue connecting (yes/no/[fingerprint])? <span class="tp-login-confirmation">yes</span></p>
+          <p>Warning: Permanently added 'ottawa' (ED25519) to the list of known hosts.</p>
+          <p>esad@ottawa's password:</p>
+          <p>Ubuntu &nbsp; ottawa pts/0</p>
           <p><span>Loading portfolio...</span></p>
         </div>
         <div class="tp-hero-content">
@@ -59,9 +60,9 @@ const capabilities = [
           <div class="tp-hero-signal" aria-hidden="true"></div>
           <h1 id="tp-hero-title">I build software<br />for work <span>and home.</span></h1>
           <ol class="tp-hero-records" aria-label="What I build">
-            <li><span>01</span> <strong>Ottawa crews</strong> / workforce tools</li>
-            <li><span>02</span> <strong>Street parking</strong> / app + in-car vision</li>
-            <li><span>03</span> <strong>The house</strong> / local intercom</li>
+            <li><a href="#raindropticon" aria-label="Raindropticon: Helping Ottawa businesses stop chasing crews and get results"><span>01</span> Helping Ottawa businesses stop chasing crews and get results.</a></li>
+            <li><a href="#parkopticon" aria-label="Parkopticon: Who likes parking tickets? Not me."><span>02</span> Who likes parking tickets? Not me.</a></li>
+            <li><a href="#home-intercom" aria-label="Home Intercom: Getting everyone downstairs for dinner"><span>03</span> Getting everyone downstairs for dinner.</a></li>
           </ol>
           <a class="tp-hero-link" href="#work" aria-label="Jump to selected work">
             <span>esad@ottawa</span>:~$ cd work/ <span aria-hidden="true">↵</span>
@@ -75,16 +76,16 @@ const capabilities = [
     (() => {
       const hero = document.querySelector("[data-terminal-hero]");
       const login = hero?.querySelector("[data-terminal-login]");
-      const link = hero?.querySelector(".tp-hero-link");
-      if (!hero || !login || !link || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const content = hero?.querySelector(".tp-hero-content");
+      if (!hero || !login || !content || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       login.hidden = false;
-      link.inert = true;
+      content.inert = true;
       hero.classList.add("is-logging-in");
       window.setTimeout(() => {
         hero.classList.remove("is-logging-in");
         login.hidden = true;
-        link.inert = false;
-      }, 2100);
+        content.inert = false;
+      }, 8000);
     })();
   </script>
 
@@ -147,11 +148,9 @@ const capabilities = [
         <span aria-hidden="true"><span class="tp-dollar">$</span> whoami</span>
       </h2>
       <p class="tp-about-copy">
-        I build software for problems close to me. I'm building Raindropticon around
-        geofenced clock-ins for Ottawa crews, and I've built a local intercom with
-        ESP32 room stations for my family. Parkopticon pairs a parking app with an
-        in-car vision device. I like working across the interface, backend, and
-        hardware. I'm finishing a CS degree at the University of Ottawa in May 2027.
+        Most of my projects start with something I want to fix for myself or the
+        people around me. I'm finishing a CS degree at the University of Ottawa
+        in May 2027.
       </p>
     </div>
   </section>
@@ -161,18 +160,16 @@ const capabilities = [
       <h2 class="tp-section-title" id="toolbox-title" aria-label="Tools">
         <span aria-hidden="true"><span class="tp-dollar">$</span> ls tools/</span>
       </h2>
-      <dl class="tp-capabilities">
-        {capabilities.map((group) => (
-          <div><dt>{group.label}</dt><dd>{group.items}</dd></div>
-        ))}
-      </dl>
+      <ToolsMap />
     </div>
   </section>
 
   <section class="tp-section tp-resume" id="resume" aria-labelledby="resume-title">
     <div class="tp-shell">
-      <h2 class="tp-section-title" id="resume-title" aria-label="Resume">
-        <span aria-hidden="true"><span class="tp-dollar">$</span> open resume.pdf</span>
+      <h2 class="tp-section-title" id="resume-title">
+        <a href="/resume.pdf" target="_blank" rel="noopener" aria-label="Open résumé PDF in a new tab">
+          <span aria-hidden="true"><span class="tp-dollar">$</span> open resume.pdf</span>
+        </a>
       </h2>
       <div class="tp-resume-actions">
         <a href="/resume.pdf" target="_blank" rel="noopener">View résumé <span aria-hidden="true">↗</span></a>
@@ -210,7 +207,7 @@ const capabilities = [
       <h2 class="tp-section-title" id="contact-title" aria-label="Contact">
         <span aria-hidden="true"><span class="tp-dollar">$</span> contact</span>
       </h2>
-      <p>Available for Summer 2027 roles and contract work.</p>
+      <p>Available Summer 2027 for internships and full-time roles.</p>
       <a class="tp-email" href={"mailto:" + personal.email}>{personal.email}<span aria-hidden="true">↗</span></a>
       <div class="tp-social-links">
         <a href={personal.links.github} target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
@@ -331,7 +328,7 @@ const capabilities = [
   }
   .tp-hero-prompt span,
   .tp-hero-link span:first-child,
-  .tp-hero-records li > span,
+  .tp-hero-records a > span,
   .tp-hero-link span:last-child,
   .tp-login span { color: var(--tp-orange); }
   .tp-hero-signal {
@@ -364,8 +361,9 @@ const capabilities = [
     font-size: 14px;
     line-height: 1.6;
   }
-  .tp-hero-records li > span { margin-right: 8px; font-weight: 500; }
-  .tp-hero-records strong { color: var(--tp-paper); font-weight: 500; }
+  .tp-hero-records a > span { margin-right: 8px; font-weight: 500; }
+  .tp-hero-records a { display: block; min-height: 44px; color: inherit; text-decoration: none; }
+  .tp-hero-records a:hover { color: var(--tp-orange); }
   .tp-hero-link {
     min-height: 44px;
     display: inline-flex;
@@ -389,6 +387,7 @@ const capabilities = [
     line-height: 1.7;
     letter-spacing: -0.04em;
     pointer-events: none;
+    overflow-wrap: anywhere;
   }
   .tp-login[hidden] { display: none; }
   .tp-login p { margin-bottom: 4px; }
@@ -398,10 +397,18 @@ const capabilities = [
     animation: tp-terminal-line 100ms ease-out both;
   }
   .tp-hero.is-logging-in .tp-login p:nth-child(1) { animation-delay: 100ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(2) { animation-delay: 350ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(3) { animation-delay: 800ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(4) { animation-delay: 1250ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(5) { animation-delay: 1650ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(2) { animation-delay: 800ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(3) { animation-delay: 1400ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(4) { animation-delay: 2000ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(5) { animation-delay: 2600ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(6) { animation-delay: 4300ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(7) { animation-delay: 5000ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(8) { animation-delay: 5700ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(9) { animation-delay: 6300ms; }
+  .tp-hero.is-logging-in .tp-login-confirmation {
+    opacity: 0;
+    animation: tp-terminal-line 100ms ease-out 3800ms both;
+  }
   @keyframes tp-terminal-line { to { opacity: 1; } }
 
   .tp-section { border-bottom: 1px solid var(--tp-rule); }
@@ -419,6 +426,7 @@ const capabilities = [
   .tp-dollar { color: var(--tp-orange); }
 
   .tp-project {
+    scroll-margin-top: 88px;
     display: grid;
     grid-template-columns: minmax(0, 1.25fr) minmax(260px, .8fr);
     align-items: center;
@@ -531,27 +539,9 @@ const capabilities = [
     letter-spacing: -0.035em;
   }
 
-  .tp-capabilities {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 32px;
-    margin: 0;
-  }
-  .tp-capabilities div {
-    padding-top: 18px;
-    border-top: 1px solid var(--tp-rule);
-  }
-  .tp-capabilities dt {
-    color: var(--tp-orange);
-    font-size: 17px;
-    line-height: 1.4;
-  }
-  .tp-capabilities dd {
-    margin: 14px 0 0;
-    color: var(--tp-paper);
-    font-size: 16px;
-    line-height: 1.7;
-  }
+
+  .tp-resume .tp-section-title a { text-decoration: none; }
+  .tp-resume .tp-section-title a:hover { color: var(--tp-orange); }
 
   .tp-resume-actions {
     display: flex;
@@ -765,8 +755,6 @@ const capabilities = [
     }
     .tp-history-row { grid-template-columns: minmax(180px, .65fr) minmax(0, 1fr); gap: 24px; }
     .tp-about-copy { font-size: 22px; }
-    .tp-capabilities { gap: 18px; }
-    .tp-capabilities dd { font-size: 14px; }
     .tp-side-row { grid-template-columns: minmax(150px, .6fr) minmax(0, 1fr) auto; }
     .tp-email { font-size: 34px; }
   }
@@ -783,9 +771,6 @@ const capabilities = [
     .tp-hero-records li { padding: 8px 0; }
     .tp-history-row, .tp-side-row { grid-template-columns: 1fr; gap: 12px; }
     .tp-history-result { font-size: 18px; }
-    .tp-capabilities { grid-template-columns: 1fr; gap: 0; }
-    .tp-capabilities div { padding: 16px 0; }
-    .tp-capabilities dd { margin-top: 8px; }
   }
 
   @media (max-width: 480px) {

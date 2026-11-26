@@ -4,6 +4,7 @@ import { personal } from "../lib/data";
 
 interface Props { project: CaseStudy }
 const { project } = Astro.props;
+const workHeading = project.ownership === "solo" ? "What I built" : "My contribution";
 const nextProject = caseStudies[(caseStudies.findIndex((item) => item.slug === project.slug) + 1) % caseStudies.length];
 ---
 
@@ -28,7 +29,7 @@ const nextProject = caseStudies[(caseStudies.findIndex((item) => item.slug === p
       <p class="study-summary">{project.summary}</p>
       <dl class="study-facts">
         <div><dt>Status</dt><dd>{project.status}</dd></div>
-        <div><dt>My work</dt><dd>{project.role}</dd></div>
+        <div><dt>{project.ownership === "solo" ? "Ownership" : "My work"}</dt><dd>{project.role}</dd></div>
       </dl>
       {(project.url || project.github || project.devpost) && (
         <div class="study-project-links">
@@ -41,7 +42,7 @@ const nextProject = caseStudies[(caseStudies.findIndex((item) => item.slug === p
 
     <nav class="study-contents" aria-label="On this page">
       <a href="#purpose">Purpose</a>
-      <a href="#contribution">My contribution</a>
+      <a href="#contribution">{workHeading}</a>
       <a href="#architecture">Architecture</a>
       <a href="#challenge">Challenge</a>
       <a href="#outcome">Outcome</a>
@@ -60,7 +61,7 @@ const nextProject = caseStudies[(caseStudies.findIndex((item) => item.slug === p
       <p>{project.purpose}</p>
     </section>
     <section class="study-section" id="contribution" aria-labelledby="contribution-title">
-      <h2 id="contribution-title">My contribution</h2>
+      <h2 id="contribution-title">{workHeading}</h2>
       <p>{project.contribution}</p>
     </section>
     <section class="study-section" id="architecture" aria-labelledby="architecture-title">
