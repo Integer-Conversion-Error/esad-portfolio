@@ -1,5 +1,5 @@
-// Playwright screenshot helper — captures the live dev server at multiple
-// desktop viewports and saves full-page + section screenshots.
+// Playwright screenshot helper — captures the live dev server at desktop and
+// mobile viewports and saves full-page + section screenshots.
 //
 // Usage: node scripts/screenshot.mjs [baseUrl]
 
@@ -10,6 +10,7 @@ import { join } from "node:path";
 const BASE = process.argv[2] || "http://localhost:4321";
 const OUT_DIR = "/tmp/portfolio-shots";
 const VIEWPORTS = [
+  { name: "390x900",   width: 390, height: 900  },
   { name: "1280x800",  width: 1280, height: 800  },
   { name: "1440x900",  width: 1440, height: 900  },
   { name: "1920x1080", width: 1920, height: 1080 },
@@ -26,7 +27,7 @@ async function main() {
 
   const browser = await chromium.launch({
     headless: true,
-    executablePath: "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
+    executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH || undefined,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
 
@@ -55,14 +56,11 @@ async function main() {
         // Section-specific screenshots
         if (page.name === "home") {
           for (const sel of [
-            "section.tp-hero",
-            "section.tp-work",
-            "section.tp-record",
-            "section.tp-about",
-            "section.tp-toolbox",
-            "section.tp-resume",
-            "section.tp-side",
-            "section.tp-contact",
+            "section.intro",
+            "section#work",
+            "section#record",
+            "section.other-work",
+            "section#contact",
           ]) {
             const el = await tab.$(sel);
             if (el) {
@@ -73,7 +71,7 @@ async function main() {
           }
 
           // Also: scroll to each project card and snap it
-          const projects = await tab.$$("article.tp-project");
+          const projects = await tab.$$("article.project");
           for (let i = 0; i < projects.length; i++) {
             await projects[i].scrollIntoViewIfNeeded();
             await tab.waitForTimeout(300);
