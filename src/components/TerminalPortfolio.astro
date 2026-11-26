@@ -85,7 +85,7 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
         hero.classList.remove("is-logging-in");
         login.hidden = true;
         content.inert = false;
-      }, 3200);
+      }, 8000);
     })();
   </script>
 
@@ -396,18 +396,18 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
     opacity: 0;
     animation: tp-terminal-line 100ms ease-out both;
   }
-  .tp-hero.is-logging-in .tp-login p:nth-child(1) { animation-delay: 0ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(2) { animation-delay: 200ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(3) { animation-delay: 350ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(4) { animation-delay: 500ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(5) { animation-delay: 650ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(6) { animation-delay: 1550ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(7) { animation-delay: 1850ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(8) { animation-delay: 2150ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(9) { animation-delay: 2350ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(1) { animation-delay: 100ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(2) { animation-delay: 800ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(3) { animation-delay: 1400ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(4) { animation-delay: 2000ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(5) { animation-delay: 2600ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(6) { animation-delay: 4300ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(7) { animation-delay: 5000ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(8) { animation-delay: 5700ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(9) { animation-delay: 6300ms; }
   .tp-hero.is-logging-in .tp-login-confirmation {
     opacity: 0;
-    animation: tp-terminal-line 100ms ease-out 1300ms both;
+    animation: tp-terminal-line 100ms ease-out 3800ms both;
   }
   @keyframes tp-terminal-line { to { opacity: 1; } }
 
