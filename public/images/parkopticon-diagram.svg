@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+  <title id="title">Parkopticon parking-map schematic</title>
+  <desc id="desc">A street-parking schematic showing parked cars, an open curbside space marked by a location pin, and a dashed zone for nearby enforcement alerts.</desc>
+
+  <rect width="640" height="420" fill="#0b0a0d"/>
+
+  <!-- Uneven urban blocks leave one clear route through the illustration. -->
+  <g fill="#121014" stroke="#51454b" stroke-width="1.5">
+    <path d="M34 32H270V174H34Z"/>
+    <path d="M394 32H606V180H416L394 158Z"/>
+    <path d="M34 320H188V388H34Z"/>
+    <path d="M210 320H270V388H210Z"/>
+    <path d="M408 328H606V388H408Z"/>
+  </g>
+  <g fill="none" stroke="#51454b" stroke-width="1" opacity=".65">
+    <path d="M234 32V174M394 104H606M34 352H188M516 328V388"/>
+  </g>
+
+  <!-- A north-south street meets a side street that bends around the blocks. -->
+  <path d="M334-12V432M-12 246H282C347 246 367 270 424 270H652" fill="none" stroke="#51454b" stroke-width="94"/>
+  <path d="M334-12V432M-12 246H282C347 246 367 270 424 270H652" fill="none" stroke="#121014" stroke-width="90"/>
+  <g fill="none" stroke="#b8aeb2" stroke-width="2" stroke-dasharray="12 14" opacity=".38">
+    <path d="M334 0V185M334 322V420"/>
+    <path d="M0 246H282M425 270H640"/>
+  </g>
+
+  <!-- Parked cars: a restrained top view with windows and distinct wheels. -->
+  <g stroke="#b8aeb2" stroke-width="1.8" fill="#121014">
+    <g transform="translate(54 268)">
+      <rect width="50" height="23" rx="6"/>
+      <path d="M13 3V20M37 3V20M15 4H35V19H15Z" fill="#51454b"/>
+      <path d="M9-2H16M35-2H42M9 25H16M35 25H42" stroke-width="3"/>
+    </g>
+    <g transform="translate(223 268)">
+      <rect width="50" height="23" rx="6"/>
+      <path d="M13 3V20M37 3V20M15 4H35V19H15Z" fill="#51454b"/>
+      <path d="M9-2H16M35-2H42M9 25H16M35 25H42" stroke-width="3"/>
+    </g>
+    <g transform="translate(377 76) rotate(90)">
+      <rect width="50" height="23" rx="6"/>
+      <path d="M13 3V20M37 3V20M15 4H35V19H15Z" fill="#51454b"/>
+      <path d="M9-2H16M35-2H42M9 25H16M35 25H42" stroke-width="3"/>
+    </g>
+  </g>
+
+  <!-- The empty, highlighted bay is the primary map feature. -->
+  <rect x="141" y="211" width="88" height="25" rx="3" fill="#e99855" fill-opacity=".10" stroke="#e99855" stroke-width="2.5"/>
+  <path d="M185 203C179 195 162 176 162 162A23 23 0 0 1 208 162C208 176 191 195 185 203Z" fill="#e99855"/>
+  <circle cx="185" cy="162" r="8" fill="#0b0a0d"/>
+  <path d="M71 124V146H145" fill="none" stroke="#e99855" stroke-width="1.5"/>
+  <text x="52" y="110" fill="#f4f1eb" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="28">Open spot</text>
+
+  <!-- A proximity zone conveys an alert without implying a measured radius. -->
+  <circle cx="493" cy="268" r="83" fill="#e99855" fill-opacity=".05" stroke="#e99855" stroke-width="1.8" stroke-dasharray="5 8"/>
+  <path d="M493 222L517 263H469Z" fill="#e99855"/>
+  <path d="M493 235V247" stroke="#0b0a0d" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="493" cy="254" r="1.8" fill="#0b0a0d"/>
+  <path d="M493 351V365H402" fill="none" stroke="#e99855" stroke-width="1.5"/>
+  <text x="340" y="398" fill="#f4f1eb" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="26">Enforcement nearby</text>
+</svg>
