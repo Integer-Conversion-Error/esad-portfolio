@@ -5,6 +5,7 @@ export type CaseStudy = {
   summary: string;
   status: string;
   role: string;
+  ownership?: "solo" | "team";
   purpose: string;
   contribution: string;
   architecture: string;
@@ -27,6 +28,7 @@ export const caseStudies: CaseStudy[] = [
     summary: "A quantum optimization agent that turns an EV dispatch prompt into a schedule you can replay.",
     status: "Hack the Nest 2026 · team prototype",
     role: "Agent planning and dashboard integration",
+    ownership: "team",
     purpose: "An EV fleet has to fit charging stops around delivery deadlines and battery limits. At Hack the Nest, my team built QuantumLoop to turn a plain-English dispatch problem into a solver and show its schedule in the Fleet Lab dashboard.",
     contribution: "I built the Gemini planning loop and connected it to Fleet Lab. I added progress tracking for solver revisions, controls from the approved plan, and browser replay for driving, waiting, charging, and deliveries. I worked with Chenkai Mu, Ehan Hassan, and Maegen Hill.",
     architecture: "The Python pipeline uses Gemini to interpret the prompt, draft a plan, and generate a solver. The EV example encodes dispatch choices for a QAOA circuit on the Quantum Rings simulator. After verification, a JSON handoff gives Fleet Lab the timed routes, cost breakdown, and adjustable settings.",
@@ -51,12 +53,13 @@ export const caseStudies: CaseStudy[] = [
     title: "Home Intercom",
     summary: "Room-to-room audio on the home network, with a wall-station board in progress.",
     status: "Prototype · PCB placement complete; routing pending",
-    role: "Hub, firmware integration, and board layout",
+    role: "Solo build · firmware, backend, and PCB design",
+    ownership: "solo",
     purpose: "I wanted a simple intercom for my family. A room station should let someone select a room, hold a button to talk, or broadcast to the house. The audio stays on the local network.",
-    contribution: "I built the Node.js hub and the control/audio split for ESP32-S3 stations. I also worked on the KiCad wall-panel layout, correcting breakout-module footprints and arranging the display, microphone, push-to-talk button, and volume control around how someone would use them.",
+    contribution: "I built the system end to end: ESP32-S3 firmware, the Node.js hub, and the KiCad wall-station PCB design. I separated control messages from audio, corrected breakout-module footprints, and laid out the display, microphone, push-to-talk button, and volume control.",
     architecture: "WebSocket carries registration and room state. UDP carries PCM audio through the hub to a selected station or broadcast targets. Keeping those paths separate lets the control channel report offline or muted rooms while the audio path stays small. Docker packages the hub.",
     flow: ["ESP32-S3 room station", "Local hub · control + audio", "Selected room or broadcast"],
-    flowNote: "The wall-station PCB is a separate hardware workstream within this project.",
+    flowNote: "The wall-station PCB is part of the same system; routing is still pending.",
     challenge: "The board needed to represent real module dimensions. Placement checks caught collisions between front controls and rear components; I repositioned those parts and refilled the ground zone.",
     outcome: "The hub implements room registration, push-to-talk routing, and broadcast. The board placement review resolved placement-created clearance problems; the PCB is still unrouted.",
     next: "Routing, enclosure design, and assembled-board validation remain. I haven't measured end-to-end audio latency.",

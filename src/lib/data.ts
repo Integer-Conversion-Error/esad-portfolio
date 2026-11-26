@@ -203,11 +203,11 @@ export const leadProjects: Project[] = [
     title: "Home Intercom",
     subtitle: "A local network intercom for the house.",
     narrative:
-      "I'm building ESP32-S3 room stations and a Dockerized hub for my home network. WebSocket carries control messages; UDP carries PCM audio for push-to-talk. The hub supports selected-room calls and broadcast. I also worked on the wall-station PCB layout; routing and enclosure work remain. I started it because I wanted a simple intercom for my mom.",
+      "I'm building ESP32-S3 room stations and a Dockerized hub for my home network. WebSocket carries control messages; UDP carries PCM audio for push-to-talk. The hub supports selected-room calls and broadcast. I designed the wall-station PCB; routing and enclosure work remain. I started it because I wanted a simple intercom for my mom.",
     outcome: "Call any room or broadcast to the whole house without a cloud service.",
     evidence: "A Docker hub routes ESP32-S3 audio; wall-station PCB routing is in progress.",
     year: "May 2026",
-    role: "Firmware + backend",
+    role: "Solo developer · firmware, backend, and PCB design",
     stack: ["ESP32-S3", "Docker", "WebSocket", "UDP", "C++"],
     visualHint: "home-intercom",
   },

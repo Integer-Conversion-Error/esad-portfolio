@@ -42,11 +42,17 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
   <section class="tp-hero" aria-labelledby="tp-hero-title" data-terminal-hero>
     <div class="tp-shell tp-hero-shell">
       <div class="tp-hero-stage">
+        <!-- OpenSSH 10.2 first-connection wording; illustrative host and generated demo fingerprint.
+             Source: https://github.com/openssh/openssh-portable/blob/V_10_2_P1/sshconnect.c -->
         <div class="tp-login" data-terminal-login aria-hidden="true" hidden>
-          <p>Ubuntu &nbsp; ottawa tty1</p>
-          <p>ottawa login: <span>esad</span></p>
-          <p>Password: ••••••••</p>
-          <p>Authentication successful.</p>
+          <p><span>$</span> ssh esad@ottawa</p>
+          <p>The authenticity of host 'ottawa (192.0.2.26)' can't be established.</p>
+          <p>ED25519 key fingerprint is: SHA256:xBa75I9aOl/AKR0P5IBT7gRUGwHO6EhJfCwXxaiYb0w</p>
+          <p>This key is not known by any other names.</p>
+          <p>Are you sure you want to continue connecting (yes/no/[fingerprint])? <span class="tp-login-confirmation">yes</span></p>
+          <p>Warning: Permanently added 'ottawa' (ED25519) to the list of known hosts.</p>
+          <p>esad@ottawa's password:</p>
+          <p>Ubuntu &nbsp; ottawa pts/0</p>
           <p><span>Loading portfolio...</span></p>
         </div>
         <div class="tp-hero-content">
@@ -55,7 +61,7 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
           <h1 id="tp-hero-title">I build software<br />for work <span>and home.</span></h1>
           <ol class="tp-hero-records" aria-label="What I build">
             <li><a href="#raindropticon" aria-label="Raindropticon: Helping Ottawa businesses stop chasing crews and get results"><span>01</span> Helping Ottawa businesses stop chasing crews and get results.</a></li>
-            <li><a href="#parkopticon" aria-label="Parkopticon: Who likes parking tickets?"><span>02</span> Who likes parking tickets?</a></li>
+            <li><a href="#parkopticon" aria-label="Parkopticon: Who likes parking tickets? Not me."><span>02</span> Who likes parking tickets? Not me.</a></li>
             <li><a href="#home-intercom" aria-label="Home Intercom: Getting everyone downstairs for dinner"><span>03</span> Getting everyone downstairs for dinner.</a></li>
           </ol>
           <a class="tp-hero-link" href="#work" aria-label="Jump to selected work">
@@ -79,7 +85,7 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
         hero.classList.remove("is-logging-in");
         login.hidden = true;
         content.inert = false;
-      }, 2100);
+      }, 3200);
     })();
   </script>
 
@@ -381,6 +387,7 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
     line-height: 1.7;
     letter-spacing: -0.04em;
     pointer-events: none;
+    overflow-wrap: anywhere;
   }
   .tp-login[hidden] { display: none; }
   .tp-login p { margin-bottom: 4px; }
@@ -389,11 +396,19 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
     opacity: 0;
     animation: tp-terminal-line 100ms ease-out both;
   }
-  .tp-hero.is-logging-in .tp-login p:nth-child(1) { animation-delay: 100ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(2) { animation-delay: 350ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(3) { animation-delay: 800ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(4) { animation-delay: 1250ms; }
-  .tp-hero.is-logging-in .tp-login p:nth-child(5) { animation-delay: 1650ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(1) { animation-delay: 0ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(2) { animation-delay: 200ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(3) { animation-delay: 350ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(4) { animation-delay: 500ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(5) { animation-delay: 650ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(6) { animation-delay: 1550ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(7) { animation-delay: 1850ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(8) { animation-delay: 2150ms; }
+  .tp-hero.is-logging-in .tp-login p:nth-child(9) { animation-delay: 2350ms; }
+  .tp-hero.is-logging-in .tp-login-confirmation {
+    opacity: 0;
+    animation: tp-terminal-line 100ms ease-out 1300ms both;
+  }
   @keyframes tp-terminal-line { to { opacity: 1; } }
 
   .tp-section { border-bottom: 1px solid var(--tp-rule); }
