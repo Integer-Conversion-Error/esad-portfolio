@@ -2,51 +2,199 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
+// Filter out drafts from the public list.
 const allPosts = await getCollection("blog", ({ data }) => data.draft !== true);
 allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-const formatDate = (date: Date): string => date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
+
+const formatDate = (date: Date): string =>
+  date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 ---
 
-<BaseLayout title="Writing — Esad Kaya" description="Essays and project notes by Esad Kaya.">
+<BaseLayout
+  title="Writing — Esad Kaya"
+  description="Essays on systems and craft by Esad Kaya."
+>
   <section class="blog" aria-labelledby="blog-title">
-    <div class="blog-inner">
-      <h1 id="blog-title">Writing</h1>
-      {allPosts.length === 0 ? <p class="empty">No posts yet.</p> : (
-        <ul class="list">
-          {allPosts.map((post) => (
-            <li>
-              <a href={`/blog/${post.id}/`} class="item-link">
-                <span class="item-main">
-                  <h2>{post.data.title}</h2>
-                  <span class="item-description">{post.data.description}</span>
-                </span>
-                <time class="date" datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+    <div class="container">
+      <header class="head">
+        <p class="command"><span>esad@ottawa:~$</span> ls writing/</p>
+        <h1 id="blog-title">Writing<span>/</span></h1>
+      </header>
+
+      {
+        allPosts.length === 0 ? (
+          <div class="empty">
+            <p>No posts yet.</p>
+          </div>
+        ) : (
+          <ul class="list">
+            {allPosts.map((post, index) => (
+              <li class="item">
+                <a href={`/blog/${post.id}/`} class="item-link">
+                  <span class="item-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                  <span class="item-main">
+                    <h2 class="item-title">{post.data.title}</h2>
+                    <span class="item-dek">{post.data.description}</span>
+                  </span>
+                  <span class="item-meta">
+                    <time class="date tabular" datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+                    <span class="item-arrow" aria-hidden="true">↗</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .blog { min-height: 65vh; padding-block: 72px 96px; }
-  .blog-inner { width: min(100%, 1120px); margin-inline: auto; padding-inline: 48px; }
-  .blog h1 { margin-bottom: 40px; font-family: var(--font-sans); font-size: 48px; line-height: 1.2; letter-spacing: -.04em; }
-  .empty { color: var(--ink-muted); }
-  .list { padding: 0; margin: 0; list-style: none; }
-  .list li { border-top: 1px solid var(--rule); }
-  .item-link { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: baseline; padding-block: 28px; text-decoration: none; }
-  .item-link h2 { font-family: var(--font-sans); font-size: 24px; font-weight: 500; line-height: 1.35; letter-spacing: -.025em; }
-  .item-link:hover h2 { color: var(--accent); }
-  .item-description { display: block; max-width: 66ch; margin-top: 8px; color: var(--ink-muted); font-size: 16px; line-height: 1.6; }
-  .date { color: var(--ink-muted); font-family: var(--font-mono); font-size: 13px; white-space: nowrap; }
-  @media (max-width: 700px) {
-    .blog { padding-block: 48px 64px; }
-    .blog-inner { padding-inline: 24px; }
-    .blog h1 { margin-bottom: 28px; font-size: 36px; }
-    .item-link { grid-template-columns: 1fr; gap: 12px; padding-block: 24px; }
-    .item-link h2 { font-size: 22px; }
+  .blog {
+    --page-bg: #0b0a0d;
+    --page-ink: #f4f1eb;
+    --page-muted: #b9adb1;
+    --page-orange: #e99855;
+    --page-rule: #51454b;
+    min-height: 70vh;
+    padding: clamp(80px, 10vw, 144px) 0 clamp(96px, 12vw, 160px);
+    background: var(--page-bg);
+    color: var(--page-ink);
+  }
+
+  .head {
+    padding-bottom: clamp(56px, 7vw, 96px);
+    border-bottom: 1px solid var(--page-orange);
+  }
+
+  .command {
+    margin-bottom: 32px;
+    color: var(--page-ink);
+    font-family: var(--font-mono);
+    font-size: clamp(14px, 1.5vw, 18px);
+    line-height: 1.5;
+    letter-spacing: -0.05em;
+  }
+
+  .command span,
+  .head h1 span {
+    color: var(--page-orange);
+  }
+
+  .head h1 {
+    color: var(--page-ink);
+    font-family: var(--font-mono);
+    font-size: clamp(58px, 9vw, 116px);
+    font-weight: 500;
+    line-height: 0.94;
+    letter-spacing: -0.085em;
+  }
+
+  .empty {
+    padding: 48px 0;
+    color: var(--page-muted);
+    font-family: var(--font-mono);
+    font-size: 18px;
+  }
+
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .item {
+    border-bottom: 1px solid var(--page-rule);
+  }
+
+  .item-link {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) auto;
+    gap: 28px;
+    align-items: start;
+    padding: 40px 0;
+    text-decoration: none;
+    color: var(--page-ink);
+    transition: color 160ms ease;
+  }
+
+  .item-link:hover .item-title,
+  .item-link:hover .item-arrow {
+    color: var(--page-orange);
+  }
+
+  .item-index,
+  .item-meta {
+    font-family: var(--font-mono);
+  }
+
+  .item-index {
+    padding-top: 5px;
+    color: var(--page-orange);
+    font-size: 14px;
+  }
+
+  .item-title {
+    color: var(--page-ink);
+    font-family: var(--font-mono);
+    font-size: clamp(27px, 3vw, 42px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.065em;
+    margin: 0;
+    transition: color 160ms ease;
+  }
+
+  .item-dek {
+    display: block;
+    max-width: 68ch;
+    margin-top: 14px;
+    color: var(--page-muted);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .item-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    padding-top: 5px;
+    white-space: nowrap;
+  }
+
+  .date {
+    color: var(--page-muted);
+    font-size: 13px;
+  }
+
+  .item-arrow {
+    color: var(--page-orange);
+    font-size: 24px;
+    line-height: 1;
+    transition: color 160ms ease;
+  }
+
+  @media (max-width: 720px) {
+    .item-link {
+      grid-template-columns: 32px minmax(0, 1fr);
+      gap: 14px;
+      padding: 32px 0;
+    }
+
+    .item-meta {
+      grid-column: 2;
+      justify-content: space-between;
+      margin-top: 6px;
+      padding: 0;
+    }
+
+    .item-dek {
+      margin-top: 10px;
+    }
   }
 </style>

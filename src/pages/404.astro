@@ -4,18 +4,78 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout title="404 — Esad Kaya" description="Page not found.">
   <section class="not-found" aria-labelledby="not-found-title">
-    <div class="not-found-inner">
-      <h1 id="not-found-title">Page not found</h1>
-      <a href="/">← Back home</a>
+    <div class="container">
+      <p class="command"><span>esad@ottawa:~$</span> cd requested-page/</p>
+      <h1 id="not-found-title">404<span>.</span></h1>
+      <p class="lede">Route not found.</p>
+      <a href="/" class="back"><span>esad@ottawa:~$</span> cd ~/ <span aria-hidden="true">↵</span></a>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .not-found { min-height: 60vh; padding-block: 96px; }
-  .not-found-inner { width: min(100%, 1120px); margin-inline: auto; padding-inline: 48px; }
-  .not-found h1 { font-family: var(--font-sans); font-size: clamp(32px, 5vw, 48px); line-height: 1.2; letter-spacing: -.035em; }
-  .not-found a { display: inline-flex; align-items: center; min-height: 44px; margin-top: 24px; color: var(--accent); font-size: 16px; }
-  .not-found a:hover { text-decoration: underline; text-underline-offset: 4px; }
-  @media (max-width: 700px) { .not-found { padding-block: 64px; } .not-found-inner { padding-inline: 24px; } }
+  .not-found {
+    --page-bg: #0b0a0d;
+    --page-ink: #f4f1eb;
+    --page-muted: #b9adb1;
+    --page-orange: #e99855;
+    min-height: max(560px, calc(100svh - 68px));
+    display: flex;
+    align-items: center;
+    padding: 80px 0 112px;
+    background: var(--page-bg);
+    color: var(--page-ink);
+  }
+
+  .command,
+  .back {
+    font-family: var(--font-mono);
+    letter-spacing: -0.05em;
+  }
+
+  .command {
+    margin-bottom: 28px;
+    color: var(--page-ink);
+    font-size: clamp(14px, 1.5vw, 18px);
+    line-height: 1.5;
+  }
+
+  .command span,
+  .not-found h1 span,
+  .back span {
+    color: var(--page-orange);
+  }
+
+  .not-found h1 {
+    color: var(--page-ink);
+    font-family: var(--font-mono);
+    font-size: clamp(96px, 17vw, 220px);
+    font-weight: 500;
+    line-height: 0.9;
+    letter-spacing: -0.11em;
+  }
+
+  .lede {
+    margin: 24px 0 56px;
+    color: var(--page-muted);
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.5;
+  }
+
+  .back {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.4em;
+    color: var(--page-ink);
+    font-size: clamp(17px, 2vw, 24px);
+    line-height: 1.4;
+    text-decoration: none;
+    border-bottom: 1px solid var(--page-orange);
+    padding-bottom: 6px;
+    transition: color 160ms ease;
+  }
+
+  .back:hover {
+    color: var(--page-orange);
+  }
 </style>

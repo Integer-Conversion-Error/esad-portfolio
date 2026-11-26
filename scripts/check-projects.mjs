@@ -27,7 +27,7 @@ try {
       const overflowing = await page.evaluate(() => [...document.body.querySelectorAll("*")].filter((el) => {
         const bounds = el.getBoundingClientRect();
         const style = getComputedStyle(el);
-        return bounds.width > 0 && style.visibility !== "hidden" && style.display !== "none" && (bounds.right > innerWidth + 1 || bounds.left < -1) && !el.matches(".skip-link, .study-skip, .nav-drawer, .nav-drawer *");
+        return bounds.width > 0 && style.visibility !== "hidden" && style.display !== "none" && (bounds.right > innerWidth + 1 || bounds.left < -1) && !el.matches(".tp-skip, .study-skip, .tp-drawer, .tp-drawer *");
       }).map((el) => `${el.tagName}.${el.className}`));
       assert.deepEqual(overflowing, [], `${path} at ${width}px: horizontal overflow`);
       assert.deepEqual(errors, [], `${path}: browser errors`);
@@ -52,10 +52,10 @@ try {
         assert.ok(!links.includes("https://www.raindropticon.com"), "Raindropticon www link removed");
         assert.ok(!links.includes("/projects/raindropticon/"), "no Raindropticon case study");
         if (width === 390) {
-          await page.locator("[data-nav-toggle]").click();
-          assert.equal(await page.locator("[data-nav-toggle]").getAttribute("aria-expanded"), "true");
+          await page.locator("[data-tp-menu]").click();
+          assert.equal(await page.locator("[data-tp-menu]").getAttribute("aria-expanded"), "true");
           await page.keyboard.press("Escape");
-          assert.equal(await page.locator("[data-nav-toggle]").getAttribute("aria-expanded"), "false");
+          assert.equal(await page.locator("[data-tp-menu]").getAttribute("aria-expanded"), "false");
         }
       } else {
         const slug = path.split("/")[2];
