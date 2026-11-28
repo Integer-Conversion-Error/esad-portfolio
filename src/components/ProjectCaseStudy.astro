@@ -14,7 +14,7 @@ const nextProject = caseStudies[(caseStudies.findIndex((item) => item.slug === p
     <div class="study-shell study-nav-inner">
       <a href="/" aria-label="Esad Kaya - home">EK</a>
       <nav aria-label="Primary">
-        <a href="/#work">Work</a>
+        <a href="/#projects">Projects</a>
         <a href="/blog/">Writing</a>
         <a href="/#contact">Contact</a>
       </nav>
@@ -23,8 +23,8 @@ const nextProject = caseStudies[(caseStudies.findIndex((item) => item.slug === p
 
   <article class="study-shell" id="project-content" aria-labelledby="project-title">
     <header class="study-hero">
-      <a class="study-back" href="/#work">← Selected work</a>
-      <p class="study-path"><span aria-hidden="true">$ </span>work/{project.slug}/</p>
+      <a class="study-back" href="/#projects">← Projects</a>
+      <p class="study-path"><span aria-hidden="true">$ </span>projects/{project.slug}/</p>
       <h1 id="project-title">{project.title}</h1>
       <p class="study-summary">{project.summary}</p>
       <dl class="study-facts">
@@ -93,7 +93,7 @@ const nextProject = caseStudies[(caseStudies.findIndex((item) => item.slug === p
     </section>
 
     <footer class="study-footer">
-      <a href="/#work">← All selected work</a>
+      <a href="/#projects">← All projects</a>
       <a href={caseStudyHref(nextProject.slug)}>Next: {nextProject.title} <span aria-hidden="true">→</span></a>
       <a href={`mailto:${personal.email}`}>Discuss this project <span aria-hidden="true">↗</span></a>
     </footer>

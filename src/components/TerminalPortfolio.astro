@@ -1,22 +1,50 @@
 ---
-import { experience, leadProjects, personal, smallProjects } from "../lib/data";
+import { experience, leadProjects, personal, smallProjects, type Project } from "../lib/data";
 import { caseStudies, caseStudyHref } from "../lib/case-studies";
 import ProjectVisual from "./ProjectVisual.astro";
 import ToolsMap from "./ToolsMap.astro";
+import OrganizationLogo from "./OrganizationLogo.astro";
 
 const hasCaseStudy = (slug: string) => caseStudies.some((project) => project.slug === slug);
 const additionalProjects = caseStudies.filter((project) => !leadProjects.some((lead) => lead.slug === project.slug));
+const projectPriority = [
+  "raindropticon", "parkopticon", "legend-flooring", "hack-the-nest", "home-intercom",
+  "raindrop-web", "put-it-down", "home-media-server", "autoscraper", "kaya-auto",
+  "home-security-node", "budg-it", "notesplicer", "hugging-stocks", "law-buddy",
+];
+type PortfolioProject = {
+  slug: string;
+  title: string;
+  description: string;
+  evidence?: string;
+  year?: string;
+  visualHint?: Project["visualHint"];
+  url?: string;
+  github?: string;
+};
+const projects: PortfolioProject[] = [
+  ...leadProjects.map((project) => ({ ...project, description: project.outcome })),
+  ...additionalProjects.map((project) => ({
+    slug: project.slug, title: project.title, description: project.summary,
+    url: project.url, github: project.github,
+  })),
+  ...smallProjects,
+].sort((a, b) => projectPriority.indexOf(a.slug) - projectPriority.indexOf(b.slug));
+const experienceIds = [
+  "experience-entrust", "experience-solace", "experience-crc",
+  "experience-infrastructure-canada", "experience-raindrop",
+];
 ---
 
 <div class="tp" id="top">
-  <a class="tp-skip" href="#work">Skip to selected work</a>
+  <a class="tp-skip" href="#projects">Skip to projects</a>
 
   <header class="tp-nav" data-tp-nav>
     <div class="tp-shell tp-nav-inner">
       <a class="tp-mark" href="#top" aria-label={personal.name + " - back to top"}>EK</a>
       <nav class="tp-nav-links" aria-label="Primary">
-        <a href="#work">Work</a>
         <a href="#record">Experience</a>
+        <a href="#projects">Projects</a>
         <a href="#about">About</a>
         <a href="#resume">Resume</a>
         <a href="/blog">Writing</a>
@@ -29,8 +57,8 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
     </div>
     <div class="tp-drawer" id="tp-mobile-navigation" data-tp-drawer aria-hidden="true" inert>
       <nav aria-label="Mobile navigation">
-        <a href="#work">Work</a>
         <a href="#record">Experience</a>
+        <a href="#projects">Projects</a>
         <a href="#about">About</a>
         <a href="#resume">Resume</a>
         <a href="/blog">Writing</a>
@@ -58,14 +86,15 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
         <div class="tp-hero-content">
           <p class="tp-hero-prompt"><span>esad@ottawa</span>:~$ ./portfolio</p>
           <div class="tp-hero-signal" aria-hidden="true"></div>
-          <h1 id="tp-hero-title">I build software<br />for work <span>and home.</span></h1>
-          <ol class="tp-hero-records" aria-label="What I build">
+          <h1 id="tp-hero-title">Building for the<br /><span>real world</span></h1>
+          <p class="tp-hero-records-label" id="hero-projects-label">Selected projects</p>
+          <ol class="tp-hero-records" aria-labelledby="hero-projects-label">
             <li><a href="#raindropticon" aria-label="Raindropticon: Helping Ottawa businesses stop chasing crews and get results"><span>01</span> Helping Ottawa businesses stop chasing crews and get results.</a></li>
             <li><a href="#parkopticon" aria-label="Parkopticon: Who likes parking tickets? Not me."><span>02</span> Who likes parking tickets? Not me.</a></li>
             <li><a href="#home-intercom" aria-label="Home Intercom: Getting everyone downstairs for dinner"><span>03</span> Getting everyone downstairs for dinner.</a></li>
           </ol>
-          <a class="tp-hero-link" href="#work" aria-label="Jump to selected work">
-            <span>esad@ottawa</span>:~$ cd work/ <span aria-hidden="true">↵</span>
+          <a class="tp-hero-link" href="#projects" aria-label="Jump to all projects">
+            <span>esad@ottawa</span>:~$ cd projects/ <span aria-hidden="true">↵</span>
           </a>
         </div>
       </div>
@@ -89,56 +118,77 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
     })();
   </script>
 
-  <section class="tp-section tp-work" id="work" aria-labelledby="work-title">
-    <div class="tp-shell">
-      <h2 class="tp-section-title" id="work-title" aria-label="Selected work">
-        <span aria-hidden="true"><span class="tp-dollar">$</span> ls work/</span>
-      </h2>
-      <div class="tp-projects">
-        {leadProjects.map((project, index) => (
-          <article class="tp-project" id={project.slug}>
-            <div class="tp-project-copy">
-              <div class="tp-project-heading">
-                <span class="tp-project-index">{String(index + 1).padStart(2, "0")}</span>
-                <h3>{hasCaseStudy(project.slug) ? <a href={caseStudyHref(project.slug)}>{project.title}</a> : project.title}</h3>
-              </div>
-              <p class="tp-project-outcome">{project.outcome}</p>
-              <p class="tp-project-evidence">{project.evidence}</p>
-              <div class="tp-project-footer">
-                <p>{project.year}</p>
-                {(hasCaseStudy(project.slug) || project.url || project.github) && (
-                  <div class="tp-project-links">
-                    {hasCaseStudy(project.slug) && <a href={caseStudyHref(project.slug)}>Case study <span aria-hidden="true">→</span></a>}
-                    {project.url && <a href={project.url} target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a>}
-                    {project.github && <a href={project.github} target="_blank" rel="noopener">Source <span aria-hidden="true">↗</span></a>}
-                  </div>
-                )}
-              </div>
-            </div>
-            <div class="tp-project-visual"><ProjectVisual hint={project.visualHint} /></div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <section class="tp-section tp-record" id="record" aria-labelledby="record-title">
     <div class="tp-shell">
       <h2 class="tp-section-title" id="record-title" aria-label="Experience">
         <span aria-hidden="true"><span class="tp-dollar">$</span> history</span>
       </h2>
       <div class="tp-history">
-        {experience.map((role) => (
-          <article class="tp-history-row">
+        {experience.map((role, index) => (
+          <article class="tp-history-row" id={experienceIds[index]}>
             <div class="tp-history-identity">
-              <h3>{role.company}</h3>
-              <p>{role.role}</p>
-              <p>{role.start} – {role.end}</p>
+              <OrganizationLogo company={role.company} />
+              <div>
+                <h3>{role.company}</h3>
+                <p>{role.role}</p>
+                <p>{role.start} – {role.end}</p>
+              </div>
             </div>
             <p class="tp-history-result">{role.result}</p>
           </article>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="tp-section tp-work" id="projects" aria-labelledby="projects-title">
+    <span class="tp-legacy-anchor" id="work" aria-hidden="true"></span>
+    <div class="tp-shell">
+      <h2 class="tp-section-title" id="projects-title" aria-label="Projects">
+        <span aria-hidden="true"><span class="tp-dollar">$</span> ls projects/</span>
+      </h2>
+      <ol class="tp-projects" role="list">
+        {projects.map((project, index) => (
+          <li>
+            <article class={project.visualHint ? "tp-project" : "tp-project-compact"} id={project.slug}>
+              {project.visualHint ? (
+                <>
+                  <div class="tp-project-copy">
+                    <div class="tp-project-heading">
+                      <span class="tp-project-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                      <h3>{hasCaseStudy(project.slug) ? <a href={caseStudyHref(project.slug)}>{project.title}</a> : project.title}</h3>
+                    </div>
+                    <p class="tp-project-outcome">{project.description}</p>
+                    <p class="tp-project-evidence">{project.evidence}</p>
+                    <div class="tp-project-footer">
+                      <p>{project.year}</p>
+                      <div class="tp-project-links">
+                        {hasCaseStudy(project.slug) && <a href={caseStudyHref(project.slug)}>Case study <span aria-hidden="true">→</span></a>}
+                        {project.url && <a href={project.url} target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a>}
+                        {project.github && <a href={project.github} target="_blank" rel="noopener">Source <span aria-hidden="true">↗</span></a>}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tp-project-visual"><ProjectVisual hint={project.visualHint} /></div>
+                </>
+              ) : (
+                <>
+                  <div class="tp-project-heading">
+                    <span class="tp-project-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                    <h3>{hasCaseStudy(project.slug) ? <a href={caseStudyHref(project.slug)}>{project.title}</a> : project.title}</h3>
+                  </div>
+                  <p>{project.description}</p>
+                  <div class="tp-project-links">
+                    {hasCaseStudy(project.slug) && <a href={caseStudyHref(project.slug)} aria-label={"Read " + project.title + " case study"}>Case study <span aria-hidden="true">→</span></a>}
+                    {project.url && <a href={project.url} target="_blank" rel="noopener">Visit site <span aria-hidden="true">↗</span></a>}
+                    {project.github && <a href={project.github} target="_blank" rel="noopener" aria-label={"Open " + project.title + " source"}>Source <span aria-hidden="true">↗</span></a>}
+                  </div>
+                </>
+              )}
+            </article>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
@@ -148,9 +198,12 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
         <span aria-hidden="true"><span class="tp-dollar">$</span> whoami</span>
       </h2>
       <p class="tp-about-copy">
-        Most of my projects start with something I want to fix for myself or the
-        people around me. I'm finishing a CS degree at the University of Ottawa
-        in May 2027.
+        Most of my projects start with a problem I run into myself, or see someone
+        close to me dealing with. That might mean finding parking, keeping a crew
+        organized, or getting everyone downstairs for dinner. Working on those
+        problems gives me a practical way to learn alongside my CS degree at the
+        University of Ottawa, which I'm finishing in May 2027. I want the things
+        I build to be useful long after the first version.
       </p>
     </div>
   </section>
@@ -174,30 +227,6 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
       <div class="tp-resume-actions">
         <a href="/resume.pdf" target="_blank" rel="noopener">View résumé <span aria-hidden="true">↗</span></a>
         <a href="/resume.pdf" download>Download PDF <span aria-hidden="true">↓</span></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="tp-section tp-side" aria-labelledby="side-title">
-    <div class="tp-shell">
-      <h2 class="tp-section-title" id="side-title" aria-label="Other projects">
-        <span aria-hidden="true"><span class="tp-dollar">$</span> ls side/</span>
-      </h2>
-      <div class="tp-side-list">
-        {additionalProjects.map((project) => (
-          <article class="tp-side-row" id={project.slug}>
-            <h3><a href={caseStudyHref(project.slug)}>{project.title}</a></h3>
-            <p>{project.summary}</p>
-            <a href={caseStudyHref(project.slug)} aria-label={"Read " + project.title + " case study"}>Case study <span aria-hidden="true">→</span></a>
-          </article>
-        ))}
-        {smallProjects.map((project) => (
-          <article class="tp-side-row">
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            {project.github && <a href={project.github} target="_blank" rel="noopener" aria-label={"Open " + project.title + " source"}>Source <span aria-hidden="true">↗</span></a>}
-          </article>
-        ))}
       </div>
     </div>
   </section>
@@ -345,12 +374,18 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
     letter-spacing: -0.075em;
   }
   .tp-hero h1 span { color: var(--tp-orange); }
+  .tp-hero-records-label {
+    margin-top: 32px;
+    color: var(--tp-muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
   .tp-hero-records {
     max-width: 1100px;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
-    margin: 32px 0 0;
+    margin: 12px 0 0;
     padding: 0;
     list-style: none;
   }
@@ -413,7 +448,10 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
 
   .tp-section { border-bottom: 1px solid var(--tp-rule); }
   .tp-section > .tp-shell { padding-block: 104px; }
-  .tp-work > .tp-shell { padding-top: 48px; }
+  .tp-work { position: relative; }
+  .tp-legacy-anchor { position: absolute; top: 0; scroll-margin-top: 64px; }
+  .tp-projects { margin: 0; padding: 0; list-style: none; }
+  .tp-projects > li { margin: 0; padding: 0; }
   .tp-section-title {
     margin-bottom: 42px;
     color: var(--tp-paper);
@@ -503,11 +541,19 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
 
   .tp-record, .tp-resume { background: #0f0d10; }
   .tp-history-row {
+    scroll-margin-top: 88px;
     display: grid;
-    grid-template-columns: minmax(220px, .58fr) minmax(0, 1fr);
+    grid-template-columns: minmax(360px, .9fr) minmax(0, 1fr);
     gap: 32px;
     padding: 30px 0;
     border-top: 1px solid var(--tp-rule);
+  }
+  .tp-history-identity {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
   }
   .tp-history-identity h3 {
     color: var(--tp-paper);
@@ -563,7 +609,8 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
   .tp-resume-actions a:hover { color: var(--tp-orange); border-color: var(--tp-orange); }
   .tp-resume-actions span { color: var(--tp-orange); }
 
-  .tp-side-row {
+  .tp-project-compact {
+    scroll-margin-top: 88px;
     display: grid;
     grid-template-columns: minmax(190px, .65fr) minmax(0, 1fr) auto;
     align-items: baseline;
@@ -571,19 +618,19 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
     padding: 24px 0;
     border-top: 1px solid var(--tp-rule);
   }
-  .tp-side-row h3 {
+  .tp-project-compact h3 {
     color: var(--tp-paper);
     font-size: 24px;
     font-weight: 500;
     line-height: 1.25;
     letter-spacing: -0.04em;
   }
-  .tp-side-row p {
+  .tp-project-compact p {
     color: var(--tp-muted);
     font-size: 15px;
     line-height: 1.6;
   }
-  .tp-side-row a {
+  .tp-project-compact a {
     min-height: 34px;
     display: inline-flex;
     align-items: center;
@@ -594,8 +641,8 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
     text-decoration: none;
     border-bottom: 1px solid transparent;
   }
-  .tp-side-row a:hover { border-color: var(--tp-orange); }
-  .tp-project h3 a, .tp-side-row h3 a {
+  .tp-project-compact a:hover { border-color: var(--tp-orange); }
+  .tp-project h3 a, .tp-project-compact h3 a {
     display: inline;
     color: inherit;
     font: inherit;
@@ -603,7 +650,7 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
     text-decoration: none;
     border: 0;
   }
-  .tp-project h3 a:hover, .tp-side-row h3 a:hover { color: var(--tp-orange); }
+  .tp-project h3 a:hover, .tp-project-compact h3 a:hover { color: var(--tp-orange); }
 
   .tp-contact {
     border-top: 1px solid var(--tp-orange);
@@ -753,9 +800,9 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
       min-height: 220px;
       justify-self: start;
     }
-    .tp-history-row { grid-template-columns: minmax(180px, .65fr) minmax(0, 1fr); gap: 24px; }
+    .tp-history-row { grid-template-columns: 1fr; gap: 20px; }
     .tp-about-copy { font-size: 22px; }
-    .tp-side-row { grid-template-columns: minmax(150px, .6fr) minmax(0, 1fr) auto; }
+    .tp-project-compact { grid-template-columns: minmax(150px, .6fr) minmax(0, 1fr) auto; }
     .tp-email { font-size: 34px; }
   }
 
@@ -766,10 +813,11 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
       max-width: 480px;
       grid-template-columns: 1fr;
       gap: 0;
-      margin-top: 24px;
+      margin-top: 12px;
     }
+    .tp-hero-records-label { margin-top: 24px; }
     .tp-hero-records li { padding: 8px 0; }
-    .tp-history-row, .tp-side-row { grid-template-columns: 1fr; gap: 12px; }
+    .tp-history-row, .tp-project-compact { grid-template-columns: 1fr; gap: 12px; }
     .tp-history-result { font-size: 18px; }
   }
 
@@ -796,10 +844,15 @@ const additionalProjects = caseStudies.filter((project) => !leadProjects.some((l
     .tp-about-copy { font-size: 19px; }
     .tp-resume-actions { display: grid; gap: 14px; }
     .tp-resume-actions a { width: fit-content; font-size: 18px; }
-    .tp-side-row h3 { font-size: 21px; }
+    .tp-project-compact h3 { font-size: 21px; }
     .tp-contact p { font-size: 16px; }
     .tp-email { font-size: 24px; }
     .tp-social-links { margin-top: 32px; }
+  }
+  @media (max-width: 359px) {
+    .tp-history-identity { grid-template-columns: 88px minmax(0, 1fr); gap: 16px; }
+    .tp-history-identity :global(.organization-logo) { width: 88px; height: 44px; }
+    .tp-history-identity h3 { overflow-wrap: anywhere; }
   }
 </style>
 
