@@ -5,8 +5,8 @@ const path = Astro.url.pathname;
 const isHome = path === "/" || path === "/index.html";
 
 const navItems = [
-  { label: "Work", href: isHome ? "#work" : "/#work" },
   { label: "Experience", href: isHome ? "#record" : "/#record" },
+  { label: "Projects", href: isHome ? "#projects" : "/#projects" },
   { label: "About", href: isHome ? "#about" : "/#about" },
   { label: "Resume", href: isHome ? "#resume" : "/#resume" },
   { label: "Writing", href: "/blog" },

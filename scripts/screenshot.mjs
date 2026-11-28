@@ -61,7 +61,6 @@ async function main() {
             "section.tp-about",
             "section.tp-toolbox",
             "section.tp-resume",
-            "section.tp-side",
             "section.tp-contact",
           ]) {
             const el = await tab.$(sel);
